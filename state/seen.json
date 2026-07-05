@@ -420,6 +420,13 @@
       "price_eur": 329000,
       "url": "https://reality.bazos.sk/inzerat/193360958/predaj-priestranny-5-izbovy-byt-130m-terasa-bratislava.php"
     },
+    "nehnutelnosti:22792": {
+      "first_seen": "2026-07-05",
+      "hash": "2c56e083182b6ffb4d7aea6428b624ecfbbaf1fd",
+      "last_seen": "2026-07-05",
+      "price_eur": 799900,
+      "url": "https://www.nehnutelnosti.sk/detail/Juk5z1p2zJP/exkluzivny-stresny-byt-s-panoramatickou-terasou-22792-m-kramare-living"
+    },
     "nehnutelnosti:3062026": {
       "first_seen": "2026-07-05",
       "hash": "2c8ff5df8a5c685988db7c33f0bdd9605647bc70",
@@ -1272,25 +1279,25 @@
     "bazos": {
       "last_count": 60,
       "last_error": null,
-      "last_run": "2026-07-05T17:03:26+00:00",
+      "last_run": "2026-07-05T17:24:12+00:00",
       "zero_streak": 0
     },
     "nehnutelnosti": {
       "last_count": 1,
       "last_error": null,
-      "last_run": "2026-07-05T17:02:49+00:00",
+      "last_run": "2026-07-05T17:23:31+00:00",
       "zero_streak": 0
     },
     "reality": {
       "last_count": 72,
       "last_error": null,
-      "last_run": "2026-07-05T17:03:17+00:00",
+      "last_run": "2026-07-05T17:23:59+00:00",
       "zero_streak": 0
     },
     "topreality": {
       "last_count": 48,
       "last_error": null,
-      "last_run": "2026-07-05T17:03:01+00:00",
+      "last_run": "2026-07-05T17:23:41+00:00",
       "zero_streak": 0
     }
   }
