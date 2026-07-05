@@ -11,11 +11,11 @@ search:
   transaction: predaj         # sale only
 
 filters:                      # hard filters — listing dropped if violated
-  min_area_m2: 55
+  min_area_m2: 85             # required: at least 85 m²
   min_price_eur: 20000        # drops "1 €" auction-teaser listings; null = disabled
-  max_price_eur: 260000
-  max_price_per_m2: 4500      # null = disabled
-  min_rooms: "2"
+  max_price_eur: null         # no budget cap for now — set a number (e.g. 400000) to cap
+  max_price_per_m2: null      # disabled; set a number to cap €/m²
+  min_rooms: "4"             # required: 4 rooms or more ("4+" listings pass)
   max_floor: null
   exclude_ground_floor: true
   require_balcony: false
@@ -27,12 +27,14 @@ filters:                      # hard filters — listing dropped if violated
 
 scoring:                      # soft preferences — affect score, not inclusion
   preferred_streets: []       # e.g. {name: "Obchodná", bonus: 30}
-  preferred_districts:
-    - name: "Bratislava I"
-      bonus: 10
+  preferred_districts: []     # e.g. {name: "Bratislava I", bonus: 10}
+  preferred_keywords:         # free-text, matched in title+description (case/diacritics-insensitive)
+    - {name: "parkov", bonus: 20}     # parkovanie / parkovacie / parkovacie miesto
+    - {name: "garáž", bonus: 20}      # garáž / garážové státie
+    - {name: "podzem", bonus: 10}     # extra points for underground (podzemné) parking
   condition_bonus:
-    novostavba: 15
-    rekonstrukcia: 10
+    novostavba: 25            # strong preference for new development projects
+    rekonstrukcia: 5
   balcony_bonus: 5
   price_per_m2_reference: 4000  # bonus scales with how far below this the listing is
 

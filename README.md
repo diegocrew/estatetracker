@@ -41,7 +41,9 @@ key, and you can check edits locally with
   "Obchodná"). **A missing/unparseable field never drops a listing** — only a
   confirmed violation does.
 - **`scoring`** — *soft* preferences that affect the score, not inclusion:
-  per-street and per-district bonuses, condition bonuses
+  per-street and per-district bonuses, `preferred_keywords` (free-text terms
+  matched in the title + description, e.g. `{name: "parkov", bonus: 20}` for
+  parking/garage), condition bonuses
   (`novostavba`, `rekonstrukcia`, `povodny_stav`), a balcony bonus, and
   `price_per_m2_reference`.
 - **`output`** — `min_score_for_issue` and the score → label mapping.

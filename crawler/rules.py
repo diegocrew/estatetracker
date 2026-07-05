@@ -142,6 +142,7 @@ def validate_rules(rules: dict[str, Any]) -> None:
     scoring = rules.get("scoring") or {}
     _check_bonus_list(scoring.get("preferred_streets") or [], "scoring.preferred_streets")
     _check_bonus_list(scoring.get("preferred_districts") or [], "scoring.preferred_districts")
+    _check_bonus_list(scoring.get("preferred_keywords") or [], "scoring.preferred_keywords")
     condition_bonus = scoring.get("condition_bonus") or {}
     _require(isinstance(condition_bonus, dict), "scoring.condition_bonus must be a mapping")
     for cond, bonus in condition_bonus.items():
@@ -261,6 +262,15 @@ def score_listing(listing: Listing, rules: dict[str, Any]) -> tuple[int, list[st
             bonus = int(entry.get("bonus", 0))
             score += bonus
             breakdown.append(f"{bonus:+d} preferred district {entry['name']!r}")
+
+    # Free-text preferences (e.g. "parkovanie", "garáž") matched case- and
+    # diacritics-insensitively against the title + description snippet.
+    keyword_haystack = normalize_text(f"{listing.title} {listing.description_snippet}")
+    for entry in scoring.get("preferred_keywords") or []:
+        if normalize_text(entry["name"]) in keyword_haystack:
+            bonus = int(entry.get("bonus", 0))
+            score += bonus
+            breakdown.append(f"{bonus:+d} keyword {entry['name']!r}")
 
     condition_bonus = (scoring.get("condition_bonus") or {}).get(listing.condition.value)
     if condition_bonus:

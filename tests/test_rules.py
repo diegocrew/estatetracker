@@ -233,6 +233,26 @@ class TestScoring:
         listing = make_listing(street=None, district=None, price_eur=None)
         assert score_listing(listing, make_rules()) == (0, [])
 
+    def test_preferred_keywords(self) -> None:
+        listing = make_listing(
+            street=None, district=None, price_eur=None,  # isolate keyword scoring
+            title="4 izbový byt, novostavba",
+            description_snippet="Byt s garážovým státím a podzemným parkovaním.",
+        )
+        rules = make_rules(scoring={
+            "preferred_districts": [], "condition_bonus": {}, "price_per_m2_reference": None,
+            "preferred_keywords": [
+                {"name": "parkov", "bonus": 20},
+                {"name": "garáž", "bonus": 20},   # diacritics: matches "garážovým"
+                {"name": "podzem", "bonus": 10},
+            ],
+        })
+        score, breakdown = score_listing(listing, rules)
+        assert score == 50
+        assert "+20 keyword 'parkov'" in breakdown
+        assert "+20 keyword 'garáž'" in breakdown
+        assert "+10 keyword 'podzem'" in breakdown
+
 
 class TestLabels:
     def test_highest_threshold_wins(self) -> None:
