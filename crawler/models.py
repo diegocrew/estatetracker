@@ -190,6 +190,30 @@ def detect_balcony(text: str | None) -> bool | None:
     return None
 
 
+_FLAT_TOKENS = ("byt", "garson", "garzon", "mezonet", "apartman")
+_HOUSE_TOKEN_RE = re.compile(
+    r"\b(rodinny|dom|domu|domy|domov|domcek|vila|vily|vilka|chata|chalupa|"
+    r"dvojdom|radovy dom|usadlost|pozemok)\b"
+)
+
+
+def looks_like_house(text: str | None) -> bool:
+    """True when the text describes a house/land rather than a flat.
+
+    Flats are protected first: any flat token ('byt', 'garsónka', 'mezonet',
+    …) — including 'byt v rodinnom dome' or 'byt v bytovom dome' — is never
+    treated as a house. Only then is a house/land token ('rodinný dom', 'vila',
+    'pozemok', …) taken as a house signal. Word boundaries keep 'dom' from
+    matching inside 'bytovom dome'.
+    """
+    norm = normalize_text(text)
+    if not norm:
+        return False
+    if any(tok in norm for tok in _FLAT_TOKENS):
+        return False
+    return _HOUSE_TOKEN_RE.search(norm) is not None
+
+
 def make_listing_id(portal: str, raw_id: str | None, url: str) -> str:
     """Portal-prefixed stable ID; SHA-1 of the URL when the portal exposes no ID."""
     if raw_id:

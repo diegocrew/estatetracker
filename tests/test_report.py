@@ -6,6 +6,8 @@ from crawler.models import Condition, Listing
 from crawler.report import (
     MAX_ISSUES_PER_RUN,
     ReportItem,
+    digest_body,
+    digest_title,
     issue_body,
     issue_title,
     overflow_summary_body,
@@ -56,3 +58,21 @@ def test_overflow_summary_lists_items() -> None:
     body = overflow_summary_body([make_item()])
     assert str(MAX_ISSUES_PER_RUN) in body
     assert "[Predám 3 izbový byt](https://example.sk/1)" in body
+
+
+def test_digest_title() -> None:
+    items = [make_item(), make_item()]
+    assert digest_title(items, "2026-07-05") == "🏠 2 new Bratislava flat(s) — 2026-07-05"
+
+
+def test_digest_body_one_row_per_flat() -> None:
+    body = digest_body([make_item(score=42), make_item(score=10)])
+    assert body.count("[open](https://example.sk/1)") == 2
+    assert "185 000 €" in body  # price column
+    assert "68 m²" in body      # area column
+    assert "Obchodná" in body   # address column
+
+
+def test_digest_body_marks_price_drop() -> None:
+    body = digest_body([make_item(price_change=(200000, 185000))])
+    assert "📉" in body

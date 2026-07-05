@@ -11,6 +11,7 @@ from __future__ import annotations
 import logging
 import os
 from dataclasses import dataclass, field
+from datetime import UTC, datetime
 
 import requests
 
@@ -28,6 +29,7 @@ LABEL_DEFINITIONS: dict[str, tuple[str, str]] = {
     "match": ("22C55E", "Listing passed all hard filters"),
     "price-drop": ("3B82F6", "Previously seen listing whose price moved >2%"),
     "scraper-broken": ("6B7280", "Portal returned 0 listings for 3 consecutive runs"),
+    "digest": ("8B5CF6", "One run's new matches, collected into a single issue"),
 }
 _DEFAULT_LABEL_COLOR = ("BFDBFE", "reality-watch label")
 
@@ -111,6 +113,32 @@ def overflow_summary_body(items: list[ReportItem]) -> str:
     return "\n".join(lines)
 
 
+def digest_title(items: list[ReportItem], date_str: str) -> str:
+    return f"🏠 {len(items)} new Bratislava flat(s) — {date_str}"
+
+
+def digest_body(items: list[ReportItem]) -> str:
+    """One markdown table for the whole run: price, area, rooms, address per flat."""
+    lines = [
+        f"**{len(items)} new matching flat(s)** this run, highest score first.",
+        "",
+        "| Score | Price | Area | Rooms | Address | Condition | Portal | Link |",
+        "| ---: | ---: | ---: | :---: | --- | --- | --- | --- |",
+    ]
+    for item in items:
+        listing = item.listing
+        area = f"{listing.area_m2:g} m²" if listing.area_m2 else "—"
+        address = listing.street or listing.district or "—"
+        flags = " 📉" if item.price_change else ""
+        lines.append(
+            f"| {item.score}{flags} | {_fmt_price(listing.price_eur)} | {area} "
+            f"| {_fmt(listing.rooms)} | {address} | {listing.condition.value} "
+            f"| {listing.portal} | [open]({listing.url}) |"
+        )
+    lines += ["", "📉 = price dropped since last seen. Edit `rules.yaml` to tune matches."]
+    return "\n".join(lines)
+
+
 @dataclass
 class Reporter:
     """Thin GitHub REST client; all methods are no-ops when unconfigured."""
@@ -183,6 +211,19 @@ class Reporter:
                         label, response.status_code)
             return False
         return any(title_contains in issue.get("title", "") for issue in response.json())
+
+    def report_digest(self, items: list[ReportItem], date_str: str | None = None) -> int:
+        """Open a single Issue for the whole run listing every new match. Returns count."""
+        if not items:
+            LOG.info("no new matches — no digest issue created")
+            return 0
+        if not self.enabled:
+            LOG.warning("reporter disabled (GITHUB_TOKEN/GITHUB_REPOSITORY unset) — "
+                        "%d matches not reported", len(items))
+            return 0
+        date_str = date_str or datetime.now(UTC).date().isoformat()
+        title = digest_title(items, date_str)
+        return 1 if self.create_issue(title, digest_body(items), ["digest"]) is not None else 0
 
     def report_matches(self, items: list[ReportItem]) -> int:
         """Open one Issue per item up to the cap, plus one overflow summary. Returns count."""

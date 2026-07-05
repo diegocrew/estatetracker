@@ -17,7 +17,24 @@ from typing import Any
 
 import yaml
 
-from .models import Condition, Listing, matches_place, normalize_text, rooms_to_float
+from .models import (
+    Condition,
+    Listing,
+    looks_like_house,
+    matches_place,
+    normalize_text,
+    rooms_to_float,
+)
+
+# Bratislava boroughs (diacritics-stripped) so a card naming only the borough
+# — "Petržalka", "Ružinov" — still counts as in-city when city_required is on.
+# Deliberately excludes ambiguous "Nové Mesto" (also a town 80 km away).
+BRATISLAVA_BOROUGHS = (
+    "stare mesto", "ruzinov", "vrakuna", "podunajske biskupice", "raca",
+    "vajnory", "karlova ves", "dubravka", "lamac", "devin",
+    "devinska nova ves", "zahorska bystrica", "petrzalka", "jarovce",
+    "rusovce", "cunovo",
+)
 
 DEFAULT_RULES_PATH = "rules.yaml"
 OVERRIDE_ENV_VAR = "RULES_OVERRIDE_B64"
@@ -116,7 +133,7 @@ def validate_rules(rules: dict[str, Any]) -> None:
     filters = rules["filters"]
     for key in ("min_area_m2", "min_price_eur", "max_price_eur", "max_price_per_m2", "max_floor"):
         _check_number(filters.get(key), f"filters.{key}")
-    for key in ("exclude_ground_floor", "require_balcony"):
+    for key in ("exclude_ground_floor", "require_balcony", "exclude_houses", "city_required"):
         value = filters.get(key, False)
         _require(isinstance(value, bool), f"filters.{key} must be true or false, got {value!r}")
     min_rooms = filters.get("min_rooms")
@@ -155,6 +172,11 @@ def validate_rules(rules: dict[str, Any]) -> None:
     _check_number(scoring.get("price_per_m2_reference"), "scoring.price_per_m2_reference")
 
     output = rules.get("output") or {}
+    mode = output.get("mode")
+    _require(
+        mode is None or mode in ("digest", "issue_per_listing"),
+        f"output.mode must be 'digest' or 'issue_per_listing', got {mode!r}",
+    )
     _check_number(output.get("min_score_for_issue"), "output.min_score_for_issue")
     labels = output.get("labels_by_score") or []
     _require(isinstance(labels, list), "output.labels_by_score must be a list")
@@ -167,20 +189,65 @@ def validate_rules(rules: dict[str, Any]) -> None:
         )
 
 
+def _location_haystack(listing: Listing) -> str:
+    """All text that might name a locality: title, snippet, street, district, raw."""
+    parts = [
+        listing.title,
+        listing.description_snippet,
+        listing.street or "",
+        listing.district or "",
+        " ".join(str(v) for v in listing.raw_extra.values()),
+    ]
+    return normalize_text(" ".join(parts))
+
+
+def in_city(listing: Listing, city: str, districts: list[str]) -> bool:
+    """True when the listing can be confirmed to be in ``city``.
+
+    Confirmation is the city name, one of the user's ``search.districts``, or —
+    for Bratislava — one of its boroughs, appearing anywhere in the listing's
+    location text. Slovak declension protects against false positives: 'od
+    Bratislavy' (near Bratislava) normalizes to 'bratislavy', which does not
+    contain 'bratislava'.
+    """
+    hay = _location_haystack(listing)
+    city_norm = normalize_text(city)
+    if city_norm and city_norm in hay:
+        return True
+    if any(normalize_text(d) and normalize_text(d) in hay for d in districts):
+        return True
+    if city_norm == "bratislava":
+        return any(borough in hay for borough in BRATISLAVA_BOROUGHS)
+    return False
+
+
 def failing_filter(listing: Listing, rules: dict[str, Any]) -> str | None:
     """Return the human-readable reason a hard filter drops this listing, or None.
 
     Missing data (None fields) never causes a drop — only a confirmed violation
-    does. The Vertex AI enrichment step will fill those gaps later.
+    does — with two opt-in exceptions, ``city_required`` and ``exclude_houses``,
+    which drop listings that can't be positively confirmed as an in-city flat.
     """
     filters = rules.get("filters") or {}
     search = rules.get("search") or {}
     districts = search.get("districts") or []
+    city = search.get("city")
+
+    # House / land, not a flat (e.g. 'rodinný dom', 'pozemok', 'vila').
+    if filters.get("exclude_houses") and looks_like_house(
+        f"{listing.title} {listing.description_snippet}"
+    ):
+        return "house or land, not a flat"
+
+    # Only keep listings positively confirmed to be in the searched city; this
+    # drops surrounding villages ("20 min from Bratislava") that a text search
+    # pulls in even when their locality was not parsed into `district`.
+    if filters.get("city_required") and city and not in_city(listing, city, districts):
+        return f"not confirmed to be in search.city {city!r}"
 
     # Classifieds portals carry seller-entered localities, so a search for
     # Bratislava can return e.g. Trenčín; district is only set when the parser
     # found a locality, and that locality must mention the searched city.
-    city = search.get("city")
     if city and listing.district and normalize_text(city) not in normalize_text(listing.district):
         return f"locality {listing.district!r} does not mention search.city {city!r}"
 

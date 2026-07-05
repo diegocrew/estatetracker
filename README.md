@@ -39,14 +39,27 @@ key, and you can check edits locally with
   `allowed_conditions`, `banned_streets`, `banned_keywords`). Keyword and
   street matching is case- and diacritics-insensitive ("Obchodna" matches
   "Obchodná"). **A missing/unparseable field never drops a listing** — only a
-  confirmed violation does.
+  confirmed violation does, with two opt-in exceptions:
+  - `exclude_houses: true` drops houses and land (`rodinný dom`, `vila`,
+    `pozemok`, …); anything that mentions a flat (`byt`, `garsónka`, …),
+    including a flat *in* an apartment building, is kept.
+  - `city_required: true` keeps only listings positively confirmed to be in
+    `search.city` — the city name, one of your `search.districts`, or (for
+    Bratislava) a borough must appear in the listing. This drops the
+    surrounding villages ("20 min from Bratislava") that a text search pulls
+    in. Trade-off: a genuine city flat whose locality the parser completely
+    missed can be dropped too.
 - **`scoring`** — *soft* preferences that affect the score, not inclusion:
   per-street and per-district bonuses, `preferred_keywords` (free-text terms
   matched in the title + description, e.g. `{name: "parkov", bonus: 20}` for
   parking/garage), condition bonuses
   (`novostavba`, `rekonstrukcia`, `povodny_stav`), a balcony bonus, and
   `price_per_m2_reference`.
-- **`output`** — `min_score_for_issue` and the score → label mapping.
+- **`output`** — `mode`, `min_score_for_issue`, and the score → label mapping.
+  `mode: digest` (default) collects a whole run's new matches into **one**
+  GitHub Issue with a price / area / rooms / address table; `mode:
+  issue_per_listing` opens one Issue per flat (capped at 20/run + an overflow
+  summary). A run with no new matches opens nothing.
 
 ### How scoring works
 
