@@ -1,0 +1,7 @@
+target-version = "py312"
+line-length = 100
+
+[lint]
+select = ["E", "F", "W", "I", "UP", "B", "SIM", "RUF"]
+# Slovak district names legitimately contain an en dash ("Bratislava I – Staré Mesto")
+allowed-confusables = ["–"]

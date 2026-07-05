@@ -1,0 +1,44 @@
+# reality-watch filter rules — edit freely, the crawler validates on start.
+# Run `python -m crawler.main --validate-rules` to check your edits.
+#
+# NOTE: this repo is public, so these preferences are public too. To keep street
+# lists / budget private, put a base64-encoded YAML fragment into the Actions
+# variable RULES_OVERRIDE_B64 — it is deep-merged over this file at runtime.
+
+search:
+  city: Bratislava
+  districts: []               # empty list = all districts; e.g. "Bratislava I"
+  transaction: predaj         # sale only
+
+filters:                      # hard filters — listing dropped if violated
+  min_area_m2: 55
+  min_price_eur: 20000        # drops "1 €" auction-teaser listings; null = disabled
+  max_price_eur: 260000
+  max_price_per_m2: 4500      # null = disabled
+  min_rooms: "2"
+  max_floor: null
+  exclude_ground_floor: true
+  require_balcony: false
+  allowed_conditions: []      # empty = all; values: novostavba, povodny_stav, rekonstrukcia
+  banned_streets: []
+  banned_keywords:            # matched in title+description, case/diacritics-insensitive
+    - "dražba"
+    - "spoluvlastnícky podiel"
+
+scoring:                      # soft preferences — affect score, not inclusion
+  preferred_streets: []       # e.g. {name: "Obchodná", bonus: 30}
+  preferred_districts:
+    - name: "Bratislava I"
+      bonus: 10
+  condition_bonus:
+    novostavba: 15
+    rekonstrukcia: 10
+  balcony_bonus: 5
+  price_per_m2_reference: 4000  # bonus scales with how far below this the listing is
+
+output:
+  min_score_for_issue: 0      # create issue for anything passing hard filters
+  labels_by_score:            # applied to the GitHub Issue (highest matching min wins)
+    - {min: 40, label: "hot"}
+    - {min: 20, label: "interesting"}
+    - {min: 0,  label: "match"}
