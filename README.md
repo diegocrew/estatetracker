@@ -22,6 +22,12 @@ No AI/LLM calls in this version — see [Future enrichment](#future-enrichment).
    previously seen listing is re-reported when its price moves by **more than
    2%**, with a `price-drop` label and the old → new price in the Issue.
    Entries not seen for 120 days are pruned.
+   Every match is also appended to a human-readable **monthly archive** in
+   [`history/`](history/) — one `history/YYYY-MM.md` file per month, each a
+   table of price / area / rooms / address / link (see
+   [`history/README.md`](history/README.md)). This is separate from
+   `state/seen.json`: state is the crawler's memory, `history/` is for you to
+   browse. Both are committed back by the workflow.
 4. Hard filters from `rules.yaml` drop listings; soft preferences compute a
    score; one Issue per match is opened (max 20 per run — overflow goes into a
    single summary Issue).
