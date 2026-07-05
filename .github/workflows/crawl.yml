@@ -1,0 +1,64 @@
+name: crawl
+
+on:
+  schedule:
+    - cron: "0 5,16 * * *" # UTC — 06:00/07:00 and 17:00/18:00 Bratislava time
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Parse and log only — no Issues, no state commit"
+        type: boolean
+        required: false
+        default: false
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: crawl
+  cancel-in-progress: false
+
+jobs:
+  crawl:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Lint
+        run: ruff check .
+
+      - name: Tests
+        run: pytest -q
+
+      - name: Run crawler
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RULES_OVERRIDE_B64: ${{ vars.RULES_OVERRIDE_B64 }}
+        run: |
+          if [ "${{ inputs.dry_run }}" = "true" ]; then
+            python -m crawler.main --dry-run
+          else
+            python -m crawler.main
+          fi
+
+      - name: Commit state
+        if: ${{ inputs.dry_run != true }}
+        run: |
+          if ! git diff --quiet -- state/seen.json; then
+            git config user.name "reality-watch bot"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add state/seen.json
+            git commit -m "chore: update state [skip ci]"
+            git push
+          else
+            echo "state unchanged"
+          fi
