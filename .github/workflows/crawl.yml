@@ -10,6 +10,10 @@ on:
         type: boolean
         required: false
         default: false
+  push: # every push runs a dry-run crawl as an end-to-end smoke test
+    branches:
+      - main
+      - claude/build-requested-feature-rohtbk
 
 permissions:
   contents: write
@@ -44,14 +48,14 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RULES_OVERRIDE_B64: ${{ vars.RULES_OVERRIDE_B64 }}
         run: |
-          if [ "${{ inputs.dry_run }}" = "true" ]; then
+          if [ "${{ github.event_name }}" = "push" ] || [ "${{ inputs.dry_run }}" = "true" ]; then
             python -m crawler.main --dry-run
           else
             python -m crawler.main
           fi
 
       - name: Commit state
-        if: ${{ inputs.dry_run != true }}
+        if: ${{ github.event_name != 'push' && inputs.dry_run != true }}
         run: |
           if ! git diff --quiet -- state/seen.json; then
             git config user.name "reality-watch bot"
