@@ -13,7 +13,7 @@ import logging
 import os
 import sys
 
-from . import enrich
+from . import enrich, history
 from . import rules as rules_mod
 from . import state as state_mod
 from .portals import all_portals
@@ -29,6 +29,8 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
                         help="path to rules.yaml")
     parser.add_argument("--state", default=state_mod.DEFAULT_STATE_PATH,
                         help="path to state/seen.json")
+    parser.add_argument("--history-dir", default=history.DEFAULT_HISTORY_DIR,
+                        help="directory for the monthly history/YYYY-MM.md archive")
     parser.add_argument("--dry-run", action="store_true",
                         help="parse and log only — no Issues, no state changes")
     parser.add_argument("--validate-rules", action="store_true",
@@ -131,6 +133,9 @@ def run(args: argparse.Namespace) -> int:
         if mode == "digest"
         else reporter.report_matches(items)
     )
+    history_path = history.append_matches(items, args.history_dir)
+    if history_path:
+        LOG.info("logged %d matches to %s", len(items), history_path)
     for portal_name, streak in canaries:
         reporter.report_scraper_broken(portal_name, streak)
 
