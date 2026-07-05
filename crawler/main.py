@@ -113,9 +113,11 @@ def run(args: argparse.Namespace) -> int:
     items.sort(key=lambda item: item.score, reverse=True)
     canaries = state_mod.portals_needing_canary(state)
 
+    mode = (rules.get("output") or {}).get("mode", "digest")
+
     if dry_run:
-        LOG.info("DRY RUN — %d matches would be reported, %d dropped by filters",
-                 len(items), dropped)
+        LOG.info("DRY RUN [%s mode] — %d matches would be reported, %d dropped by filters",
+                 mode, len(items), dropped)
         for item in items:
             LOG.info("  would report: %s | labels=%s", issue_title(item), item.labels)
         for portal_name, streak in canaries:
@@ -124,7 +126,11 @@ def run(args: argparse.Namespace) -> int:
         return 0
 
     reporter = Reporter()
-    created = reporter.report_matches(items)
+    created = (
+        reporter.report_digest(items)
+        if mode == "digest"
+        else reporter.report_matches(items)
+    )
     for portal_name, streak in canaries:
         reporter.report_scraper_broken(portal_name, streak)
 

@@ -203,6 +203,54 @@ class TestHardFilters:
         assert failing_filter(make_listing(condition=Condition.UNKNOWN), rules) is None
 
 
+class TestHouseFilter:
+    def test_drops_house(self) -> None:
+        rules = make_rules(filters={"exclude_houses": True})
+        house = make_listing(
+            title="Rodinný dom, 5 izieb",
+            description_snippet="Priestranný dom s veľkým pozemkom.",
+        )
+        assert failing_filter(house, rules) == "house or land, not a flat"
+
+    def test_drops_land(self) -> None:
+        rules = make_rules(filters={"exclude_houses": True})
+        land = make_listing(title="Stavebný pozemok Bratislava", description_snippet="")
+        assert failing_filter(land, rules) is not None
+
+    def test_keeps_flat(self) -> None:
+        rules = make_rules(filters={"exclude_houses": True})
+        assert failing_filter(make_listing(title="4 izbový byt"), rules) is None
+
+    def test_flat_in_apartment_building_kept(self) -> None:
+        """'byt v bytovom dome' contains 'dom' but is a flat — must be kept."""
+        rules = make_rules(filters={"exclude_houses": True})
+        flat = make_listing(
+            title="3 izbový byt",
+            description_snippet="Tehlový byt v bytovom dome, 2. poschodie.",
+        )
+        assert failing_filter(flat, rules) is None
+
+
+class TestCityRequired:
+    def test_keeps_bratislava_district(self) -> None:
+        rules = make_rules(filters={"city_required": True})
+        assert failing_filter(make_listing(district="Bratislava II – Ružinov"), rules) is None
+
+    def test_keeps_borough_only_mention(self) -> None:
+        rules = make_rules(filters={"city_required": True})
+        listing = make_listing(district=None, street=None, title="4 izbový byt, Petržalka")
+        assert failing_filter(listing, rules) is None
+
+    def test_drops_nearby_village(self) -> None:
+        rules = make_rules(filters={"city_required": True})
+        listing = make_listing(
+            district=None, street=None, title="4 izbový byt Senec",
+            description_snippet="Pekný byt v Senci, 20 minút od Bratislavy.",
+        )
+        reason = failing_filter(listing, rules)
+        assert reason is not None and "search.city" in reason
+
+
 class TestScoring:
     def test_score_breakdown(self) -> None:
         listing = make_listing(

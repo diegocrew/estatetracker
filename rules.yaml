@@ -18,6 +18,8 @@ filters:                      # hard filters — listing dropped if violated
   min_rooms: "4"             # required: 4 rooms or more ("4+" listings pass)
   max_floor: null
   exclude_ground_floor: true
+  exclude_houses: true        # drop "dom" / land / vila — flats only
+  city_required: true         # drop nearby villages; keep only confirmed Bratislava
   require_balcony: false
   allowed_conditions: []      # empty = all; values: novostavba, povodny_stav, rekonstrukcia
   banned_streets: []
@@ -39,6 +41,7 @@ scoring:                      # soft preferences — affect score, not inclusion
   price_per_m2_reference: 4000  # bonus scales with how far below this the listing is
 
 output:
+  mode: digest                # digest = one issue per run; issue_per_listing = one each
   min_score_for_issue: 0      # create issue for anything passing hard filters
   labels_by_score:            # applied to the GitHub Issue (highest matching min wins)
     - {min: 40, label: "hot"}
