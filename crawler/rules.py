@@ -114,7 +114,7 @@ def validate_rules(rules: dict[str, Any]) -> None:
              "search.transaction must be a string")
 
     filters = rules["filters"]
-    for key in ("min_area_m2", "max_price_eur", "max_price_per_m2", "max_floor"):
+    for key in ("min_area_m2", "min_price_eur", "max_price_eur", "max_price_per_m2", "max_floor"):
         _check_number(filters.get(key), f"filters.{key}")
     for key in ("exclude_ground_floor", "require_balcony"):
         value = filters.get(key, False)
@@ -173,7 +173,15 @@ def failing_filter(listing: Listing, rules: dict[str, Any]) -> str | None:
     does. The Vertex AI enrichment step will fill those gaps later.
     """
     filters = rules.get("filters") or {}
-    districts = (rules.get("search") or {}).get("districts") or []
+    search = rules.get("search") or {}
+    districts = search.get("districts") or []
+
+    # Classifieds portals carry seller-entered localities, so a search for
+    # Bratislava can return e.g. Trenčín; district is only set when the parser
+    # found a locality, and that locality must mention the searched city.
+    city = search.get("city")
+    if city and listing.district and normalize_text(city) not in normalize_text(listing.district):
+        return f"locality {listing.district!r} does not mention search.city {city!r}"
 
     if (
         districts
@@ -185,6 +193,10 @@ def failing_filter(listing: Listing, rules: dict[str, Any]) -> str | None:
     min_area = filters.get("min_area_m2")
     if min_area is not None and listing.area_m2 is not None and listing.area_m2 < min_area:
         return f"area {listing.area_m2:g} m² below min_area_m2 {min_area}"
+
+    min_price = filters.get("min_price_eur")
+    if min_price is not None and listing.price_eur is not None and listing.price_eur < min_price:
+        return f"price {listing.price_eur} € below min_price_eur {min_price} (auction teaser?)"
 
     max_price = filters.get("max_price_eur")
     if max_price is not None and listing.price_eur is not None and listing.price_eur > max_price:

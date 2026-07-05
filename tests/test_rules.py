@@ -138,6 +138,17 @@ class TestHardFilters:
     def test_passing_listing(self) -> None:
         assert failing_filter(make_listing(), make_rules()) is None
 
+    def test_wrong_city_locality(self) -> None:
+        """Bazos returns seller-entered localities: a Bratislava search can yield Trenčín."""
+        reason = failing_filter(make_listing(district="Trenčín 914 51"), make_rules())
+        assert reason is not None and "search.city" in reason
+        assert failing_filter(make_listing(district="Bratislava 821 01"), make_rules()) is None
+
+    def test_auction_teaser_price(self) -> None:
+        rules = make_rules(filters={"min_price_eur": 20000})
+        reason = failing_filter(make_listing(price_eur=1), rules)
+        assert reason is not None and "min_price_eur" in reason
+
     def test_price_too_high(self) -> None:
         reason = failing_filter(make_listing(price_eur=300000), make_rules())
         assert reason is not None and "max_price_eur" in reason

@@ -67,15 +67,17 @@ def parse_search_page(html: str) -> list[Listing]:
             description = _card_text(card, ".offer__description") or params
             locality = _card_text(card, ".offer__address")
             street, district = split_locality(locality)
-            haystack = f"{title} {params} {description}"
+            card_text = card.get_text(" ", strip=True)
+            haystack = f"{title} {params} {description} {card_text}"
             listings.append(
                 Listing(
                     id=make_listing_id(PORTAL_NAME, str(raw_id) if raw_id else None, url),
                     portal=PORTAL_NAME,
                     url=url,
                     title=title,
-                    price_eur=parse_price(_card_text(card, ".offer__price")),
-                    area_m2=parse_area(params) or parse_area(title),
+                    price_eur=parse_price(_card_text(card, ".offer__price"))
+                    or (parse_price(card_text) if "€" in card_text else None),
+                    area_m2=parse_area(params) or parse_area(title) or parse_area(card_text),
                     rooms=parse_rooms(haystack),
                     street=street,
                     district=district,

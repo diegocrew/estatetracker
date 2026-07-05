@@ -12,6 +12,7 @@ the canary fires.
 from __future__ import annotations
 
 import re
+from urllib.parse import urlencode
 
 from bs4 import BeautifulSoup, Tag
 
@@ -34,11 +35,12 @@ _ID_RE = re.compile(r"[-/](\d{4,})(?:\.html)?/?$")
 
 
 def build_search_url(rules: dict, page: int) -> str:
-    city = (rules.get("search") or {}).get("city", "Bratislava").lower()
-    url = f"{BASE_URL}/byty/{city}/predaj/"
-    if page > 1:
-        url += f"?stranka={page}"
-    return url
+    # /byty/<city>/predaj/ 404s (verified from a live run); the long-standing
+    # search endpoint is vyhladavanie-nehnutelnosti-<page>.html with a free-text
+    # query. The canary will flag this portal if the endpoint moves again.
+    city = (rules.get("search") or {}).get("city", "Bratislava")
+    params = {"searchType": "string", "q": city}
+    return f"{BASE_URL}/vyhladavanie-nehnutelnosti-{page}.html?{urlencode(params)}"
 
 
 def _card_text(card: Tag, selector: str) -> str:
@@ -64,15 +66,17 @@ def parse_search_page(html: str) -> list[Listing]:
             description = _card_text(card, ".description") or params
             locality = _card_text(card, ".locality") or _card_text(card, ".estate__locality")
             street, district = split_locality(locality)
-            haystack = f"{title} {params} {description}"
+            card_text = card.get_text(" ", strip=True)
+            haystack = f"{title} {params} {description} {card_text}"
             listings.append(
                 Listing(
                     id=make_listing_id(PORTAL_NAME, raw_id, url),
                     portal=PORTAL_NAME,
                     url=url,
                     title=title,
-                    price_eur=parse_price(_card_text(card, ".price")),
-                    area_m2=parse_area(params) or parse_area(title),
+                    price_eur=parse_price(_card_text(card, ".price"))
+                    or (parse_price(card_text) if "€" in card_text else None),
+                    area_m2=parse_area(params) or parse_area(title) or parse_area(card_text),
                     rooms=parse_rooms(haystack),
                     street=street,
                     district=district,

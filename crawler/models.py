@@ -56,27 +56,42 @@ def matches_place(needle: str, haystack: str | None) -> bool:
 
 
 _PRICE_RE = re.compile(r"\d[\d\s.\u00a0\u202f]*(?:,\d+)?")
+_PRICE_NEAR_EUR_RE = re.compile(
+    r"(\d[\d\s.\u00a0\u202f]*(?:,\d+)?)\s*(?:,-)?\s*(?:€|eur)", re.IGNORECASE
+)
 
 
-def parse_price(text: str | None) -> int | None:
-    """'185 000 €', '185.000,- EUR', '185000' -> 185000. None when unparseable.
-
-    'Cena dohodou' (price on request) is treated as no price.
-    """
-    if not text:
-        return None
-    if "dohod" in normalize_text(text):
-        return None
-    match = _PRICE_RE.search(text)
-    if not match:
-        return None
-    number = match.group(0).split(",")[0]  # drop decimal part / ',-' suffix
+def _to_int(number: str) -> int | None:
+    number = number.split(",")[0]  # drop decimal part / ',-' suffix
     number = re.sub(r"[\s.\u00a0\u202f]", "", number)
     try:
         value = int(number)
     except ValueError:
         return None
     return value if value > 0 else None
+
+
+def parse_price(text: str | None) -> int | None:
+    """'185 000 €', '185.000,- EUR', '185000' -> 185000. None when unparseable.
+
+    In mixed text ('3 izbový byt, 68 m², 185 000 € (2 701 €/m²)') numbers
+    adjacent to a €/EUR sign win, and the largest of them is taken so that the
+    total price beats the per-m² figure. 'Cena dohodou' (price on request) is
+    treated as no price.
+    """
+    if not text:
+        return None
+    if "dohod" in normalize_text(text):
+        return None
+    near_eur = [
+        value
+        for match in _PRICE_NEAR_EUR_RE.finditer(text)
+        if (value := _to_int(match.group(1))) is not None
+    ]
+    if near_eur:
+        return max(near_eur)
+    match = _PRICE_RE.search(text)
+    return _to_int(match.group(0)) if match else None
 
 
 _AREA_RE = re.compile(r"(\d+(?:[.,]\d+)?)\s*m(?:2|²|\b)", re.IGNORECASE)
@@ -204,6 +219,15 @@ class Listing:
 
     def __post_init__(self) -> None:
         self.description_snippet = (self.description_snippet or "")[:DESCRIPTION_SNIPPET_LEN]
+
+    @property
+    def has_usable_data(self) -> bool:
+        """False = phantom card: parser drift produced a listing with nothing in it.
+
+        Such listings must not reach filtering/reporting and count as a parser
+        failure for the portal-health canary.
+        """
+        return self.price_eur is not None or self.area_m2 is not None or self.rooms is not None
 
     @property
     def price_per_m2(self) -> float | None:

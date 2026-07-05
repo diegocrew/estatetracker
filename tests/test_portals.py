@@ -154,6 +154,48 @@ class TestBazos:
         )
 
 
+class TestNehnutelnostiFallback:
+    """The 2024+ redesign uses generated CSS classes; the fallback harvests
+    /detail/ links and mines the surrounding card text."""
+
+    MODERN_HTML = """
+    <html><body><div class="css-x1y2z3">
+      <div class="css-a1b2c3">
+        <a href="/detail/3-izbovy-byt-ruzinov/Ab4901234">Priestranný 3 izbový byt</a>
+        <p class="css-d4e5f6">Ružinov · 68 m² · 3. poschodie</p>
+        <span class="css-g7h8i9">185 000 €</span>
+      </div>
+      <div class="css-a1b2c3">
+        <a href="/detail/3-izbovy-byt-ruzinov/Ab4901234">Priestranný 3 izbový byt</a>
+      </div>
+      <a href="/detail/">not a listing</a>
+    </div></body></html>
+    """
+
+    def test_harvests_detail_links(self) -> None:
+        listings = nehnutelnosti.parse_search_page(self.MODERN_HTML)
+        assert len(listings) == 1  # duplicate link + non-listing link ignored
+        listing = listings[0]
+        assert listing.id == "nehnutelnosti:4901234"
+        assert listing.price_eur == 185000
+        assert listing.area_m2 == 68
+        assert listing.rooms == "3"
+        assert listing.floor == 3
+        assert listing.has_usable_data
+
+    def test_classic_markup_still_preferred(self) -> None:
+        listings = nehnutelnosti.parse_search_page(load_fixture("nehnutelnosti_search.html"))
+        assert all(ls.raw_extra.get("parser") != "detail-link-fallback" for ls in listings)
+
+
+def test_phantom_listing_detection() -> None:
+    from crawler.models import Listing
+
+    phantom = Listing(id="x:1", portal="x", url="u", title="whatever")
+    assert not phantom.has_usable_data
+    assert Listing(id="x:2", portal="x", url="u", title="t", area_m2=60.0).has_usable_data
+
+
 def test_parsers_survive_garbage_html() -> None:
     for module in (nehnutelnosti, topreality, reality, bazos):
         assert module.parse_search_page("<html><body><p>upgrade your browser") == []

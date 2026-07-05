@@ -68,12 +68,20 @@ def run(args: argparse.Namespace) -> int:
         except Exception as exc:
             LOG.exception("portal %s crashed", portal.name)
             listings, error = [], f"unexpected error: {exc}"
-        streak = state_mod.record_portal_run(state, portal.name, len(listings), error)
-        LOG.info("portal %s: %d listings (zero-streak: %d)", portal.name, len(listings), streak)
+        if enrich_enabled:
+            listings = [enrich.enrich(listing) for listing in listings]
+        # Phantom cards (no price, area or rooms) are parser drift, not matches:
+        # they must not become Issues, and a portal producing only phantoms is
+        # as broken as one producing nothing — count only usable listings.
+        usable = [listing for listing in listings if listing.has_usable_data]
+        if len(usable) < len(listings):
+            LOG.warning("portal %s: %d of %d cards had no extractable price/area/rooms "
+                        "(parser drift?)", portal.name, len(listings) - len(usable), len(listings))
+        streak = state_mod.record_portal_run(state, portal.name, len(usable), error)
+        LOG.info("portal %s: %d usable listings (zero-streak: %d)",
+                 portal.name, len(usable), streak)
 
-        for listing in listings:
-            if enrich_enabled:
-                listing = enrich.enrich(listing)
+        for listing in usable:
             status, previous = state_mod.classify_listing(state, listing)
             previous_price = previous.get("price_eur") if previous else None
             state_mod.remember_listing(state, listing)

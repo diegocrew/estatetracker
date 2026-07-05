@@ -12,6 +12,7 @@ search:
 
 filters:                      # hard filters — listing dropped if violated
   min_area_m2: 55
+  min_price_eur: 20000        # drops "1 €" auction-teaser listings; null = disabled
   max_price_eur: 260000
   max_price_per_m2: 4500      # null = disabled
   min_rooms: "2"
