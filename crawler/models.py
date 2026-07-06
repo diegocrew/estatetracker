@@ -197,6 +197,34 @@ _HOUSE_TOKEN_RE = re.compile(
 )
 
 
+_BRATISLAVA_BOROUGHS_DISPLAY = (
+    "Staré Mesto", "Ružinov", "Vrakuňa", "Podunajské Biskupice", "Nové Mesto",
+    "Rača", "Vajnory", "Karlova Ves", "Dúbravka", "Lamač", "Devínska Nová Ves",
+    "Devín", "Záhorská Bystrica", "Petržalka", "Jarovce", "Rusovce", "Čunovo",
+)
+_ROMAN_RE = re.compile(r"\bbratislava\s+(i{1,3}|iv|v)\b")
+
+
+def guess_locality(text: str | None) -> str | None:
+    """Mine a display locality (e.g. 'Bratislava - Ružinov') from free card text.
+
+    Used as a fallback when a portal's address selector missed: the card still
+    mentions the borough / district somewhere. Only fires when the text mentions
+    Bratislava, so an ambiguous borough name ('Nové Mesto') can't mislabel a
+    listing from another town. Returns None when nothing usable is found.
+    """
+    norm = normalize_text(text)
+    if not norm or "bratislava" not in norm:
+        return None
+    roman_match = _ROMAN_RE.search(norm)
+    roman = roman_match.group(1).upper() if roman_match else None
+    prefix = f"Bratislava {roman}" if roman else "Bratislava"
+    for borough in _BRATISLAVA_BOROUGHS_DISPLAY:
+        if normalize_text(borough) in norm:
+            return f"{prefix} - {borough}"
+    return prefix
+
+
 def looks_like_house(text: str | None) -> bool:
     """True when the text describes a house/land rather than a flat.
 

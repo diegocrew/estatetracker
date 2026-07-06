@@ -13,7 +13,7 @@ import pathlib
 
 import pytest
 
-from crawler.models import Condition
+from crawler.models import Condition, guess_locality
 from crawler.portals import bazos, nehnutelnosti, reality, topreality
 from crawler.portals.base import split_locality
 
@@ -31,6 +31,44 @@ def test_split_locality() -> None:
     )
     assert split_locality("Bratislava IV – Karlova Ves") == (None, "Bratislava IV – Karlova Ves")
     assert split_locality(None) == (None, None)
+
+
+def test_guess_locality() -> None:
+    # borough mined and returned with proper diacritics regardless of input casing
+    assert guess_locality("Pekny byt, Bratislava - Ruzinov, blizko Strkovca") == (
+        "Bratislava - Ružinov"
+    )
+    assert guess_locality("Byt Bratislava III, Nove Mesto") == "Bratislava III - Nové Mesto"
+    assert guess_locality("Slnecny byt, Bratislava, sirsie centrum") == "Bratislava"
+    # not Bratislava -> no mislabelling
+    assert guess_locality("Pekny byt v Senci, 20 min od mesta") is None
+    assert guess_locality(None) is None
+
+
+def test_reality_locality_mined_when_address_selector_misses() -> None:
+    html = """
+    <article class="offer">
+      <h2><a href="/byty/x/AB12345">4 izbovy byt</a></h2>
+      <div class="offer__params">4 izby, 95 m2, 3. poschodie</div>
+      <div class="offer__description">Priestranny byt, Bratislava - Ruzinov, blizko Strkovca.</div>
+    </article>
+    """
+    listing = reality.parse_search_page(html)[0]
+    assert listing.district == "Bratislava - Ružinov"  # no .offer__address, mined from text
+
+
+def test_topreality_locality_mined_when_selector_misses() -> None:
+    html = """
+    <div class="estate">
+      <h2><a href="https://www.topreality.sk/x-9999999.html">4-izbovy byt</a></h2>
+      <span class="price">539 000 €</span>
+      <div class="params">4-izbovy byt, 144 m2</div>
+      <div class="description">Vynimocny byt, Bratislava - Stare Mesto.</div>
+    </div>
+    """
+    listing = topreality.parse_search_page(html)[0]
+    assert listing.district == "Bratislava - Staré Mesto"
+    assert listing.price_eur == 539000
 
 
 class TestNehnutelnosti:

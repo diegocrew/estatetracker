@@ -17,6 +17,7 @@ from bs4 import BeautifulSoup, Tag
 from ..models import (
     Listing,
     detect_balcony,
+    guess_locality,
     make_listing_id,
     parse_area,
     parse_condition,
@@ -69,6 +70,7 @@ def parse_search_page(html: str) -> list[Listing]:
             street, district = split_locality(locality)
             card_text = card.get_text(" ", strip=True)
             haystack = f"{title} {params} {description} {card_text}"
+            district = district or guess_locality(haystack)
             listings.append(
                 Listing(
                     id=make_listing_id(PORTAL_NAME, str(raw_id) if raw_id else None, url),
