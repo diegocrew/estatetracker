@@ -75,6 +75,7 @@ def issue_body(item: ReportItem) -> str:
         ("Floor", _fmt(listing.floor)),
         ("Condition", listing.condition.value),
         ("Balcony", {True: "yes", False: "no", None: "-"}[listing.balcony]),
+        ("Parking", {True: "yes", False: "no", None: "-"}[listing.raw_extra.get("parking")]),
         ("First seen", _fmt(listing.first_seen)),
     ]
     lines = [f"### [{listing.title}]({listing.url})", ""]
@@ -88,8 +89,12 @@ def issue_body(item: ReportItem) -> str:
     if item.breakdown:
         lines += ["", "Score breakdown:"]
         lines += [f"- {part}" for part in item.breakdown]
-    if listing.description_snippet:
-        lines += ["", "> " + listing.description_snippet.replace("\n", " ")]
+    red_flags = listing.raw_extra.get("red_flags")
+    if red_flags:
+        lines += ["", "**Red flags:** " + ", ".join(str(f) for f in red_flags)]
+    detail = listing.raw_extra.get("summary") or listing.description_snippet
+    if detail:
+        lines += ["", "> " + detail.replace("\n", " ")]
     lines += ["", f"Link: {listing.url}"]
     return "\n".join(lines)
 

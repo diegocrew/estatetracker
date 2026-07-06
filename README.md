@@ -136,11 +136,34 @@ EOF
 - Only ~3 pages per portal per run are fetched; a very fast market could push
   listings past page 3 between runs.
 
-## Future enrichment
+## AI enrichment (optional)
 
-`crawler/enrich.py` is a stub for a Vertex AI Gemini step that will extract
-`condition`, `floor`, `balcony`, orientation, and red flags from the listing
-text when deterministic parsing returned `None`. It is wired into `main.py`
-behind the `ENRICH_ENABLED` env var (default off) and currently returns the
-listing unchanged - swapping in the real implementation requires no
-refactoring.
+`crawler/enrich.py` sends each **new** listing's card text to Google **Gemini
+2.5 Flash** and fills the fields deterministic parsing missed (price, street,
+district, floor, condition, balcony) plus extras it can't get by regex
+(parking, terrace, year built, is-new-development, red flags, and a short
+summary shown in Telegram / the issue). Deterministic values are authoritative
+- the model only fills gaps and never overwrites them.
+
+It is **fail-open and off by default**: with no key it is a no-op, and any API
+error or bad response returns the listing unchanged, so a bad AI day never
+breaks a run. It also runs only on real runs (never on the push/dry-run smoke
+tests) and only for new/price-changed listings, so API usage stays tiny.
+
+To enable:
+
+1. Create a **Gemini API key** (a Vertex AI *Express Mode* account-bound key
+   works) and make sure the key is allowed to call the **Generative Language
+   API** (enable it in the API Library).
+2. Add it as the repository secret **`AI_KEY`**
+   (Settings -> Secrets and variables -> Actions).
+3. Optional repo *variables*: `AI_MODEL` (default `gemini-2.5-flash`) and
+   `AI_API_BASE` (default `https://generativelanguage.googleapis.com/v1beta`;
+   point this at the Vertex endpoint if your key only allows Vertex).
+
+That's it - the next run enriches new listings. Cost at this volume (a handful
+of new flats per run, twice daily) is a fraction of a cent.
+
+Note: AI does **not** revive `nehnutelnosti.sk` - that portal renders listings
+with JavaScript, so the fetched HTML has nothing to extract; that needs a
+headless browser, which this version deliberately avoids.

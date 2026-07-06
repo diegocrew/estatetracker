@@ -87,7 +87,7 @@ def parse_search_page(html: str) -> list[Listing]:
                     balcony=detect_balcony(haystack),
                     description_snippet=description,
                     raw_extra={"locality": locality, "params": params,
-                               "card_text": card_text[:200]},
+                               "card_text": card_text[:2000]},
                 )
             )
         except Exception:
