@@ -1,4 +1,4 @@
-"""Issue title/body formatting (pure functions — no network)."""
+"""Issue title/body formatting (pure functions - no network)."""
 
 from __future__ import annotations
 
@@ -30,7 +30,7 @@ def make_item(**overrides: object) -> ReportItem:
 
 
 def test_issue_title_format() -> None:
-    assert issue_title(make_item()) == "🏠 [42] 185 000 € | 68 m² | Obchodná | bazos"
+    assert issue_title(make_item()) == "[42] 185 000 € | 68 m² | Obchodná | bazos"
 
 
 def test_issue_title_handles_missing_fields() -> None:
@@ -38,7 +38,7 @@ def test_issue_title_handles_missing_fields() -> None:
     item.listing.price_eur = None
     item.listing.area_m2 = None
     item.listing.street = None
-    assert issue_title(item) == "🏠 [42] ? € | ? m² | Bratislava I | bazos"
+    assert issue_title(item) == "[42] ? € | ? m² | Bratislava I | bazos"
 
 
 def test_issue_body_contains_table_link_and_breakdown() -> None:
@@ -51,7 +51,7 @@ def test_issue_body_contains_table_link_and_breakdown() -> None:
 
 def test_price_change_banner() -> None:
     body = issue_body(make_item(price_change=(200000, 185000)))
-    assert "Price dropped: 200 000 € → 185 000 €" in body
+    assert "Price dropped: 200 000 € -> 185 000 €" in body
 
 
 def test_overflow_summary_lists_items() -> None:
@@ -62,7 +62,7 @@ def test_overflow_summary_lists_items() -> None:
 
 def test_digest_title() -> None:
     items = [make_item(), make_item()]
-    assert digest_title(items, "2026-07-05") == "🏠 2 new Bratislava flat(s) — 2026-07-05"
+    assert digest_title(items, "2026-07-05") == "2 new Bratislava flat(s) - 2026-07-05"
 
 
 def test_digest_body_one_row_per_flat() -> None:
@@ -75,4 +75,4 @@ def test_digest_body_one_row_per_flat() -> None:
 
 def test_digest_body_marks_price_drop() -> None:
     body = digest_body([make_item(price_change=(200000, 185000))])
-    assert "📉" in body
+    assert "185 000 € (was 200 000 €)" in body

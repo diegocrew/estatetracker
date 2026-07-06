@@ -4,7 +4,7 @@ Targets ``article.offer`` cards (title link, ``.offer__price``,
 ``.offer__address``, ``.offer__params``, ``.offer__description``). City and
 transaction are encoded in the URL path; the rest is filtered client-side.
 
-NOTE: written against a saved fixture — refresh the fixture and selectors when
+NOTE: written against a saved fixture - refresh the fixture and selectors when
 the canary fires.
 """
 

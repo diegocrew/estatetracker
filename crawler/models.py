@@ -1,7 +1,7 @@
 """Normalized listing model and defensive parsing helpers.
 
 Every helper in this module returns ``None`` (or a sentinel like
-``Condition.UNKNOWN``) instead of raising when the input cannot be parsed —
+``Condition.UNKNOWN``) instead of raising when the input cannot be parsed -
 portal HTML drifts constantly and a single malformed card must never kill a run.
 """
 
@@ -136,7 +136,7 @@ def parse_rooms(text: str | None) -> str | None:
 
 
 def rooms_to_float(rooms: str | None) -> float | None:
-    """'4+' -> 4.0, '1.5' -> 1.5 — for numeric comparison against min_rooms."""
+    """'4+' -> 4.0, '1.5' -> 1.5 - for numeric comparison against min_rooms."""
     if rooms is None:
         return None
     try:
@@ -201,7 +201,7 @@ def looks_like_house(text: str | None) -> bool:
     """True when the text describes a house/land rather than a flat.
 
     Flats are protected first: any flat token ('byt', 'garsónka', 'mezonet',
-    …) — including 'byt v rodinnom dome' or 'byt v bytovom dome' — is never
+    …) - including 'byt v rodinnom dome' or 'byt v bytovom dome' - is never
     treated as a house. Only then is a house/land token ('rodinný dom', 'vila',
     'pozemok', …) taken as a house signal. Word boundaries keep 'dom' from
     matching inside 'bytovom dome'.
@@ -223,7 +223,7 @@ def make_listing_id(portal: str, raw_id: str | None, url: str) -> str:
 
 @dataclass
 class Listing:
-    """Normalized listing — the single schema every portal parser produces."""
+    """Normalized listing - the single schema every portal parser produces."""
 
     id: str
     portal: str

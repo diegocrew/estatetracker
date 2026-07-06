@@ -7,7 +7,7 @@ Politeness contract (applies to every portal):
 * robots.txt is honored when it can be fetched; unreachable robots fails open
 
 Resilience contract: any HTTP error, anti-bot challenge page, or network
-failure raises PortalError — the orchestrator records it and moves on to the
+failure raises PortalError - the orchestrator records it and moves on to the
 next portal; a run never fails because one portal is down.
 """
 
@@ -124,7 +124,7 @@ class BasePortal(abc.ABC):
             try:
                 parser.read()
             except Exception as exc:
-                LOG.debug("%s: robots.txt unavailable (%s) — failing open", self.name, exc)
+                LOG.debug("%s: robots.txt unavailable (%s) - failing open", self.name, exc)
                 self._robots_unavailable = True
                 return True
             self._robots = parser

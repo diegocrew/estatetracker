@@ -9,7 +9,7 @@ Portals: [nehnutelnosti.sk](https://www.nehnutelnosti.sk),
 [topreality.sk](https://www.topreality.sk), [reality.sk](https://www.reality.sk),
 [reality.bazos.sk](https://reality.bazos.sk).
 
-No AI/LLM calls in this version — see [Future enrichment](#future-enrichment).
+No AI/LLM calls in this version - see [Future enrichment](#future-enrichment).
 
 ## How it works
 
@@ -20,16 +20,16 @@ No AI/LLM calls in this version — see [Future enrichment](#future-enrichment).
    that can't be parsed becomes `None`, never a crash.
 3. `state/seen.json` (committed back by the workflow) dedupes listings. A
    previously seen listing is re-reported when its price moves by **more than
-   2%**, with a `price-drop` label and the old → new price in the Issue.
+   2%**, with a `price-drop` label and the old -> new price in the Issue.
    Entries not seen for 120 days are pruned.
    Every match is also appended to a human-readable **monthly archive** in
-   [`history/`](history/) — one `history/YYYY-MM.md` file per month, each a
+   [`history/`](history/) - one `history/YYYY-MM.md` file per month, each a
    table of price / area / rooms / address / link (see
    [`history/README.md`](history/README.md)). This is separate from
    `state/seen.json`: state is the crawler's memory, `history/` is for you to
    browse. Both are committed back by the workflow.
 4. Hard filters from `rules.yaml` drop listings; soft preferences compute a
-   score; one Issue per match is opened (max 20 per run — overflow goes into a
+   score; one Issue per match is opened (max 20 per run - overflow goes into a
    single summary Issue).
 
 ## Editing rules.yaml
@@ -38,31 +38,31 @@ No AI/LLM calls in this version — see [Future enrichment](#future-enrichment).
 key, and you can check edits locally with
 `python -m crawler.main --validate-rules`.
 
-- **`search`** — city, list of districts (empty = all), transaction type.
-- **`filters`** — *hard* limits: a listing violating any of these is dropped
+- **`search`** - city, list of districts (empty = all), transaction type.
+- **`filters`** - *hard* limits: a listing violating any of these is dropped
   (`min_area_m2`, `max_area_m2`, `min_price_eur`, `max_price_eur`,
   `max_price_per_m2`, `min_rooms`,
   `max_floor`, `exclude_ground_floor`, `require_balcony`,
   `allowed_conditions`, `banned_streets`, `banned_keywords`). Keyword and
   street matching is case- and diacritics-insensitive ("Obchodna" matches
-  "Obchodná"). **A missing/unparseable field never drops a listing** — only a
+  "Obchodná"). **A missing/unparseable field never drops a listing** - only a
   confirmed violation does, with two opt-in exceptions:
   - `exclude_houses: true` drops houses and land (`rodinný dom`, `vila`,
     `pozemok`, …); anything that mentions a flat (`byt`, `garsónka`, …),
     including a flat *in* an apartment building, is kept.
   - `city_required: true` keeps only listings positively confirmed to be in
-    `search.city` — the city name, one of your `search.districts`, or (for
+    `search.city` - the city name, one of your `search.districts`, or (for
     Bratislava) a borough must appear in the listing. This drops the
     surrounding villages ("20 min from Bratislava") that a text search pulls
     in. Trade-off: a genuine city flat whose locality the parser completely
     missed can be dropped too.
-- **`scoring`** — *soft* preferences that affect the score, not inclusion:
+- **`scoring`** - *soft* preferences that affect the score, not inclusion:
   per-street and per-district bonuses, `preferred_keywords` (free-text terms
   matched in the title + description, e.g. `{name: "parkov", bonus: 20}` for
   parking/garage), condition bonuses
   (`novostavba`, `rekonstrukcia`, `povodny_stav`), a balcony bonus, and
   `price_per_m2_reference`.
-- **`output`** — `mode`, `min_score_for_issue`, and the score → label mapping.
+- **`output`** - `mode`, `min_score_for_issue`, and the score -> label mapping.
   `mode: digest` (default) collects a whole run's new matches into **one**
   GitHub Issue with a price / area / rooms / address table; `mode:
   issue_per_listing` opens one Issue per flat (capped at 20/run + an overflow
@@ -78,7 +78,7 @@ body shows the full breakdown of which rules contributed.
 
 ## Manual runs
 
-Actions → **crawl** → *Run workflow*. Tick **dry_run** to parse and log without
+Actions -> **crawl** -> *Run workflow*. Tick **dry_run** to parse and log without
 opening Issues or committing state. Locally:
 
 ```bash
@@ -90,7 +90,7 @@ python -m crawler.main --dry-run --verbose
 
 `rules.yaml` reveals your budget and street preferences to anyone. To keep the
 sensitive parts private, put a base64-encoded YAML fragment into a repository
-Actions **variable** named `RULES_OVERRIDE_B64` — it is deep-merged over
+Actions **variable** named `RULES_OVERRIDE_B64` - it is deep-merged over
 `rules.yaml` at runtime (already wired into the workflow):
 
 ```bash
@@ -111,7 +111,7 @@ EOF
   consecutive zero-listing runs** a single `scraper-broken` maintenance Issue
   is opened per portal (deduplicated while one is already open).
 - **HTML drift**: the portals change markup regularly. Parsers are written
-  against saved fixtures in `tests/fixtures/` — those fixtures are currently
+  against saved fixtures in `tests/fixtures/` - those fixtures are currently
   *synthetic* (the portals were unreachable from the development environment),
   so expect one selector-update pass against real saved pages; the fixtures
   README explains how.
@@ -124,5 +124,5 @@ EOF
 `condition`, `floor`, `balcony`, orientation, and red flags from the listing
 text when deterministic parsing returned `None`. It is wired into `main.py`
 behind the `ENRICH_ENABLED` env var (default off) and currently returns the
-listing unchanged — swapping in the real implementation requires no
+listing unchanged - swapping in the real implementation requires no
 refactoring.

@@ -1,7 +1,7 @@
 """Parse saved fixtures and assert the normalized output.
 
 EXPECTED TO UPDATE: the fixtures in tests/fixtures/ are synthetic (the portals
-were unreachable from the development environment — see tests/fixtures/README.md).
+were unreachable from the development environment - see tests/fixtures/README.md).
 They encode each portal's documented card markup. When the first real crawl
 shows selector drift, save real search pages over the fixtures and adjust both
 the parsers and these assertions.

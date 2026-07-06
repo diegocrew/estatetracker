@@ -1,4 +1,4 @@
-"""reality.bazos.sk parser — classifieds, deliberately simple stable HTML.
+"""reality.bazos.sk parser - classifieds, deliberately simple stable HTML.
 
 Card = ``div.inzeraty`` with ``h2.nadpis a`` (title/URL, id in the URL),
 ``div.inzeratycena`` (price), ``div.inzeratylok`` (locality) and ``div.popis``
