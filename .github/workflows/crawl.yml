@@ -51,6 +51,9 @@ jobs:
           RULES_OVERRIDE_B64: ${{ vars.RULES_OVERRIDE_B64 }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          AI_KEY: ${{ secrets.AI_KEY }}
+          AI_MODEL: ${{ vars.AI_MODEL }}
+          AI_API_BASE: ${{ vars.AI_API_BASE }}
         run: |
           if [ "${{ github.event_name }}" = "push" ] || [ "${{ inputs.dry_run }}" = "true" ]; then
             python -m crawler.main --dry-run

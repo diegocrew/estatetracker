@@ -67,6 +67,7 @@ def parse_search_page(html: str) -> list[Listing]:
             raw_id = id_match.group(1) if id_match else None
             description = _card_text(card, "div.popis")
             locality = _card_text(card, "div.inzeratylok")
+            card_text = card.get_text(" ", strip=True)
             haystack = f"{title} {description}"
             listings.append(
                 Listing(
@@ -83,7 +84,7 @@ def parse_search_page(html: str) -> list[Listing]:
                     condition=parse_condition(haystack),
                     balcony=detect_balcony(haystack),
                     description_snippet=description,
-                    raw_extra={"locality": locality},
+                    raw_extra={"locality": locality, "card_text": card_text[:2000]},
                 )
             )
         except Exception:

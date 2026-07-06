@@ -56,7 +56,12 @@ def run(args: argparse.Namespace) -> int:
         return 0
 
     dry_run = args.dry_run or _env_flag("DRY_RUN")
-    enrich_enabled = _env_flag("ENRICH_ENABLED")
+    enricher = enrich.GeminiEnricher()
+    # Enrich only on real runs (never on the push/dry-run smoke tests) so we
+    # don't spend API calls on every commit.
+    ai_enabled = enricher.enabled and not dry_run
+    if ai_enabled:
+        LOG.info("AI enrichment enabled (model %s)", enricher.model)
     state = state_mod.load_state(args.state)
     min_score = rules_mod.min_score_for_issue(rules)
 
@@ -72,8 +77,6 @@ def run(args: argparse.Namespace) -> int:
         except Exception as exc:
             LOG.exception("portal %s crashed", portal.name)
             listings, error = [], f"unexpected error: {exc}"
-        if enrich_enabled:
-            listings = [enrich.enrich(listing) for listing in listings]
         # Phantom cards (no price, area or rooms) are parser drift, not matches:
         # they must not become Issues, and a portal producing only phantoms is
         # as broken as one producing nothing - count only usable listings.
@@ -88,6 +91,10 @@ def run(args: argparse.Namespace) -> int:
         for listing in usable:
             status, previous = state_mod.classify_listing(state, listing)
             previous_price = previous.get("price_eur") if previous else None
+            # Enrich only new / price-changed listings (bounds API calls to the
+            # few that will actually be reported), before filtering on the result.
+            if status != "seen" and ai_enabled:
+                listing = enricher.enrich(listing)
             state_mod.remember_listing(state, listing)
             if status == "seen":
                 continue

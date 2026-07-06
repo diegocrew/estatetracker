@@ -41,10 +41,12 @@ def telegram_message(items: list[ReportItem], date_str: str) -> str:
         if item.price_change:
             old, new = item.price_change
             price = f"{_fmt_price(new)} (was {_fmt_price(old)})"
-        lines.append(
-            f"\n[{item.score}] {price} | {area} | {rooms} | {place} | {listing.portal}"
-            f"\n{listing.url}"
-        )
+        block = f"\n[{item.score}] {price} | {area} | {rooms} | {place} | {listing.portal}"
+        summary = listing.raw_extra.get("summary")
+        if summary:
+            block += f"\n{summary}"
+        block += f"\n{listing.url}"
+        lines.append(block)
     overflow = len(items) - MAX_LISTINGS_IN_MESSAGE
     if overflow > 0:
         lines.append(f"\n...and {overflow} more (see the GitHub issue).")
