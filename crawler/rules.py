@@ -131,7 +131,8 @@ def validate_rules(rules: dict[str, Any]) -> None:
              "search.transaction must be a string")
 
     filters = rules["filters"]
-    for key in ("min_area_m2", "min_price_eur", "max_price_eur", "max_price_per_m2", "max_floor"):
+    for key in ("min_area_m2", "max_area_m2", "min_price_eur", "max_price_eur",
+                "max_price_per_m2", "max_floor"):
         _check_number(filters.get(key), f"filters.{key}")
     for key in ("exclude_ground_floor", "require_balcony", "exclude_houses", "city_required"):
         value = filters.get(key, False)
@@ -261,6 +262,10 @@ def failing_filter(listing: Listing, rules: dict[str, Any]) -> str | None:
     min_area = filters.get("min_area_m2")
     if min_area is not None and listing.area_m2 is not None and listing.area_m2 < min_area:
         return f"area {listing.area_m2:g} m² below min_area_m2 {min_area}"
+
+    max_area = filters.get("max_area_m2")
+    if max_area is not None and listing.area_m2 is not None and listing.area_m2 > max_area:
+        return f"area {listing.area_m2:g} m² above max_area_m2 {max_area}"
 
     min_price = filters.get("min_price_eur")
     if min_price is not None and listing.price_eur is not None and listing.price_eur < min_price:

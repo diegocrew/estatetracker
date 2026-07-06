@@ -12,8 +12,9 @@ search:
 
 filters:                      # hard filters — listing dropped if violated
   min_area_m2: 85             # required: at least 85 m²
+  max_area_m2: 300            # drop oversized non-flats / investment objects; null = disabled
   min_price_eur: 20000        # drops "1 €" auction-teaser listings; null = disabled
-  max_price_eur: null         # no budget cap for now — set a number (e.g. 400000) to cap
+  max_price_eur: 1000000      # budget cap (€1M); null = disabled
   max_price_per_m2: null      # disabled; set a number to cap €/m²
   min_rooms: "4"             # required: 4 rooms or more ("4+" listings pass)
   max_floor: null
@@ -26,6 +27,8 @@ filters:                      # hard filters — listing dropped if violated
   banned_keywords:            # matched in title+description, case/diacritics-insensitive
     - "dražba"
     - "spoluvlastnícky podiel"
+    - "objekt"                # commercial / investment objects, not flats
+    - "projekt"               # "rezidenčný projekt" investment listings
 
 scoring:                      # soft preferences — affect score, not inclusion
   preferred_streets: []       # e.g. {name: "Obchodná", bonus: 30}

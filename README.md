@@ -40,7 +40,8 @@ key, and you can check edits locally with
 
 - **`search`** — city, list of districts (empty = all), transaction type.
 - **`filters`** — *hard* limits: a listing violating any of these is dropped
-  (`min_area_m2`, `min_price_eur`, `max_price_eur`, `max_price_per_m2`, `min_rooms`,
+  (`min_area_m2`, `max_area_m2`, `min_price_eur`, `max_price_eur`,
+  `max_price_per_m2`, `min_rooms`,
   `max_floor`, `exclude_ground_floor`, `require_balcony`,
   `allowed_conditions`, `banned_streets`, `banned_keywords`). Keyword and
   street matching is case- and diacritics-insensitive ("Obchodna" matches
