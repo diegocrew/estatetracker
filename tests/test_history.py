@@ -32,7 +32,7 @@ def test_creates_month_file_with_header_and_row(tmp_path: pathlib.Path) -> None:
     path = append_matches([make_item()], str(tmp_path), today=date(2026, 7, 5))
     assert path == month_path(str(tmp_path), date(2026, 7, 5))
     text = pathlib.Path(path).read_text(encoding="utf-8")
-    assert "# reality-watch matches — July 2026" in text
+    assert "# reality-watch matches - July 2026" in text
     assert "| Logged | Score | Price |" in text
     assert "| 2026-07-05 | 94 | 299 000 € | 92 m² | 4+ | Bratislava III |" in text
     assert "[4 izbový byt](https://example.sk/1)" in text
@@ -58,12 +58,12 @@ def test_new_month_new_file(tmp_path: pathlib.Path) -> None:
     assert (tmp_path / "2026-08.md").exists()
 
 
-def test_price_change_shows_arrow(tmp_path: pathlib.Path) -> None:
+def test_price_change_shows_previous(tmp_path: pathlib.Path) -> None:
     path = append_matches(
         [make_item(price_change=(320000, 299000))], str(tmp_path), today=date(2026, 7, 5)
     )
     text = pathlib.Path(path).read_text(encoding="utf-8")
-    assert "299 000 € (↓ 320 000 €)" in text
+    assert "299 000 € (was 320 000 €)" in text
 
 
 def test_pipe_in_title_does_not_break_table(tmp_path: pathlib.Path) -> None:

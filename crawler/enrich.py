@@ -1,4 +1,4 @@
-"""Vertex AI enrichment stub — interface only, no GCP dependency in v1.
+"""Vertex AI enrichment stub - interface only, no GCP dependency in v1.
 
 Future contract
 ---------------
@@ -13,7 +13,7 @@ deterministic parsing left as ``None`` / ``Condition.UNKNOWN``:
   place) into ``raw_extra["orientation"]`` / ``raw_extra["red_flags"]``
 
 Deterministically parsed values are authoritative: the model only fills gaps,
-never overwrites a non-None field. The call must be fail-open — any API error
+never overwrites a non-None field. The call must be fail-open - any API error
 returns the listing unchanged. Wire-up lives behind the ``ENRICH_ENABLED``
 environment variable (default: disabled) in ``main.py``, so enabling the real
 implementation is a drop-in replacement of this function body.

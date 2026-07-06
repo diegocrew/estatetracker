@@ -1,4 +1,4 @@
-"""nehnutelnosti.sk — largest Slovak real estate portal.
+"""nehnutelnosti.sk - largest Slovak real estate portal.
 
 Parser targets the classic listing-card markup (``div.advertisement-item`` with
 a ``data-id`` attribute). City and transaction are filtered server-side through

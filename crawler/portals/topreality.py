@@ -5,7 +5,7 @@ Targets the ``div.estate`` card layout (title link in ``h2``, ``span.price``,
 are encoded in the URL path; the rest is filtered client-side by the rules
 engine.
 
-NOTE: written against a saved fixture — refresh the fixture and selectors when
+NOTE: written against a saved fixture - refresh the fixture and selectors when
 the canary fires.
 """
 

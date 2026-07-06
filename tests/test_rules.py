@@ -192,7 +192,7 @@ class TestHardFilters:
 
     def test_banned_keyword_diacritics_insensitive(self) -> None:
         listing = make_listing(title="Byt v drazbe - DRAZBA", description_snippet="")
-        # rules say "dražba"; the listing says "drazba" — must still match
+        # rules say "dražba"; the listing says "drazba" - must still match
         rules = make_rules(filters={"banned_keywords": ["dražba"]})
         assert failing_filter(listing, rules) is not None
 
@@ -235,7 +235,7 @@ class TestHouseFilter:
         assert failing_filter(make_listing(title="4 izbový byt"), rules) is None
 
     def test_flat_in_apartment_building_kept(self) -> None:
-        """'byt v bytovom dome' contains 'dom' but is a flat — must be kept."""
+        """'byt v bytovom dome' contains 'dom' but is a flat - must be kept."""
         rules = make_rules(filters={"exclude_houses": True})
         flat = make_listing(
             title="3 izbový byt",

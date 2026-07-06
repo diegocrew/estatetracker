@@ -1,4 +1,4 @@
-"""Portal registry — add a new portal by importing it and listing it here."""
+"""Portal registry - add a new portal by importing it and listing it here."""
 
 from .base import BasePortal, PortalError
 from .bazos import BazosPortal

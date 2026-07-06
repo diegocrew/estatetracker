@@ -50,7 +50,7 @@ def _fmt_price(price: int | None) -> str:
 
 
 def _fmt(value: object) -> str:
-    return "—" if value is None or value == "" else str(value)
+    return "-" if value is None or value == "" else str(value)
 
 
 def issue_title(item: ReportItem) -> str:
@@ -58,7 +58,7 @@ def issue_title(item: ReportItem) -> str:
     area = f"{listing.area_m2:g} m²" if listing.area_m2 else "? m²"
     place = listing.street or listing.district or "?"
     return (
-        f"🏠 [{item.score}] {_fmt_price(listing.price_eur)} | {area} | {place} | {listing.portal}"
+        f"[{item.score}] {_fmt_price(listing.price_eur)} | {area} | {place} | {listing.portal}"
     )
 
 
@@ -67,21 +67,21 @@ def issue_body(item: ReportItem) -> str:
     rows = [
         ("Portal", listing.portal),
         ("Price", _fmt_price(listing.price_eur)),
-        ("Area", f"{listing.area_m2:g} m²" if listing.area_m2 else "—"),
-        ("Price / m²", f"{listing.price_per_m2:g} €" if listing.price_per_m2 else "—"),
+        ("Area", f"{listing.area_m2:g} m²" if listing.area_m2 else "-"),
+        ("Price / m²", f"{listing.price_per_m2:g} €" if listing.price_per_m2 else "-"),
         ("Rooms", _fmt(listing.rooms)),
         ("Street", _fmt(listing.street)),
         ("District", _fmt(listing.district)),
         ("Floor", _fmt(listing.floor)),
         ("Condition", listing.condition.value),
-        ("Balcony", {True: "yes", False: "no", None: "—"}[listing.balcony]),
+        ("Balcony", {True: "yes", False: "no", None: "-"}[listing.balcony]),
         ("First seen", _fmt(listing.first_seen)),
     ]
     lines = [f"### [{listing.title}]({listing.url})", ""]
     if item.price_change:
         old, new = item.price_change
         direction = "dropped" if new < old else "rose"
-        lines += [f"**Price {direction}: {_fmt_price(old)} → {_fmt_price(new)}**", ""]
+        lines += [f"**Price {direction}: {_fmt_price(old)} -> {_fmt_price(new)}**", ""]
     lines += ["| Field | Value |", "| --- | --- |"]
     lines += [f"| {name} | {value} |" for name, value in rows]
     lines += ["", f"**Score: {item.score}**"]
@@ -90,7 +90,7 @@ def issue_body(item: ReportItem) -> str:
         lines += [f"- {part}" for part in item.breakdown]
     if listing.description_snippet:
         lines += ["", "> " + listing.description_snippet.replace("\n", " ")]
-    lines += ["", f"🔗 {listing.url}"]
+    lines += ["", f"Link: {listing.url}"]
     return "\n".join(lines)
 
 
@@ -105,7 +105,7 @@ def overflow_summary_body(items: list[ReportItem]) -> str:
     ]
     for item in items:
         listing = item.listing
-        area = f"{listing.area_m2:g} m²" if listing.area_m2 else "—"
+        area = f"{listing.area_m2:g} m²" if listing.area_m2 else "-"
         lines.append(
             f"| {item.score} | [{listing.title}]({listing.url}) "
             f"| {_fmt_price(listing.price_eur)} | {area} |"
@@ -114,7 +114,7 @@ def overflow_summary_body(items: list[ReportItem]) -> str:
 
 
 def digest_title(items: list[ReportItem], date_str: str) -> str:
-    return f"🏠 {len(items)} new Bratislava flat(s) — {date_str}"
+    return f"{len(items)} new Bratislava flat(s) - {date_str}"
 
 
 def digest_body(items: list[ReportItem]) -> str:
@@ -127,15 +127,18 @@ def digest_body(items: list[ReportItem]) -> str:
     ]
     for item in items:
         listing = item.listing
-        area = f"{listing.area_m2:g} m²" if listing.area_m2 else "—"
-        address = listing.street or listing.district or "—"
-        flags = " 📉" if item.price_change else ""
+        area = f"{listing.area_m2:g} m²" if listing.area_m2 else "-"
+        address = listing.street or listing.district or "-"
+        price = _fmt_price(listing.price_eur)
+        if item.price_change:
+            old, new = item.price_change
+            price = f"{_fmt_price(new)} (was {_fmt_price(old)})"
         lines.append(
-            f"| {item.score}{flags} | {_fmt_price(listing.price_eur)} | {area} "
+            f"| {item.score} | {price} | {area} "
             f"| {_fmt(listing.rooms)} | {address} | {listing.condition.value} "
             f"| {listing.portal} | [open]({listing.url}) |"
         )
-    lines += ["", "📉 = price dropped since last seen. Edit `rules.yaml` to tune matches."]
+    lines += ["", "Edit `rules.yaml` to tune matches."]
     return "\n".join(lines)
 
 
@@ -215,10 +218,10 @@ class Reporter:
     def report_digest(self, items: list[ReportItem], date_str: str | None = None) -> int:
         """Open a single Issue for the whole run listing every new match. Returns count."""
         if not items:
-            LOG.info("no new matches — no digest issue created")
+            LOG.info("no new matches - no digest issue created")
             return 0
         if not self.enabled:
-            LOG.warning("reporter disabled (GITHUB_TOKEN/GITHUB_REPOSITORY unset) — "
+            LOG.warning("reporter disabled (GITHUB_TOKEN/GITHUB_REPOSITORY unset) - "
                         "%d matches not reported", len(items))
             return 0
         date_str = date_str or datetime.now(UTC).date().isoformat()
@@ -228,7 +231,7 @@ class Reporter:
     def report_matches(self, items: list[ReportItem]) -> int:
         """Open one Issue per item up to the cap, plus one overflow summary. Returns count."""
         if not self.enabled:
-            LOG.warning("reporter disabled (GITHUB_TOKEN/GITHUB_REPOSITORY unset) — "
+            LOG.warning("reporter disabled (GITHUB_TOKEN/GITHUB_REPOSITORY unset) - "
                         "%d matches not reported", len(items))
             return 0
         created = 0
@@ -237,7 +240,7 @@ class Reporter:
                 created += 1
         overflow = items[MAX_ISSUES_PER_RUN:]
         if overflow:
-            title = f"⚠️ {len(overflow)} additional matches over the {MAX_ISSUES_PER_RUN}/run cap"
+            title = f"{len(overflow)} additional matches over the {MAX_ISSUES_PER_RUN}/run cap"
             if self.create_issue(title, overflow_summary_body(overflow), ["match"]) is not None:
                 created += 1
         return created
@@ -247,9 +250,9 @@ class Reporter:
         if not self.enabled:
             return
         if self.has_open_issue("scraper-broken", title_contains=portal):
-            LOG.info("scraper-broken issue for %s already open — skipping", portal)
+            LOG.info("scraper-broken issue for %s already open - skipping", portal)
             return
-        title = f"⚠️ {portal}: 0 listings for {streak} consecutive runs"
+        title = f"{portal}: 0 listings for {streak} consecutive runs"
         body = (
             f"The `{portal}` scraper has produced **0 listings for {streak} consecutive "
             "runs**. Likely causes: the portal changed its HTML, the search URL format "

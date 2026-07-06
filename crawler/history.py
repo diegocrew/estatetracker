@@ -22,7 +22,7 @@ _TABLE_HEADER = (
 
 
 def _fmt_price(price: int | None) -> str:
-    return f"{price:,} €".replace(",", " ") if price is not None else "—"
+    return f"{price:,} €".replace(",", " ") if price is not None else "-"
 
 
 def _cell(value: str) -> str:
@@ -32,16 +32,15 @@ def _cell(value: str) -> str:
 
 def _row(item: ReportItem, logged: str) -> str:
     listing = item.listing
-    area = f"{listing.area_m2:g} m²" if listing.area_m2 else "—"
+    area = f"{listing.area_m2:g} m²" if listing.area_m2 else "-"
     price = _fmt_price(listing.price_eur)
     if item.price_change:
         old, new = item.price_change
-        arrow = "↓" if new < old else "↑"
-        price = f"{_fmt_price(new)} ({arrow} {_fmt_price(old)})"
-    address = _cell(listing.street or listing.district or "—")
+        price = f"{_fmt_price(new)} (was {_fmt_price(old)})"
+    address = _cell(listing.street or listing.district or "-")
     title = _cell(listing.title) or "listing"
     return (
-        f"| {logged} | {item.score} | {price} | {area} | {listing.rooms or '—'} "
+        f"| {logged} | {item.score} | {price} | {area} | {listing.rooms or '-'} "
         f"| {address} | {listing.condition.value} | {listing.portal} "
         f"| [{title}]({listing.url}) |"
     )
@@ -70,7 +69,7 @@ def append_matches(
     rows = [_row(item, on.isoformat()) for item in items]
     with open(path, "a", encoding="utf-8") as fh:
         if new_file:
-            fh.write(f"# reality-watch matches — {on:%B %Y}\n\n")
+            fh.write(f"# reality-watch matches - {on:%B %Y}\n\n")
             fh.write(
                 "Appended automatically by the crawler each run; newest entries at the "
                 "bottom. Do not edit by hand.\n\n"

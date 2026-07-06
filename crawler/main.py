@@ -32,7 +32,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--history-dir", default=history.DEFAULT_HISTORY_DIR,
                         help="directory for the monthly history/YYYY-MM.md archive")
     parser.add_argument("--dry-run", action="store_true",
-                        help="parse and log only — no Issues, no state changes")
+                        help="parse and log only - no Issues, no state changes")
     parser.add_argument("--validate-rules", action="store_true",
                         help="validate rules.yaml and exit")
     parser.add_argument("-v", "--verbose", action="store_true", help="debug logging")
@@ -74,7 +74,7 @@ def run(args: argparse.Namespace) -> int:
             listings = [enrich.enrich(listing) for listing in listings]
         # Phantom cards (no price, area or rooms) are parser drift, not matches:
         # they must not become Issues, and a portal producing only phantoms is
-        # as broken as one producing nothing — count only usable listings.
+        # as broken as one producing nothing - count only usable listings.
         usable = [listing for listing in listings if listing.has_usable_data]
         if len(usable) < len(listings):
             LOG.warning("portal %s: %d of %d cards had no extractable price/area/rooms "
@@ -118,7 +118,7 @@ def run(args: argparse.Namespace) -> int:
     mode = (rules.get("output") or {}).get("mode", "digest")
 
     if dry_run:
-        LOG.info("DRY RUN [%s mode] — %d matches would be reported, %d dropped by filters",
+        LOG.info("DRY RUN [%s mode] - %d matches would be reported, %d dropped by filters",
                  mode, len(items), dropped)
         for item in items:
             LOG.info("  would report: %s | labels=%s", issue_title(item), item.labels)

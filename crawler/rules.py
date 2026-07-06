@@ -27,7 +27,7 @@ from .models import (
 )
 
 # Bratislava boroughs (diacritics-stripped) so a card naming only the borough
-# — "Petržalka", "Ružinov" — still counts as in-city when city_required is on.
+# - "Petržalka", "Ružinov" - still counts as in-city when city_required is on.
 # Deliberately excludes ambiguous "Nové Mesto" (also a town 80 km away).
 BRATISLAVA_BOROUGHS = (
     "stare mesto", "ruzinov", "vrakuna", "podunajske biskupice", "raca",
@@ -205,8 +205,8 @@ def _location_haystack(listing: Listing) -> str:
 def in_city(listing: Listing, city: str, districts: list[str]) -> bool:
     """True when the listing can be confirmed to be in ``city``.
 
-    Confirmation is the city name, one of the user's ``search.districts``, or —
-    for Bratislava — one of its boroughs, appearing anywhere in the listing's
+    Confirmation is the city name, one of the user's ``search.districts``, or -
+    for Bratislava - one of its boroughs, appearing anywhere in the listing's
     location text. Slovak declension protects against false positives: 'od
     Bratislavy' (near Bratislava) normalizes to 'bratislavy', which does not
     contain 'bratislava'.
@@ -225,8 +225,8 @@ def in_city(listing: Listing, city: str, districts: list[str]) -> bool:
 def failing_filter(listing: Listing, rules: dict[str, Any]) -> str | None:
     """Return the human-readable reason a hard filter drops this listing, or None.
 
-    Missing data (None fields) never causes a drop — only a confirmed violation
-    does — with two opt-in exceptions, ``city_required`` and ``exclude_houses``,
+    Missing data (None fields) never causes a drop - only a confirmed violation
+    does - with two opt-in exceptions, ``city_required`` and ``exclude_houses``,
     which drop listings that can't be positively confirmed as an in-city flat.
     """
     filters = rules.get("filters") or {}
