@@ -88,3 +88,27 @@ def test_gives_up_after_repeated_errors() -> None:
     enr = GeminiEnricher(api_key="test-key")
     enr._error_count = 3
     assert enr.enabled is False                  # stops calling for the rest of the run
+
+
+class _FakeResponse:
+    status_code = 200
+
+    def json(self) -> dict[str, Any]:
+        return {"candidates": [{"content": {"parts": [{"text": '{"summary": "ok"}'}]}}]}
+
+
+def test_generate_payload_has_user_role() -> None:
+    """Vertex rejects contents without a role - the payload must set role=user."""
+    captured: dict[str, Any] = {}
+
+    class FakeSession:
+        def post(self, url: str, json: dict[str, Any], timeout: int) -> _FakeResponse:
+            captured["url"] = url
+            captured["json"] = json
+            return _FakeResponse()
+
+    enr = GeminiEnricher(api_key="k", api_base="https://example/v1", session=FakeSession())
+    result = enr._generate("card text", "title")
+    assert result == {"summary": "ok"}
+    assert captured["json"]["contents"][0]["role"] == "user"
+    assert captured["url"] == "https://example/v1/models/gemini-2.5-flash:generateContent?key=k"
