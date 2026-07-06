@@ -2,7 +2,9 @@ name: crawl
 
 on:
   schedule:
-    - cron: "0 5,16 * * *" # UTC — 06:00/07:00 and 17:00/18:00 Bratislava time
+    # Deliberately off the top of the hour: GitHub heavily contends :00 cron
+    # slots and often delays or drops them for low-activity public repos.
+    - cron: "17 5,16 * * *" # UTC — ~06:17/07:17 and ~17:17/18:17 Bratislava time
   workflow_dispatch:
     inputs:
       dry_run:
