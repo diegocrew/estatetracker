@@ -1984,7 +1984,7 @@
     "topreality:sha1:80ffa0ef703e11717595a9bfa4d36c638261c398": {
       "first_seen": "2026-07-05",
       "hash": "80ffa0ef703e11717595a9bfa4d36c638261c398",
-      "last_seen": "2026-07-05",
+      "last_seen": "2026-07-06",
       "price_eur": 265000,
       "url": "https://www.topreality.sk/moderny-4-izbovy-rodinny-dom-novostavba-na-predaj-velka-maca-r9365074.html"
     },
@@ -2413,25 +2413,25 @@
     "bazos": {
       "last_count": 60,
       "last_error": null,
-      "last_run": "2026-07-06T15:10:25+00:00",
+      "last_run": "2026-07-06T15:28:14+00:00",
       "zero_streak": 0
     },
     "nehnutelnosti": {
       "last_count": 1,
       "last_error": null,
-      "last_run": "2026-07-06T15:09:44+00:00",
+      "last_run": "2026-07-06T15:27:33+00:00",
       "zero_streak": 0
     },
     "reality": {
       "last_count": 72,
       "last_error": null,
-      "last_run": "2026-07-06T15:10:13+00:00",
+      "last_run": "2026-07-06T15:28:04+00:00",
       "zero_streak": 0
     },
     "topreality": {
       "last_count": 48,
       "last_error": null,
-      "last_run": "2026-07-06T15:09:55+00:00",
+      "last_run": "2026-07-06T15:27:45+00:00",
       "zero_streak": 0
     }
   }
