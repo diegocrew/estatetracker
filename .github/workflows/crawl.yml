@@ -4,11 +4,11 @@ on:
   schedule:
     # Deliberately off the top of the hour: GitHub heavily contends :00 cron
     # slots and often delays or drops them for low-activity public repos.
-    - cron: "17 5,16 * * *" # UTC — ~06:17/07:17 and ~17:17/18:17 Bratislava time
+    - cron: "17 5,16 * * *" # UTC - ~06:17/07:17 and ~17:17/18:17 Bratislava time
   workflow_dispatch:
     inputs:
       dry_run:
-        description: "Parse and log only — no Issues, no state commit"
+        description: "Parse and log only - no Issues, no state commit"
         type: boolean
         required: false
         default: false
@@ -49,6 +49,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RULES_OVERRIDE_B64: ${{ vars.RULES_OVERRIDE_B64 }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
           if [ "${{ github.event_name }}" = "push" ] || [ "${{ inputs.dry_run }}" = "true" ]; then
             python -m crawler.main --dry-run
