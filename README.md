@@ -86,6 +86,24 @@ pip install -r requirements.txt
 python -m crawler.main --dry-run --verbose
 ```
 
+## Telegram notifications (optional)
+
+Each run can push its digest to Telegram so new matches reach your phone. It is
+off unless both secrets below are set; when unset the crawler simply skips it.
+
+1. In Telegram, message **@BotFather**, send `/newbot`, and follow the prompts
+   to get a **bot token** (looks like `123456789:AA...`).
+2. Start a chat with your new bot and send it any message (a bot cannot message
+   you first).
+3. Get your **chat id**: open
+   `https://api.telegram.org/bot<TOKEN>/getUpdates` in a browser and copy the
+   `chat.id` from the JSON (a positive number for a personal chat).
+4. In the repo: **Settings -> Secrets and variables -> Actions -> New repository
+   secret** and add `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID`.
+
+That's it - the next run sends a message listing each new flat with its price,
+area, rooms, address and link. Locally, export the same two env vars to test.
+
 ## Privacy note (public repo!)
 
 `rules.yaml` reveals your budget and street preferences to anyone. To keep the

@@ -12,10 +12,12 @@ import argparse
 import logging
 import os
 import sys
+from datetime import UTC, datetime
 
 from . import enrich, history
 from . import rules as rules_mod
 from . import state as state_mod
+from .notify import TelegramNotifier
 from .portals import all_portals
 from .portals.base import PortalError
 from .report import Reporter, ReportItem, issue_title
@@ -136,6 +138,7 @@ def run(args: argparse.Namespace) -> int:
     history_path = history.append_matches(items, args.history_dir)
     if history_path:
         LOG.info("logged %d matches to %s", len(items), history_path)
+    TelegramNotifier().notify_digest(items, datetime.now(UTC).date().isoformat())
     for portal_name, streak in canaries:
         reporter.report_scraper_broken(portal_name, streak)
 
