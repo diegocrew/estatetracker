@@ -156,6 +156,19 @@ class TestHardFilters:
     def test_area_too_small(self) -> None:
         assert failing_filter(make_listing(area_m2=40.0), make_rules()) is not None
 
+    def test_area_too_large(self) -> None:
+        rules = make_rules(filters={"max_area_m2": 300})
+        reason = failing_filter(make_listing(area_m2=320.0), rules)
+        assert reason is not None and "max_area_m2" in reason
+        assert failing_filter(make_listing(area_m2=120.0), rules) is None
+
+    def test_banned_objekt_projekt(self) -> None:
+        rules = make_rules(filters={"banned_keywords": ["objekt", "projekt"]})
+        assert failing_filter(make_listing(title="Historický objekt v centre"), rules) is not None
+        assert failing_filter(
+            make_listing(title="Byt", description_snippet="Rezidenčný projekt Magurská"), rules
+        ) is not None
+
     def test_price_per_m2(self) -> None:
         listing = make_listing(price_eur=250000, area_m2=55.0)  # ~4545 €/m²
         reason = failing_filter(listing, make_rules())
