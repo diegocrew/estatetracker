@@ -152,17 +152,26 @@ tests) and only for new/price-changed listings, so API usage stays tiny.
 
 To enable:
 
-1. Create a **Gemini API key** (a Vertex AI *Express Mode* account-bound key
-   works) and make sure the key is allowed to call the **Generative Language
-   API** (enable it in the API Library).
+1. Get a Gemini key. Two kinds work:
+   - a **Google AI Studio** key (calls `generativelanguage.googleapis.com`), or
+   - a **Vertex AI Express Mode** account-bound key (calls the Vertex endpoint).
 2. Add it as the repository secret **`AI_KEY`**
    (Settings -> Secrets and variables -> Actions).
-3. Optional repo *variables*: `AI_MODEL` (default `gemini-2.5-flash`) and
-   `AI_API_BASE` (default `https://generativelanguage.googleapis.com/v1beta`;
-   point this at the Vertex endpoint if your key only allows Vertex).
+3. Repo *variables* (Variables tab) - set `AI_API_BASE` to match your key:
+   - AI Studio key (default): `https://generativelanguage.googleapis.com/v1beta`
+   - **Vertex Express key**: `https://aiplatform.googleapis.com/v1/publishers/google`
+   - `AI_MODEL` is optional (default `gemini-2.5-flash`).
 
 That's it - the next run enriches new listings. Cost at this volume (a handful
 of new flats per run, twice daily) is a fraction of a cent.
+
+Troubleshooting the enrichment step (all are fail-open - the run still
+finishes on deterministic data):
+- **HTTP 403 "... generativelanguage ... are blocked"**: your key is a Vertex
+  key hitting the AI Studio endpoint. Set `AI_API_BASE` to the Vertex value
+  above (or enable the Generative Language API on the key).
+- **HTTP 400 "Please use a valid role"**: older payloads only; the request now
+  sends `role: user`, which both endpoints accept.
 
 Note: AI does **not** revive `nehnutelnosti.sk` - that portal renders listings
 with JavaScript, so the fetched HTML has nothing to extract; that needs a

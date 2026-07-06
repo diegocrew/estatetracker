@@ -121,7 +121,9 @@ class GeminiEnricher:
     def _generate(self, source: str, title: str) -> dict[str, Any] | None:
         url = f"{self.api_base}/models/{self.model}:generateContent?key={self.api_key}"
         payload = {
-            "contents": [{"parts": [{"text": _PROMPT.format(title=title, source=source)}]}],
+            "contents": [
+                {"role": "user", "parts": [{"text": _PROMPT.format(title=title, source=source)}]}
+            ],
             "generationConfig": {
                 "responseMimeType": "application/json",
                 "responseSchema": _RESPONSE_SCHEMA,
