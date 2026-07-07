@@ -25,7 +25,7 @@ from ..models import (
     parse_price,
     parse_rooms,
 )
-from .base import MAX_PAGES, BasePortal, split_locality
+from .base import MAX_PAGES, BasePortal, mine_price_text, split_locality
 
 PORTAL_NAME = "nehnutelnosti"
 BASE_URL = "https://www.nehnutelnosti.sk"
@@ -65,13 +65,7 @@ def _parse_detail_links(soup: BeautifulSoup) -> list[Listing]:
         if url in seen:
             continue
         seen.add(url)
-        container: Tag = link
-        text = link.get_text(" ", strip=True)
-        for _ in range(4):
-            if "€" in text or not isinstance(container.parent, Tag):
-                break
-            container = container.parent
-            text = container.get_text(" ", strip=True)
+        text = mine_price_text(link)
         title = link.get_text(" ", strip=True) or text[:100]
         if not title:
             continue

@@ -7,9 +7,9 @@ opens **one GitHub Issue per new matching listing**.
 
 Portals: [nehnutelnosti.sk](https://www.nehnutelnosti.sk),
 [topreality.sk](https://www.topreality.sk), [reality.sk](https://www.reality.sk),
-[reality.bazos.sk](https://reality.bazos.sk).
+[reality.bazos.sk](https://reality.bazos.sk), [byty.sk](https://www.byty.sk).
 
-No AI/LLM calls in this version - see [Future enrichment](#future-enrichment).
+Optional AI enrichment via Gemini - see [AI enrichment](#ai-enrichment-optional).
 
 ## How it works
 
@@ -135,6 +135,18 @@ EOF
   README explains how.
 - Only ~3 pages per portal per run are fetched; a very fast market could push
   listings past page 3 between runs.
+- **byty.sk has no reference HTML at all** (unreachable from the dev
+  environment, same as the others). Its parser harvests any link with a 5+
+  digit ID in its path and mines price/area/rooms from the surrounding text -
+  no CSS selectors were guessed, since there was nothing to base them on. It
+  will very likely need correction once the first live run's portal-health
+  and drop-reason logs show what it actually got.
+- **nehnutelnosti.sk** intermittently returns very few listings. This has not
+  been root-caused: it may be genuinely JS-rendered (would need a headless
+  browser, deliberately out of scope for this version - see the project's
+  original constraints), or it may be the same kind of markup drift that
+  affected reality.sk/topreality.sk and got fixed without one. A real saved
+  page would settle it.
 
 ## AI enrichment (optional)
 

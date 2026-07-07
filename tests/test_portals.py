@@ -14,7 +14,7 @@ import pathlib
 import pytest
 
 from crawler.models import Condition, guess_locality
-from crawler.portals import bazos, nehnutelnosti, reality, topreality
+from crawler.portals import bazos, byty, nehnutelnosti, reality, topreality
 from crawler.portals.base import split_locality
 
 FIXTURES = pathlib.Path(__file__).parent / "fixtures"
@@ -192,6 +192,53 @@ class TestBazos:
         )
 
 
+class TestByty:
+    """Speculative parser built with zero reference HTML (byty.sk was
+    unreachable from the dev environment) - see crawler/portals/byty.py's
+    module docstring. Harvests any link with a 5+ digit ID in its path and
+    mines the surrounding text, mirroring nehnutelnosti's fallback strategy."""
+
+    def test_ignores_nav_links(self) -> None:
+        listings = byty.parse_search_page(load_fixture("byty_search.html"))
+        assert all("/kontakt" not in ls.url and "tel:" not in ls.url for ls in listings)
+
+    def test_parses_all_cards(self) -> None:
+        listings = byty.parse_search_page(load_fixture("byty_search.html"))
+        assert len(listings) == 3
+
+    def test_full_card(self) -> None:
+        listing = byty.parse_search_page(load_fixture("byty_search.html"))[0]
+        assert listing.id == "byty:145678"
+        assert listing.url == "https://www.byty.sk/byty/145678-3-izbovy-byt-ruzinov"
+        assert listing.price_eur == 189000
+        assert listing.area_m2 == 68
+        assert listing.rooms == "3"
+        assert listing.district == "Bratislava - Ružinov"
+        assert listing.floor == 2
+        assert listing.condition is Condition.REKONSTRUKCIA
+        assert listing.balcony is True
+
+    def test_novostavba_card(self) -> None:
+        listing = byty.parse_search_page(load_fixture("byty_search.html"))[1]
+        assert listing.price_eur == 315000
+        assert listing.rooms == "4+"
+        assert listing.district == "Bratislava - Nové Mesto"
+        assert listing.condition is Condition.NOVOSTAVBA
+        assert listing.balcony is False
+
+    def test_no_price_does_not_steal_a_neighboring_cards_price(self) -> None:
+        """Regression: walking up from the title link must never cross into a
+        shared ancestor that also holds other cards' prices."""
+        listing = byty.parse_search_page(load_fixture("byty_search.html"))[2]
+        assert listing.price_eur is None
+        assert listing.district == "Bratislava - Petržalka"
+
+    def test_search_url(self) -> None:
+        rules = {"search": {"city": "Bratislava"}}
+        assert byty.build_search_url(rules, 1) == "https://www.byty.sk/byty/predaj/bratislava"
+        assert "strana=2" in byty.build_search_url(rules, 2)
+
+
 class TestNehnutelnostiFallback:
     """The 2024+ redesign uses generated CSS classes; the fallback harvests
     /detail/ links and mines the surrounding card text."""
@@ -235,6 +282,6 @@ def test_phantom_listing_detection() -> None:
 
 
 def test_parsers_survive_garbage_html() -> None:
-    for module in (nehnutelnosti, topreality, reality, bazos):
+    for module in (nehnutelnosti, topreality, reality, bazos, byty):
         assert module.parse_search_page("<html><body><p>upgrade your browser") == []
         assert module.parse_search_page("") == []
