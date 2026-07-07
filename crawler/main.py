@@ -12,6 +12,7 @@ import argparse
 import logging
 import os
 import sys
+from collections import Counter
 from datetime import UTC, datetime
 
 from . import enrich, history
@@ -23,6 +24,35 @@ from .portals.base import PortalError
 from .report import Reporter, ReportItem, issue_title
 
 LOG = logging.getLogger("crawler")
+
+# Maps a substring of a rules.failing_filter() message to a short, stable
+# category label, so the run summary can show *why* listings were dropped
+# without needing --verbose. Order matters: first match wins.
+_DROP_CATEGORIES: tuple[tuple[str, str], ...] = (
+    ("house or land", "not a flat (house/land)"),
+    ("not confirmed to be in search.city", "not confirmed in city"),
+    ("does not mention search.city", "locality mismatch"),
+    ("district", "district not searched"),
+    ("below min_area_m2", "area too small"),
+    ("above max_area_m2", "area too large"),
+    ("below min_price_eur", "price too low"),
+    ("above max_price_eur", "price too high"),
+    ("above max_price_per_m2", "price/m2 too high"),
+    ("below min_rooms", "too few rooms"),
+    ("above max_floor", "floor too high"),
+    ("ground floor excluded", "ground floor excluded"),
+    ("balcony required", "no balcony"),
+    ("not in allowed_conditions", "condition not allowed"),
+    ("banned street", "banned street"),
+    ("banned keyword", "banned keyword"),
+)
+
+
+def _categorize_drop_reason(reason: str) -> str:
+    for needle, label in _DROP_CATEGORIES:
+        if needle in reason:
+            return label
+    return "other"
 
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
@@ -67,6 +97,7 @@ def run(args: argparse.Namespace) -> int:
 
     items: list[ReportItem] = []
     dropped = 0
+    drop_reasons: Counter[str] = Counter()
     for portal in all_portals():
         try:
             listings = portal.fetch(rules)
@@ -101,11 +132,13 @@ def run(args: argparse.Namespace) -> int:
             reason = rules_mod.failing_filter(listing, rules)
             if reason:
                 dropped += 1
+                drop_reasons[_categorize_drop_reason(reason)] += 1
                 LOG.debug("dropped %s: %s", listing.id, reason)
                 continue
             score, breakdown = rules_mod.score_listing(listing, rules)
             if score < min_score:
                 dropped += 1
+                drop_reasons["score below threshold"] += 1
                 LOG.debug("dropped %s: score %d below min_score_for_issue %d",
                           listing.id, score, min_score)
                 continue
@@ -123,6 +156,10 @@ def run(args: argparse.Namespace) -> int:
 
     items.sort(key=lambda item: item.score, reverse=True)
     canaries = state_mod.portals_needing_canary(state)
+
+    if drop_reasons:
+        LOG.info("drop reasons: %s",
+                 ", ".join(f"{label}={count}" for label, count in drop_reasons.most_common()))
 
     mode = (rules.get("output") or {}).get("mode", "digest")
 
