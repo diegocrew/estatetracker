@@ -2,6 +2,7 @@
 
 from .base import BasePortal, PortalError
 from .bazos import BazosPortal
+from .byty import BytyPortal
 from .nehnutelnosti import NehnutelnostiPortal
 from .reality import RealitySkPortal
 from .topreality import TopRealityPortal
@@ -9,6 +10,7 @@ from .topreality import TopRealityPortal
 __all__ = [
     "BasePortal",
     "BazosPortal",
+    "BytyPortal",
     "NehnutelnostiPortal",
     "PortalError",
     "RealitySkPortal",
@@ -24,4 +26,5 @@ def all_portals() -> list[BasePortal]:
         TopRealityPortal(),
         RealitySkPortal(),
         BazosPortal(),
+        BytyPortal(),
     ]

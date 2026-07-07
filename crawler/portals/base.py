@@ -21,6 +21,7 @@ import urllib.robotparser
 from urllib.parse import urlparse
 
 import requests
+from bs4 import Tag
 
 from ..models import Listing
 
@@ -52,6 +53,28 @@ _ANTI_BOT_MARKERS = (
 
 class PortalError(RuntimeError):
     """A portal could not be crawled this run (HTTP error, anti-bot, network)."""
+
+
+def mine_price_text(link: Tag, max_levels: int = 4) -> str:
+    """Walk up from a title link to find text that includes its price.
+
+    Used when a card has no dedicated price selector to target: the price is
+    somewhere in an ancestor's text. Stops as soon as an ancestor's text
+    contains exactly one '€', and deliberately refuses to step into an
+    ancestor whose text contains *more than one* - that means the walk has
+    crossed the actual card boundary into a wrapper holding several listings,
+    which would silently attribute a neighboring card's price to this one.
+    """
+    container: Tag = link
+    text = link.get_text(" ", strip=True)
+    for _ in range(max_levels):
+        if text.count("€") == 1 or not isinstance(container.parent, Tag):
+            break
+        parent_text = container.parent.get_text(" ", strip=True)
+        if parent_text.count("€") > 1:
+            break
+        container, text = container.parent, parent_text
+    return text
 
 
 def split_locality(text: str | None) -> tuple[str | None, str | None]:
