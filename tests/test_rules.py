@@ -190,6 +190,15 @@ class TestHardFilters:
         reason = failing_filter(make_listing(street="Priklad ulica 7"), make_rules())
         assert reason is not None and "banned street" in reason
 
+    def test_banned_district_matches_title_and_district(self) -> None:
+        rules = make_rules(filters={"banned_districts": ["Rača", "Dúbravka"]})
+        # named only in the title, district left unparsed
+        assert failing_filter(make_listing(title="4-izbový byt, Raca"), rules) is not None
+        # named in the parsed district field
+        assert failing_filter(make_listing(district="Bratislava IV – Dúbravka"), rules) is not None
+        # a nearby street must NOT trip the whole-word match
+        assert failing_filter(make_listing(street="Račianska 10"), rules) is None
+
     def test_banned_keyword_diacritics_insensitive(self) -> None:
         listing = make_listing(title="Byt v drazbe - DRAZBA", description_snippet="")
         # rules say "dražba"; the listing says "drazba" - must still match

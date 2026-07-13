@@ -24,11 +24,17 @@ filters:                      # hard filters - listing dropped if violated
   require_balcony: false
   allowed_conditions: []      # empty = all; values: novostavba, povodny_stav, rekonstrukcia
   banned_streets: []
+  banned_districts:           # whole-word match on location text; drop too-far boroughs
+    - "Rača"                  # too far
+    - "Dúbravka"              # too far
   banned_keywords:            # matched in title+description, case/diacritics-insensitive
     - "dražba"
     - "spoluvlastnícky podiel"
     - "objekt"                # commercial / investment objects, not flats
     - "projekt"               # "rezidenčný projekt" investment listings
+    - "predzáhrad"            # front garden -> ground floor (predzáhradka/-ou)
+    - "prízem"                # prízemie / prízemný -> ground floor
+    - "backyard"
 
 scoring:                      # soft preferences - affect score, not inclusion
   preferred_streets: []       # e.g. {name: "Obchodná", bonus: 30}

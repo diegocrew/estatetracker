@@ -155,6 +155,7 @@ def validate_rules(rules: dict[str, Any]) -> None:
             f"filters.allowed_conditions: {cond!r} is not one of {sorted(_VALID_CONDITIONS)}",
         )
     _check_str_list(filters.get("banned_streets") or [], "filters.banned_streets")
+    _check_str_list(filters.get("banned_districts") or [], "filters.banned_districts")
     _check_str_list(filters.get("banned_keywords") or [], "filters.banned_keywords")
 
     scoring = rules.get("scoring") or {}
@@ -308,6 +309,14 @@ def failing_filter(listing: Listing, rules: dict[str, Any]) -> str | None:
     for banned in filters.get("banned_streets") or []:
         if matches_place(banned, listing.street):
             return f"banned street {banned!r}"
+
+    # Whole-word match against all location text (title, snippet, street,
+    # district, raw), so a too-far borough is dropped even when the parser left
+    # `district` empty but named it in the title. \b boundaries stop 'Rača' from
+    # matching the unrelated street 'Račianska'.
+    for banned in filters.get("banned_districts") or []:
+        if matches_place(banned, _location_haystack(listing)):
+            return f"banned district {banned!r}"
 
     haystack = normalize_text(f"{listing.title} {listing.description_snippet}")
     for keyword in filters.get("banned_keywords") or []:
