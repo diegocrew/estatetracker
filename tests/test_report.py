@@ -3,14 +3,18 @@
 from __future__ import annotations
 
 from crawler.models import Condition, Listing
+from crawler.projects import Project
 from crawler.report import (
     MAX_ISSUES_PER_RUN,
+    ProjectUpdate,
     ReportItem,
     digest_body,
     digest_title,
     issue_body,
     issue_title,
     overflow_summary_body,
+    projects_body,
+    projects_title,
 )
 
 
@@ -54,10 +58,50 @@ def test_price_change_banner() -> None:
     assert "Price dropped: 200 000 € -> 185 000 €" in body
 
 
+def test_non_bool_enrichment_values_render_as_dash() -> None:
+    """The AI enricher can return anything for `parking` - it must not crash the body."""
+    item = make_item()
+    item.listing.raw_extra["parking"] = "yes, garage"
+    assert "| Parking | - |" in issue_body(item)
+
+
 def test_overflow_summary_lists_items() -> None:
     body = overflow_summary_body([make_item()])
     assert str(MAX_ISSUES_PER_RUN) in body
     assert "[Predám 3 izbový byt](https://example.sk/1)" in body
+
+
+def make_update(**overrides: object) -> ProjectUpdate:
+    project = Project(
+        slug="nove-lido", name="Nové Lido", url="https://www.yimba.sk/nove-lido",
+        status="intention", district="Petržalka",
+    )
+    update = ProjectUpdate(project=project)
+    for key, value in overrides.items():
+        setattr(update, key, value)
+    return update
+
+
+def make_started_update() -> ProjectUpdate:
+    """A known project that moved from 'Zámer' to 'Výstavba'."""
+    project = Project(
+        slug="zwirn", name="Zwirn", url="https://www.yimba.sk/zwirn",
+        status="construction", district="Ružinov",
+    )
+    return ProjectUpdate(project=project, previous_status="intention")
+
+
+def test_projects_title_counts_new_and_changed() -> None:
+    updates = [make_update(), make_started_update()]
+    assert projects_title(updates, "2026-08-10") == (
+        "Development watch: 1 new project(s), 1 status change(s) - 2026-08-10"
+    )
+
+
+def test_projects_body_marks_new_and_transitions() -> None:
+    body = projects_body([make_update(), make_started_update()])
+    assert "| new | [Nové Lido](https://www.yimba.sk/nove-lido) | Petržalka | Zámer |" in body
+    assert "| changed | [Zwirn](https://www.yimba.sk/zwirn) | Ružinov | Zámer -> Výstavba |" in body
 
 
 def test_digest_title() -> None:

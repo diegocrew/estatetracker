@@ -15,3 +15,9 @@ best-guess generic card structure, not a reproduction of anything observed.
 Its parser (`crawler/portals/byty.py`) doesn't rely on specific CSS selectors
 at all for exactly this reason - it harvests any link with a 5+ digit ID in
 its path instead.
+
+`yimba_projects.html` is the exception: it **is** a real capture, trimmed to one
+card per project status, taken from
+`https://www.yimba.sk/zoznam-projektov?type=Bývanie&district[]=downtown&district[]=ruzinov`.
+Refresh it by saving that page and keeping a few `div.project-list-result`
+cards.

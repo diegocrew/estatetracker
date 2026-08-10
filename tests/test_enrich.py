@@ -102,13 +102,19 @@ def test_generate_payload_has_user_role() -> None:
     captured: dict[str, Any] = {}
 
     class FakeSession:
-        def post(self, url: str, json: dict[str, Any], timeout: int) -> _FakeResponse:
+        def post(
+            self, url: str, json: dict[str, Any], headers: dict[str, str], timeout: int
+        ) -> _FakeResponse:
             captured["url"] = url
             captured["json"] = json
+            captured["headers"] = headers
             return _FakeResponse()
 
     enr = GeminiEnricher(api_key="k", api_base="https://example/v1", session=FakeSession())
     result = enr._generate("card text", "title")
     assert result == {"summary": "ok"}
     assert captured["json"]["contents"][0]["role"] == "user"
-    assert captured["url"] == "https://example/v1/models/gemini-2.5-flash:generateContent?key=k"
+    assert captured["url"] == "https://example/v1/models/gemini-2.5-flash:generateContent"
+    # the key must travel in a header, never in the URL
+    assert captured["headers"]["x-goog-api-key"] == "k"
+    assert "key=" not in captured["url"]

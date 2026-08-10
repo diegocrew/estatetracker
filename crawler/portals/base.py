@@ -1,6 +1,6 @@
 """Portal interface plus shared polite-HTTP plumbing.
 
-Politeness contract (applies to every portal):
+Politeness contract (applies to every crawled source):
 * single-threaded, max MAX_PAGES result pages per portal per run
 * randomized 3–6 s sleep between requests
 * realistic browser User-Agent and ``Accept-Language: sk``
@@ -100,8 +100,8 @@ def split_locality(text: str | None) -> tuple[str | None, str | None]:
     return street, district
 
 
-class BasePortal(abc.ABC):
-    """Subclasses implement ``fetch`` and use ``self.get`` for all HTTP."""
+class PoliteClient:
+    """Rate-limited, robots-aware HTTP GET shared by every crawled source."""
 
     name: str = ""
     base_url: str = ""
@@ -112,10 +112,6 @@ class BasePortal(abc.ABC):
         self._robots: urllib.robotparser.RobotFileParser | None = None
         self._robots_unavailable = False
         self._request_count = 0
-
-    @abc.abstractmethod
-    def fetch(self, rules: dict) -> list[Listing]:
-        """Crawl up to MAX_PAGES search result pages and return normalized listings."""
 
     def get(self, url: str) -> str:
         """Politely fetch one page; raise PortalError on anything non-usable."""
@@ -141,14 +137,40 @@ class BasePortal(abc.ABC):
         if self._robots_unavailable:
             return True
         if self._robots is None:
-            parsed = urlparse(url)
-            parser = urllib.robotparser.RobotFileParser()
-            parser.set_url(f"{parsed.scheme}://{parsed.netloc}/robots.txt")
-            try:
-                parser.read()
-            except Exception as exc:
-                LOG.debug("%s: robots.txt unavailable (%s) - failing open", self.name, exc)
-                self._robots_unavailable = True
+            self._robots = self._load_robots(url)
+            if self._robots is None:
                 return True
-            self._robots = parser
         return self._robots.can_fetch(USER_AGENT, url)
+
+    def _load_robots(self, url: str) -> urllib.robotparser.RobotFileParser | None:
+        """Fetch robots.txt with *our* session, or None to fail open.
+
+        RobotFileParser.read() uses urllib, whose default User-Agent several
+        portals answer with 403 - and the parser turns that 403 into "disallow
+        everything", which would silently skip a site whose robots.txt actually
+        allows crawling. Fetching it like a browser avoids that trap.
+        """
+        parsed = urlparse(url)
+        robots_url = f"{parsed.scheme}://{parsed.netloc}/robots.txt"
+        try:
+            response = self.session.get(robots_url, timeout=REQUEST_TIMEOUT_S)
+        except requests.RequestException as exc:
+            LOG.debug("%s: robots.txt unreachable (%s) - failing open", self.name, exc)
+            self._robots_unavailable = True
+            return None
+        if response.status_code != 200:
+            LOG.debug("%s: robots.txt HTTP %s - failing open", self.name, response.status_code)
+            self._robots_unavailable = True
+            return None
+        parser = urllib.robotparser.RobotFileParser()
+        parser.parse(response.text.splitlines())
+        return parser
+
+
+class BasePortal(PoliteClient, abc.ABC):
+    """Subclasses implement ``fetch`` and use ``self.get`` for all HTTP."""
+
+    @abc.abstractmethod
+    def fetch(self, rules: dict) -> list[Listing]:
+        """Crawl up to MAX_PAGES search result pages and return normalized listings."""
+

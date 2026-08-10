@@ -196,6 +196,21 @@ _HOUSE_TOKEN_RE = re.compile(
     r"dvojdom|radovy dom|usadlost|pozemok)\b"
 )
 
+# Whole-word flat tokens: unlike _FLAT_TOKENS these must not fire inside
+# 'nebytovy' (non-residential), which contains the substring 'byt'.
+_FLAT_WORD_RE = re.compile(
+    r"\b(byt|byty|bytu|byte|bytov|bytoch|izbovy|izbova|izbove|garsonka|garzonka|"
+    r"garsonke|mezonet|mezonetovy|apartman|apartmany|podkrovny)\b"
+)
+_COMMERCIAL_TOKEN_RE = re.compile(
+    r"\b(nebytovy|nebytove|nebytovych|nebytovom|obchodny priestor|obchodne priestory|"
+    r"obchodnych priestorov|kancelaria|kancelarie|kancelarsky|kancelarske|"
+    r"restauracia|restauracie|restauracny|kaviaren|kaviarne|bufet|bar|"
+    r"prevadzka|prevadzky|prevadzkovy|prevadzkove|showroom|hotel|penzion|"
+    r"administrativny|administrativne|komercny|komercne|polyfunkcny|polyfunkcne|"
+    r"sklad|skladovy|skladove|hala|ambulancia|salon|fitness|wellness)\b"
+)
+
 
 _BRATISLAVA_BOROUGHS_DISPLAY = (
     "Staré Mesto", "Ružinov", "Vrakuňa", "Podunajské Biskupice", "Nové Mesto",
@@ -240,6 +255,24 @@ def looks_like_house(text: str | None) -> bool:
     if any(tok in norm for tok in _FLAT_TOKENS):
         return False
     return _HOUSE_TOKEN_RE.search(norm) is not None
+
+
+def looks_like_commercial(text: str | None) -> bool:
+    """True when the text describes a non-residential space rather than a home.
+
+    Catches the 'restaurant / bare shell unit / office' listings that a flat
+    search still returns ('nebytový priestor', 'obchodný priestor', 'reštaurácia',
+    'prevádzka', …). Flats win first, on a whole-word match, so a normal flat
+    that merely mentions a cellar ('byt so skladom') or an office-friendly layout
+    ('3-izbový byt vhodný aj ako kancelária') is kept - while 'nebytový priestor'
+    is not mistaken for a flat by the substring 'byt' it contains.
+    """
+    norm = normalize_text(text)
+    if not norm:
+        return False
+    if _FLAT_WORD_RE.search(norm):
+        return False
+    return _COMMERCIAL_TOKEN_RE.search(norm) is not None
 
 
 def make_listing_id(portal: str, raw_id: str | None, url: str) -> str:

@@ -15,13 +15,21 @@ from dataclasses import dataclass, field
 
 import requests
 
-from .report import ReportItem, _fmt_price
+from .projects import STATUS_LABELS
+from .report import ProjectUpdate, ReportItem, fmt_price
 
 LOG = logging.getLogger(__name__)
 
 REQUEST_TIMEOUT_S = 30
 TELEGRAM_MAX_CHARS = 4096
 MAX_LISTINGS_IN_MESSAGE = 20  # keep well under the 4096-char Telegram limit
+MAX_PROJECTS_IN_MESSAGE = 20
+
+
+def _truncate(message: str) -> str:
+    if len(message) > TELEGRAM_MAX_CHARS:
+        return message[: TELEGRAM_MAX_CHARS - 3] + "..."
+    return message
 
 
 def telegram_message(items: list[ReportItem], date_str: str) -> str:
@@ -37,10 +45,10 @@ def telegram_message(items: list[ReportItem], date_str: str) -> str:
         area = f"{listing.area_m2:g} m2" if listing.area_m2 else "? m2"
         rooms = f"{listing.rooms} rooms" if listing.rooms else "? rooms"
         place = listing.street or listing.district or "?"
-        price = _fmt_price(listing.price_eur)
+        price = fmt_price(listing.price_eur)
         if item.price_change:
             old, new = item.price_change
-            price = f"{_fmt_price(new)} (was {_fmt_price(old)})"
+            price = f"{fmt_price(new)} (was {fmt_price(old)})"
         block = f"\n[{item.score}] {price} | {area} | {rooms} | {place} | {listing.portal}"
         summary = listing.raw_extra.get("summary")
         if summary:
@@ -50,10 +58,25 @@ def telegram_message(items: list[ReportItem], date_str: str) -> str:
     overflow = len(items) - MAX_LISTINGS_IN_MESSAGE
     if overflow > 0:
         lines.append(f"\n...and {overflow} more (see the GitHub issue).")
-    message = "\n".join(lines)
-    if len(message) > TELEGRAM_MAX_CHARS:
-        message = message[: TELEGRAM_MAX_CHARS - 3] + "..."
-    return message
+    return _truncate("\n".join(lines))
+
+
+def telegram_projects_message(updates: list[ProjectUpdate], date_str: str) -> str:
+    """Plain-text message for new / re-staged development projects."""
+    lines = [f"{len(updates)} development project update(s) - {date_str}"]
+    for update in updates[:MAX_PROJECTS_IN_MESSAGE]:
+        project = update.project
+        place = project.district or "?"
+        if update.is_new:
+            headline = f"NEW: {project.name} | {place} | {project.status_label}"
+        else:
+            previous = STATUS_LABELS.get(update.previous_status or "", update.previous_status)
+            headline = f"{project.name} | {place} | {previous} -> {project.status_label}"
+        lines.append(f"\n{headline}\n{project.url}")
+    overflow = len(updates) - MAX_PROJECTS_IN_MESSAGE
+    if overflow > 0:
+        lines.append(f"\n...and {overflow} more (see the GitHub issue).")
+    return _truncate("\n".join(lines))
 
 
 @dataclass
@@ -99,3 +122,8 @@ class TelegramNotifier:
         if not items:
             return False
         return self.send(telegram_message(items, date_str))
+
+    def notify_projects(self, updates: list[ProjectUpdate], date_str: str) -> bool:
+        if not updates:
+            return False
+        return self.send(telegram_projects_message(updates, date_str))

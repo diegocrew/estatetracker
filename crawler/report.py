@@ -16,6 +16,7 @@ from datetime import UTC, datetime
 import requests
 
 from .models import Listing
+from .projects import STATUS_LABELS, Project
 
 LOG = logging.getLogger(__name__)
 
@@ -30,6 +31,7 @@ LABEL_DEFINITIONS: dict[str, tuple[str, str]] = {
     "price-drop": ("3B82F6", "Previously seen listing whose price moved >2%"),
     "scraper-broken": ("6B7280", "Portal returned 0 listings for 3 consecutive runs"),
     "digest": ("8B5CF6", "One run's new matches, collected into a single issue"),
+    "new-project": ("0EA5E9", "New or re-staged development project on YIM.BA"),
 }
 _DEFAULT_LABEL_COLOR = ("BFDBFE", "reality-watch label")
 
@@ -45,7 +47,19 @@ class ReportItem:
     price_change: tuple[int, int] | None = None  # (old €, new €) when re-reported
 
 
-def _fmt_price(price: int | None) -> str:
+@dataclass
+class ProjectUpdate:
+    """A YIM.BA development that is new to us, or that changed status."""
+
+    project: Project
+    previous_status: str | None = None  # None = the project is new
+
+    @property
+    def is_new(self) -> bool:
+        return self.previous_status is None
+
+
+def fmt_price(price: int | None) -> str:
     return f"{price:,} €".replace(",", " ") if price is not None else "? €"
 
 
@@ -53,12 +67,21 @@ def _fmt(value: object) -> str:
     return "-" if value is None or value == "" else str(value)
 
 
+def _fmt_bool(value: object) -> str:
+    """'yes'/'no'/'-'; anything the AI enricher returned that isn't a bool is '-'."""
+    if value is True:
+        return "yes"
+    if value is False:
+        return "no"
+    return "-"
+
+
 def issue_title(item: ReportItem) -> str:
     listing = item.listing
     area = f"{listing.area_m2:g} m²" if listing.area_m2 else "? m²"
     place = listing.street or listing.district or "?"
     return (
-        f"[{item.score}] {_fmt_price(listing.price_eur)} | {area} | {place} | {listing.portal}"
+        f"[{item.score}] {fmt_price(listing.price_eur)} | {area} | {place} | {listing.portal}"
     )
 
 
@@ -66,7 +89,7 @@ def issue_body(item: ReportItem) -> str:
     listing = item.listing
     rows = [
         ("Portal", listing.portal),
-        ("Price", _fmt_price(listing.price_eur)),
+        ("Price", fmt_price(listing.price_eur)),
         ("Area", f"{listing.area_m2:g} m²" if listing.area_m2 else "-"),
         ("Price / m²", f"{listing.price_per_m2:g} €" if listing.price_per_m2 else "-"),
         ("Rooms", _fmt(listing.rooms)),
@@ -74,15 +97,15 @@ def issue_body(item: ReportItem) -> str:
         ("District", _fmt(listing.district)),
         ("Floor", _fmt(listing.floor)),
         ("Condition", listing.condition.value),
-        ("Balcony", {True: "yes", False: "no", None: "-"}[listing.balcony]),
-        ("Parking", {True: "yes", False: "no", None: "-"}[listing.raw_extra.get("parking")]),
+        ("Balcony", _fmt_bool(listing.balcony)),
+        ("Parking", _fmt_bool(listing.raw_extra.get("parking"))),
         ("First seen", _fmt(listing.first_seen)),
     ]
     lines = [f"### [{listing.title}]({listing.url})", ""]
     if item.price_change:
         old, new = item.price_change
         direction = "dropped" if new < old else "rose"
-        lines += [f"**Price {direction}: {_fmt_price(old)} -> {_fmt_price(new)}**", ""]
+        lines += [f"**Price {direction}: {fmt_price(old)} -> {fmt_price(new)}**", ""]
     lines += ["| Field | Value |", "| --- | --- |"]
     lines += [f"| {name} | {value} |" for name, value in rows]
     lines += ["", f"**Score: {item.score}**"]
@@ -113,7 +136,7 @@ def overflow_summary_body(items: list[ReportItem]) -> str:
         area = f"{listing.area_m2:g} m²" if listing.area_m2 else "-"
         lines.append(
             f"| {item.score} | [{listing.title}]({listing.url}) "
-            f"| {_fmt_price(listing.price_eur)} | {area} |"
+            f"| {fmt_price(listing.price_eur)} | {area} |"
         )
     return "\n".join(lines)
 
@@ -134,16 +157,50 @@ def digest_body(items: list[ReportItem]) -> str:
         listing = item.listing
         area = f"{listing.area_m2:g} m²" if listing.area_m2 else "-"
         address = listing.street or listing.district or "-"
-        price = _fmt_price(listing.price_eur)
+        price = fmt_price(listing.price_eur)
         if item.price_change:
             old, new = item.price_change
-            price = f"{_fmt_price(new)} (was {_fmt_price(old)})"
+            price = f"{fmt_price(new)} (was {fmt_price(old)})"
         lines.append(
             f"| {item.score} | {price} | {area} "
             f"| {_fmt(listing.rooms)} | {address} | {listing.condition.value} "
             f"| {listing.portal} | [open]({listing.url}) |"
         )
     lines += ["", "Edit `rules.yaml` to tune matches."]
+    return "\n".join(lines)
+
+
+def projects_title(updates: list[ProjectUpdate], date_str: str) -> str:
+    new = sum(1 for update in updates if update.is_new)
+    changed = len(updates) - new
+    parts = []
+    if new:
+        parts.append(f"{new} new project(s)")
+    if changed:
+        parts.append(f"{changed} status change(s)")
+    return f"Development watch: {', '.join(parts)} - {date_str}"
+
+
+def projects_body(updates: list[ProjectUpdate]) -> str:
+    """One markdown table of new / re-staged developments from YIM.BA."""
+    lines = [
+        "New and re-staged Bratislava development projects in your watched "
+        "districts, from [YIM.BA](https://www.yimba.sk/zoznam-projektov).",
+        "",
+        "| What | Project | District | Status |",
+        "| --- | --- | --- | --- |",
+    ]
+    for update in updates:
+        project = update.project
+        status = project.status_label
+        if not update.is_new:
+            previous = STATUS_LABELS.get(update.previous_status or "", update.previous_status)
+            status = f"{previous} -> {status}"
+        lines.append(
+            f"| {'new' if update.is_new else 'changed'} "
+            f"| [{project.name}]({project.url}) | {_fmt(project.district)} | {status} |"
+        )
+    lines += ["", "Turn this off with `projects.enabled: false` in `rules.yaml`."]
     return "\n".join(lines)
 
 
@@ -232,6 +289,22 @@ class Reporter:
         date_str = date_str or datetime.now(UTC).date().isoformat()
         title = digest_title(items, date_str)
         return 1 if self.create_issue(title, digest_body(items), ["digest"]) is not None else 0
+
+    def report_projects(
+        self, updates: list[ProjectUpdate], date_str: str | None = None
+    ) -> int:
+        """Open a single Issue for the run's new / re-staged developments."""
+        if not updates:
+            LOG.info("no new development projects - no issue created")
+            return 0
+        if not self.enabled:
+            LOG.warning("reporter disabled (GITHUB_TOKEN/GITHUB_REPOSITORY unset) - "
+                        "%d project updates not reported", len(updates))
+            return 0
+        date_str = date_str or datetime.now(UTC).date().isoformat()
+        title = projects_title(updates, date_str)
+        created = self.create_issue(title, projects_body(updates), ["new-project"])
+        return 1 if created is not None else 0
 
     def report_matches(self, items: list[ReportItem]) -> int:
         """Open one Issue per item up to the cap, plus one overflow summary. Returns count."""

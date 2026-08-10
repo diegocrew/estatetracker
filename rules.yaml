@@ -20,6 +20,7 @@ filters:                      # hard filters - listing dropped if violated
   max_floor: null
   exclude_ground_floor: true
   exclude_houses: true        # drop "dom" / land / vila - flats only
+  exclude_non_residential: true  # drop restaurants / offices / bare shell units
   city_required: true         # drop nearby villages; keep only confirmed Bratislava
   require_balcony: false
   allowed_conditions: []      # empty = all; values: novostavba, povodny_stav, rekonstrukcia
@@ -27,6 +28,9 @@ filters:                      # hard filters - listing dropped if violated
   banned_districts:           # whole-word match on location text; drop too-far boroughs
     - "Rača"                  # too far
     - "Dúbravka"              # too far
+    - "Devínska Nová Ves"     # too far
+    - "Podunajské Biskupice"  # too far
+    - "Vrakuňa"               # too far
   banned_keywords:            # matched in title+description, case/diacritics-insensitive
     - "dražba"
     - "spoluvlastnícky podiel"
@@ -37,8 +41,51 @@ filters:                      # hard filters - listing dropped if violated
     - "backyard"
 
 scoring:                      # soft preferences - affect score, not inclusion
-  preferred_streets: []       # e.g. {name: "Obchodná", bonus: 30}
-  preferred_districts: []     # e.g. {name: "Bratislava I", bonus: 10}
+  # Favourite area: Nivy and the Ružinov / Staré Mesto blocks around it.
+  # A single hit is worth 40 so any listing there lands in the "hot" label.
+  # Matched whole-word against title, description, street and district.
+  preferred_streets:
+    - {name: "Bazová", bonus: 40}
+    - {name: "Budovateľská", bonus: 40}
+    - {name: "Gemerská", bonus: 40}
+    - {name: "Hontianska", bonus: 40}
+    - {name: "Jelačičova", bonus: 40}
+    - {name: "Kocelova", bonus: 40}
+    - {name: "Kohútova", bonus: 40}
+    - {name: "Košická", bonus: 40}
+    - {name: "Kuliškova", bonus: 40}
+    - {name: "Kvačalova", bonus: 40}
+    - {name: "Kvetná", bonus: 40}
+    - {name: "Liptovská", bonus: 40}
+    - {name: "Lužická", bonus: 40}
+    - {name: "Miletičova", bonus: 40}
+    - {name: "Mojmírova", bonus: 40}
+    - {name: "Moskovská", bonus: 40}
+    - {name: "Oravská", bonus: 40}
+    - {name: "Páričkova", bonus: 40}
+    - {name: "Pavlovova", bonus: 40}
+    - {name: "Poľná", bonus: 40}
+    - {name: "Poľská", bonus: 40}
+    - {name: "Revúcka", bonus: 40}
+    - {name: "Spišská", bonus: 40}
+    - {name: "Súťažná", bonus: 40}
+    - {name: "Svätoplukova", bonus: 40}
+    - {name: "Šarišská", bonus: 40}
+    - {name: "Šoltésovej", bonus: 40}
+    - {name: "Tekovská", bonus: 40}
+    - {name: "Trenčianska", bonus: 40}
+    - {name: "Turčianska", bonus: 40}
+    - {name: "Velehradská", bonus: 40}
+    - {name: "Viktorínova", bonus: 40}
+    - {name: "Zvolenská", bonus: 40}
+    - {name: "Záhradnícka", bonus: 40}
+    - {name: "Karadžičova", bonus: 30}   # long street, only partly in the area
+    - {name: "Justičná", bonus: 30}
+    - {name: "Azovská", bonus: 30}
+  preferred_districts:
+    - {name: "Nivy", bonus: 25}
+    - {name: "Ružinov", bonus: 15}
+    - {name: "Staré Mesto", bonus: 15}
   preferred_keywords:         # free-text, matched in title+description (case/diacritics-insensitive)
     - {name: "parkov", bonus: 20}     # parkovanie / parkovacie / parkovacie miesto
     - {name: "garáž", bonus: 20}      # garáž / garážové státie
@@ -56,3 +103,16 @@ output:
     - {min: 40, label: "hot"}
     - {min: 20, label: "interesting"}
     - {min: 0,  label: "match"}
+
+projects:                     # YIM.BA development watch - upcoming projects, not flats
+  enabled: true               # false = skip the extra request entirely
+  type: "Bývanie"             # site-side filter: residential projects only
+  districts:                  # YIM.BA borough slugs; empty = the defaults below
+    - downtown                # the Nivy area
+    - ruzinov
+    - stare-mesto
+    - petrzalka
+    - nove-mesto
+  statuses:                   # report only these; empty = every status change
+    - intention               # "Zámer" - a developer announced the plan
+    - construction            # "Výstavba" - ground broken

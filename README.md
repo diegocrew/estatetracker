@@ -9,6 +9,10 @@ Portals: [nehnutelnosti.sk](https://www.nehnutelnosti.sk),
 [topreality.sk](https://www.topreality.sk), [reality.sk](https://www.reality.sk),
 [reality.bazos.sk](https://reality.bazos.sk), [byty.sk](https://www.byty.sk).
 
+It also runs a second, separate feed: a **development watch** over
+[YIM.BA](https://www.yimba.sk/zoznam-projektov) that reports newly announced
+housing projects - see [Development watch](#development-watch).
+
 Optional AI enrichment via Gemini - see [AI enrichment](#ai-enrichment-optional).
 
 ## How it works
@@ -34,7 +38,7 @@ Optional AI enrichment via Gemini - see [AI enrichment](#ai-enrichment-optional)
 
 ## Editing rules.yaml
 
-`rules.yaml` has four sections; validation fails fast with the exact offending
+`rules.yaml` has five sections; validation fails fast with the exact offending
 key, and you can check edits locally with
 `python -m crawler.main --validate-rules`.
 
@@ -46,10 +50,14 @@ key, and you can check edits locally with
   `allowed_conditions`, `banned_streets`, `banned_keywords`). Keyword and
   street matching is case- and diacritics-insensitive ("Obchodna" matches
   "Obchodná"). **A missing/unparseable field never drops a listing** - only a
-  confirmed violation does, with two opt-in exceptions:
+  confirmed violation does, with three opt-in exceptions:
   - `exclude_houses: true` drops houses and land (`rodinný dom`, `vila`,
     `pozemok`, …); anything that mentions a flat (`byt`, `garsónka`, …),
     including a flat *in* an apartment building, is kept.
+  - `exclude_non_residential: true` drops commercial units that a flat search
+    still returns (`nebytový priestor`, `reštaurácia`, `obchodný priestor`,
+    `kancelária`, `prevádzka`, …). A listing that mentions a flat wins, so a
+    normal flat with a cellar or an "also suitable as an office" note is kept.
   - `city_required: true` keeps only listings positively confirmed to be in
     `search.city` - the city name, one of your `search.districts`, or (for
     Bratislava) a borough must appear in the listing. This drops the
@@ -57,7 +65,9 @@ key, and you can check edits locally with
     in. Trade-off: a genuine city flat whose locality the parser completely
     missed can be dropped too.
 - **`scoring`** - *soft* preferences that affect the score, not inclusion:
-  per-street and per-district bonuses, `preferred_keywords` (free-text terms
+  per-street and per-district bonuses (matched whole-word against the title,
+  description, street and district, so a favourite street named only in the
+  title still scores), `preferred_keywords` (free-text terms
   matched in the title + description, e.g. `{name: "parkov", bonus: 20}` for
   parking/garage), condition bonuses
   (`novostavba`, `rekonstrukcia`, `povodny_stav`), a balcony bonus, and
@@ -67,6 +77,7 @@ key, and you can check edits locally with
   GitHub Issue with a price / area / rooms / address table; `mode:
   issue_per_listing` opens one Issue per flat (capped at 20/run + an overflow
   summary). A run with no new matches opens nothing.
+- **`projects`** - the development watch (see below).
 
 ### How scoring works
 
@@ -76,8 +87,39 @@ at ±25. The Issue gets the label with the highest `min` threshold the score
 reaches (`hot` ≥ 40, `interesting` ≥ 20, `match` ≥ 0 by default), and the Issue
 body shows the full breakdown of which rules contributed.
 
-## Manual runs
+## Development watch
 
+A separate feed for **projects that don't exist yet**: what developers have
+announced or started building in your districts, scraped from the
+[YIM.BA project list](https://www.yimba.sk/zoznam-projektov). A project has no
+price, area or rooms, so it deliberately bypasses the listing pipeline and its
+filters; it lives in its own `projects` bucket in `state/seen.json` and gets its
+own Issue (label `new-project`) plus a Telegram message.
+
+Two events are reported:
+
+- a project **appears** on the list for the first time (a new intention), and
+- a tracked project **changes status**, e.g. `Zámer` -> `Výstavba`.
+
+```yaml
+projects:
+  enabled: true               # false = skip the extra request entirely
+  type: "Bývanie"             # site-side filter: residential projects only
+  districts: [downtown, ruzinov, stare-mesto]   # YIM.BA borough slugs
+  statuses: [intention, construction]           # empty = every status change
+```
+
+Statuses are the site's own: `intention` (Zámer), `construction` (Výstavba),
+`success` (Zrealizované), `cancelled` (Pozastavené / Zrušené). `downtown` is
+YIM.BA's own district for the Nivy area.
+
+The **first run adopts the whole existing backlog silently** and reports from
+the next run onwards - otherwise ~150 long-running developments would arrive as
+"new" and bury the one that actually appears next week. Projects are never
+pruned from state, for the same reason. The watch costs one request per run and
+can never fail a run: any error is logged and the flat digest continues.
+
+## Manual runs
 Actions -> **crawl** -> *Run workflow*. Tick **dry_run** to parse and log without
 opening Issues or committing state. Locally:
 

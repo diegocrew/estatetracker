@@ -16,12 +16,13 @@ from collections import Counter
 from datetime import UTC, datetime
 
 from . import enrich, history
+from . import projects as projects_mod
 from . import rules as rules_mod
 from . import state as state_mod
 from .notify import TelegramNotifier
 from .portals import all_portals
 from .portals.base import PortalError
-from .report import Reporter, ReportItem, issue_title
+from .report import ProjectUpdate, Reporter, ReportItem, issue_title
 
 LOG = logging.getLogger("crawler")
 
@@ -30,8 +31,10 @@ LOG = logging.getLogger("crawler")
 # without needing --verbose. Order matters: first match wins.
 _DROP_CATEGORIES: tuple[tuple[str, str], ...] = (
     ("house or land", "not a flat (house/land)"),
+    ("non-residential space", "not a flat (commercial)"),
     ("not confirmed to be in search.city", "not confirmed in city"),
     ("does not mention search.city", "locality mismatch"),
+    ("banned district", "banned district"),
     ("district", "district not searched"),
     ("below min_area_m2", "area too small"),
     ("above max_area_m2", "area too large"),
@@ -53,6 +56,48 @@ def _categorize_drop_reason(reason: str) -> str:
         if needle in reason:
             return label
     return "other"
+
+
+def collect_project_updates(rules: dict, state: state_mod.State) -> list[ProjectUpdate]:
+    """Diff the YIM.BA development list against state. Never raises.
+
+    Failures here are logged and swallowed: the development watch is a bonus
+    feed and must never cost us the flat digest.
+    """
+    if not projects_mod.is_enabled(rules):
+        return []
+    try:
+        found = projects_mod.YimbaProjects().fetch(rules)
+    except PortalError as exc:
+        LOG.warning("project watch failed: %s", exc)
+        return []
+    except Exception:
+        LOG.exception("project watch crashed")
+        return []
+    LOG.info("project watch: %d projects on the list", len(found))
+
+    # First ever run: adopt the whole backlog silently. Announcing 150 existing
+    # developments as "new" would bury the one that actually appears next week.
+    seeding = not state["projects"]
+    wanted = projects_mod.watched_statuses(rules)
+    updates: list[ProjectUpdate] = []
+    for project in found:
+        status, previous = state_mod.classify_project(state, project)
+        state_mod.remember_project(state, project)
+        if seeding or status == "seen":
+            continue
+        if wanted and project.status not in wanted:
+            continue
+        updates.append(
+            ProjectUpdate(
+                project=project,
+                previous_status=previous if status == "status_change" else None,
+            )
+        )
+    if seeding:
+        LOG.info("project watch: seeded %d known projects, reporting from the next run",
+                 len(found))
+    return updates
 
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
@@ -155,6 +200,7 @@ def run(args: argparse.Namespace) -> int:
             )
 
     items.sort(key=lambda item: item.score, reverse=True)
+    project_updates = collect_project_updates(rules, state)
     canaries = state_mod.portals_needing_canary(state)
 
     if drop_reasons:
@@ -168,28 +214,36 @@ def run(args: argparse.Namespace) -> int:
                  mode, len(items), dropped)
         for item in items:
             LOG.info("  would report: %s | labels=%s", issue_title(item), item.labels)
+        for update in project_updates:
+            LOG.info("  would report project: %s (%s)",
+                     update.project.name, update.project.status_label)
         for portal_name, streak in canaries:
             LOG.info("  would open scraper-broken issue for %s (streak %d)",
                      portal_name, streak)
         return 0
 
+    today = datetime.now(UTC).date().isoformat()
     reporter = Reporter()
     created = (
         reporter.report_digest(items)
         if mode == "digest"
         else reporter.report_matches(items)
     )
+    created += reporter.report_projects(project_updates, today)
     history_path = history.append_matches(items, args.history_dir)
     if history_path:
         LOG.info("logged %d matches to %s", len(items), history_path)
-    TelegramNotifier().notify_digest(items, datetime.now(UTC).date().isoformat())
+    notifier = TelegramNotifier()
+    notifier.notify_digest(items, today)
+    notifier.notify_projects(project_updates, today)
     for portal_name, streak in canaries:
         reporter.report_scraper_broken(portal_name, streak)
 
     pruned = state_mod.prune_state(state)
     state_mod.save_state(state, args.state)
-    LOG.info("done: %d issues created, %d matches, %d dropped, %d stale entries pruned",
-             created, len(items), dropped, pruned)
+    LOG.info("done: %d issues created, %d matches, %d project updates, %d dropped, "
+             "%d stale entries pruned",
+             created, len(items), len(project_updates), dropped, pruned)
     return 0
 
 

@@ -20,11 +20,13 @@ import yaml
 from .models import (
     Condition,
     Listing,
+    looks_like_commercial,
     looks_like_house,
     matches_place,
     normalize_text,
     rooms_to_float,
 )
+from .projects import STATUS_LABELS as PROJECT_STATUS_LABELS
 
 # Bratislava boroughs (diacritics-stripped) so a card naming only the borough
 # - "Petržalka", "Ružinov" - still counts as in-city when city_required is on.
@@ -118,7 +120,7 @@ def validate_rules(rules: dict[str, Any]) -> None:
     """Raise RulesError naming the offending key when the structure is wrong."""
     for section in ("search", "filters"):
         _require(isinstance(rules.get(section), dict), f"required section '{section}' is missing")
-    for section in ("scoring", "output"):
+    for section in ("scoring", "output", "projects"):
         _require(
             rules.get(section) is None or isinstance(rules.get(section), dict),
             f"section '{section}' must be a mapping",
@@ -134,7 +136,8 @@ def validate_rules(rules: dict[str, Any]) -> None:
     for key in ("min_area_m2", "max_area_m2", "min_price_eur", "max_price_eur",
                 "max_price_per_m2", "max_floor"):
         _check_number(filters.get(key), f"filters.{key}")
-    for key in ("exclude_ground_floor", "require_balcony", "exclude_houses", "city_required"):
+    for key in ("exclude_ground_floor", "require_balcony", "exclude_houses", "city_required",
+                "exclude_non_residential"):
         value = filters.get(key, False)
         _require(isinstance(value, bool), f"filters.{key} must be true or false, got {value!r}")
     min_rooms = filters.get("min_rooms")
@@ -190,6 +193,22 @@ def validate_rules(rules: dict[str, Any]) -> None:
             "output.labels_by_score entries need a string 'label'",
         )
 
+    projects = rules.get("projects") or {}
+    enabled = projects.get("enabled", False)
+    _require(isinstance(enabled, bool), f"projects.enabled must be true or false, got {enabled!r}")
+    _check_str_list(projects.get("districts") or [], "projects.districts")
+    _require(
+        isinstance(projects.get("type", ""), str),
+        "projects.type must be a string",
+    )
+    statuses = projects.get("statuses") or []
+    _check_str_list(statuses, "projects.statuses")
+    for status in statuses:
+        _require(
+            status in PROJECT_STATUS_LABELS,
+            f"projects.statuses: {status!r} is not one of {sorted(PROJECT_STATUS_LABELS)}",
+        )
+
 
 def _location_haystack(listing: Listing) -> str:
     """All text that might name a locality: title, snippet, street, district, raw."""
@@ -240,6 +259,13 @@ def failing_filter(listing: Listing, rules: dict[str, Any]) -> str | None:
         f"{listing.title} {listing.description_snippet}"
     ):
         return "house or land, not a flat"
+
+    # Commercial / bare-shell unit, not a home (e.g. 'nebytový priestor',
+    # 'reštaurácia', 'obchodný priestor').
+    if filters.get("exclude_non_residential") and looks_like_commercial(
+        f"{listing.title} {listing.description_snippet}"
+    ):
+        return "non-residential space, not a flat"
 
     # Only keep listings positively confirmed to be in the searched city; this
     # drops surrounding villages ("20 min from Bratislava") that a text search
@@ -332,14 +358,19 @@ def score_listing(listing: Listing, rules: dict[str, Any]) -> tuple[int, list[st
     score = 0
     breakdown: list[str] = []
 
+    # Preferred streets/districts are matched against all location text, not just
+    # `listing.street` / `listing.district`: most portals leave those fields empty
+    # and name the place only in the title ("4-izbový byt, Bazová"), which would
+    # silently lose the bonus for the user's favourite area.
+    location = _location_haystack(listing)
     for entry in scoring.get("preferred_streets") or []:
-        if matches_place(entry["name"], listing.street):
+        if matches_place(entry["name"], location):
             bonus = int(entry.get("bonus", 0))
             score += bonus
             breakdown.append(f"{bonus:+d} preferred street {entry['name']!r}")
 
     for entry in scoring.get("preferred_districts") or []:
-        if matches_place(entry["name"], listing.district):
+        if matches_place(entry["name"], location):
             bonus = int(entry.get("bonus", 0))
             score += bonus
             breakdown.append(f"{bonus:+d} preferred district {entry['name']!r}")

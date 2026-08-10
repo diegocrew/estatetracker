@@ -119,7 +119,9 @@ class GeminiEnricher:
         return listing
 
     def _generate(self, source: str, title: str) -> dict[str, Any] | None:
-        url = f"{self.api_base}/models/{self.model}:generateContent?key={self.api_key}"
+        # Key goes in a header, not the query string, so it can't leak into
+        # proxy / server access logs or an exception's request URL.
+        url = f"{self.api_base}/models/{self.model}:generateContent"
         payload = {
             "contents": [
                 {"role": "user", "parts": [{"text": _PROMPT.format(title=title, source=source)}]}
@@ -130,7 +132,12 @@ class GeminiEnricher:
                 "temperature": 0,
             },
         }
-        response = self.session.post(url, json=payload, timeout=REQUEST_TIMEOUT_S)
+        response = self.session.post(
+            url,
+            json=payload,
+            headers={"x-goog-api-key": self.api_key},
+            timeout=REQUEST_TIMEOUT_S,
+        )
         if response.status_code != 200:
             self._error_count += 1
             LOG.warning("Gemini HTTP %s: %s", response.status_code, response.text[:300])

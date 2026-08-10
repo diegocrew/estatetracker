@@ -18,6 +18,12 @@ the only "database" this project has. Structure:
       },
       "portal_health": {
         "<portal>": {"zero_streak": 2, "last_error": "...", "last_run": "..."}
+      },
+      "projects": {
+        "<yimba slug>": {
+          "first_seen": "2026-08-10", "last_seen": "2026-08-10",
+          "name": "...", "url": "...", "status": "intention"
+        }
       }
     }
 """
@@ -31,6 +37,7 @@ from datetime import UTC, date, datetime, timedelta
 from typing import Any
 
 from .models import Listing, normalize_text
+from .projects import Project
 
 DEFAULT_STATE_PATH = os.path.join("state", "seen.json")
 PRICE_CHANGE_THRESHOLD = 0.02  # >2% moves re-report the listing
@@ -45,7 +52,7 @@ def _today() -> date:
 
 
 def empty_state() -> State:
-    return {"listings": {}, "content_seen": {}, "portal_health": {}}
+    return {"listings": {}, "content_seen": {}, "portal_health": {}, "projects": {}}
 
 
 def load_state(path: str = DEFAULT_STATE_PATH) -> State:
@@ -60,6 +67,7 @@ def load_state(path: str = DEFAULT_STATE_PATH) -> State:
     data.setdefault("listings", {})
     data.setdefault("content_seen", {})
     data.setdefault("portal_health", {})
+    data.setdefault("projects", {})
     return data
 
 
@@ -201,3 +209,31 @@ def portals_needing_canary(state: State) -> list[tuple[str, int]]:
         for portal, health in sorted(state["portal_health"].items())
         if health.get("zero_streak", 0) >= CANARY_STREAK
     ]
+
+
+def classify_project(state: State, project: Project) -> tuple[str, str | None]:
+    """('new'|'status_change'|'seen', the previously recorded status if any).
+
+    Projects are never pruned: a development runs for years, and forgetting one
+    would re-announce it as brand new.
+    """
+    entry = state["projects"].get(project.slug)
+    if entry is None:
+        return "new", None
+    previous = entry.get("status")
+    if previous != project.status:
+        return "status_change", previous
+    return "seen", previous
+
+
+def remember_project(state: State, project: Project, today: date | None = None) -> None:
+    today_iso = (today or _today()).isoformat()
+    entry = state["projects"].get(project.slug) or {}
+    state["projects"][project.slug] = {
+        "first_seen": entry.get("first_seen") or today_iso,
+        "last_seen": today_iso,
+        "name": project.name,
+        "url": project.url,
+        "status": project.status,
+        "district": project.district,
+    }

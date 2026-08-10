@@ -253,6 +253,66 @@ class TestHouseFilter:
         assert failing_filter(flat, rules) is None
 
 
+class TestNonResidentialFilter:
+    def test_drops_restaurant(self) -> None:
+        rules = make_rules(filters={"exclude_non_residential": True})
+        listing = make_listing(
+            title="Reštaurácia v centre mesta",
+            description_snippet="Zabehnutá prevádzka, 120 m².",
+        )
+        assert failing_filter(listing, rules) == "non-residential space, not a flat"
+
+    def test_drops_bare_shell_unit(self) -> None:
+        rules = make_rules(filters={"exclude_non_residential": True})
+        listing = make_listing(
+            title="Nebytový priestor, holopriestor",
+            description_snippet="Vhodný na obchod alebo kanceláriu.",
+        )
+        assert failing_filter(listing, rules) is not None
+
+    def test_keeps_flat_mentioning_office_use(self) -> None:
+        """'byt' wins over an incidental 'kancelária' / 'sklad' mention."""
+        rules = make_rules(filters={"exclude_non_residential": True})
+        listing = make_listing(
+            title="4 izbový byt",
+            description_snippet="Vhodný aj ako kancelária, k bytu patrí pivnica a sklad.",
+        )
+        assert failing_filter(listing, rules) is None
+
+    def test_disabled_by_default(self) -> None:
+        listing = make_listing(title="Reštaurácia v centre mesta")
+        assert failing_filter(listing, make_rules()) is None
+
+    def test_repo_rules_drop_restaurant(self) -> None:
+        rules = load_rules(str(REPO_ROOT / "rules.yaml"), env={})
+        listing = make_listing(
+            title="Reštaurácia Bratislava - Staré Mesto",
+            description_snippet="Prevádzka s terasou.",
+            area_m2=120.0, rooms="4+", price_eur=400000,
+        )
+        assert failing_filter(listing, rules) == "non-residential space, not a flat"
+
+    def test_repo_rules_ban_far_boroughs(self) -> None:
+        rules = load_rules(str(REPO_ROOT / "rules.yaml"), env={})
+        for borough in ("Devínska Nová Ves", "Podunajské Biskupice", "Vrakuňa"):
+            listing = make_listing(
+                district=f"Bratislava - {borough}",
+                area_m2=120.0, rooms="4+", price_eur=400000,
+            )
+            reason = failing_filter(listing, rules)
+            assert reason is not None and "banned district" in reason, borough
+
+    def test_repo_rules_flag_favourite_streets(self) -> None:
+        """A flat on a favourite street must reach the 'hot' label on that alone."""
+        rules = load_rules(str(REPO_ROOT / "rules.yaml"), env={})
+        listing = make_listing(
+            title="4 izbový byt, Bazová", street=None, district=None, price_eur=None,
+        )
+        score, breakdown = score_listing(listing, rules)
+        assert "+40 preferred street 'Bazová'" in breakdown
+        assert labels_for_score(score, rules) == ["hot"]
+
+
 class TestCityRequired:
     def test_keeps_bratislava_district(self) -> None:
         rules = make_rules(filters={"city_required": True})
@@ -302,6 +362,16 @@ class TestScoring:
     def test_no_signals_scores_zero(self) -> None:
         listing = make_listing(street=None, district=None, price_eur=None)
         assert score_listing(listing, make_rules()) == (0, [])
+
+    def test_preferred_street_named_only_in_title(self) -> None:
+        """Portals often leave `street` empty and name it in the title only."""
+        listing = make_listing(
+            street=None, district=None, price_eur=None,
+            title="3 izbový byt, Obchodna 12",
+        )
+        score, breakdown = score_listing(listing, make_rules())
+        assert score == 30
+        assert breakdown == ["+30 preferred street 'Obchodná'"]
 
     def test_preferred_keywords(self) -> None:
         listing = make_listing(
