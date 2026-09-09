@@ -38,7 +38,7 @@
     "0077da88c4fa0ad920fc87eea3db77b4c7fbad8e": {
       "first_seen": "2026-08-30",
       "id": "topreality:sha1:c4fb3d953916db2ea2aa8de05db2fb68632408c3",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 219000,
       "url": "https://www.topreality.sk/predaj-novostavba-4-izboveho-rodinneho-domu-v-gbeloch-okr-skalica-r9405964.html"
     },
@@ -52,7 +52,7 @@
     "00823cf60b3cca979e47b137294dce277ad9b75e": {
       "first_seen": "2026-08-04",
       "id": "topreality:sha1:521445994619757ceb026a8ab5a7bd124ecd376a",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 800000,
       "url": "https://www.topreality.sk/na-predaj-rodinny-dom-s-4-bytovymi-jednotkami-bratislava-vrakuna-r9219084.html"
     },
@@ -164,7 +164,7 @@
     "02044d1e452974b859fd8f8005c0d3a93e7c8427": {
       "first_seen": "2026-07-05",
       "id": "bazos:195291715",
-      "last_seen": "2026-09-07",
+      "last_seen": "2026-09-09",
       "price_eur": 165000,
       "url": "https://reality.bazos.sk/inzerat/195291715/stylova-garzonka-po-rekonstrukcii-bratislava-ruzinov.php"
     },
@@ -409,7 +409,7 @@
     "0544b7c87334ae1ecd428ca1ade81db09d417231": {
       "first_seen": "2026-09-04",
       "id": "topreality:sha1:38499fec85509eb6f289b38369424d23703f1cfa",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 250,
       "url": "https://www.topreality.sk/stylovy-a-svetly-3-izbovy-byt-s-velkou-lodziou-10-m2-a-vyhladom-do-parku-dubravka-huscavova-ul-r9414926.html"
     },
@@ -577,7 +577,7 @@
     "0839a829c69696ce6a2c2176d5154700077004cd": {
       "first_seen": "2026-07-07",
       "id": "byty:6151179",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 285000,
       "url": "https://www.byty.sk/6151179/herrys-na-predaj-vynimocny-3-izbovy-podkrovny-byt-v-centre-bratislavy-na-palarikovej-ulici"
     },
@@ -825,6 +825,13 @@
       "last_seen": "2026-09-06",
       "price_eur": 519000,
       "url": "https://www.byty.sk/6146876/premiovy-rodinny-4-5-izbovy-byt-s-terasou-a-vyhladom-na-zelen-v-komornej-novostavbe"
+    },
+    "0bcd996fc9b6c3568887d8d01d673e98143f5990": {
+      "first_seen": "2026-09-09",
+      "id": "topreality:sha1:bba832c5b5b2f82b4a6616efb622cb921df6cdab",
+      "last_seen": "2026-09-09",
+      "price_eur": 182000,
+      "url": "https://www.topreality.sk/na-predaj-priestranny-1i-byt-po-rekonstrukcii-dubravka-r9407291.html"
     },
     "0bd85998590f0a3fe987591af3ca1a07291d9a44": {
       "first_seen": "2026-07-05",
@@ -1094,10 +1101,10 @@
     },
     "0fa227fe676ed18335b3420eccd8c29232836fbd": {
       "first_seen": "2026-07-09",
-      "id": "reality:sha1:bedba79dc7b096d3b39d1092caa067ed251ffef1",
-      "last_seen": "2026-07-21",
-      "price_eur": 3672,
-      "url": "https://www.reality.sk/byty/na-predaj-3-izbovy-zrekonstruovany-byt-v-devinskej-novej-vsi/JuI85QZf--I/"
+      "id": "reality:sha1:714b314e5c338409fdb9b2890f75ea9b3e34773b",
+      "last_seen": "2026-09-09",
+      "price_eur": 3906,
+      "url": "https://www.reality.sk/byty/na-predaj-3-izbovy-bytik-v-centre-petrzalky/JuYIDEXxUH3/"
     },
     "0fe55ade606300c18dbfb1cf9d7a56bdf7f5dec6": {
       "first_seen": "2026-09-03",
@@ -1578,7 +1585,7 @@
     "1796c8a06fea91298b4deedffb68160a4c5ccc0b": {
       "first_seen": "2026-09-04",
       "id": "topreality:sha1:e74bfee4a93bcda4f79683fed37ec8624d63ab46",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 299000,
       "url": "https://www.topreality.sk/velky-2-5izb-tehlovy-byt-s-charakterom-dostojevskeho-rad-bratislava-stare-mesto-r9414920.html"
     },
@@ -1620,7 +1627,7 @@
     "182b78bd6b73ceb2858fcf9142b9e6a59066a41b": {
       "first_seen": "2026-09-08",
       "id": "topreality:sha1:2828e33e091517246ff2c0faf04a83c5e5a44d7e",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 200,
       "url": "https://www.topreality.sk/na-prenajom-stylovy-2i-byt-v-cubicone-stare-grunty-r9404167.html"
     },
@@ -2012,7 +2019,7 @@
     "1df4bec6186b23c40d0efa7bfbd2a020e310f561": {
       "first_seen": "2026-07-16",
       "id": "bazos:193695861",
-      "last_seen": "2026-09-06",
+      "last_seen": "2026-09-09",
       "price_eur": 199900,
       "url": "https://reality.bazos.sk/inzerat/193695861/predaj-2-izbovy-byt-38-m-bakosova-ulica-bratislava-lam.php"
     },
@@ -2081,10 +2088,10 @@
     },
     "1f1b100544ee42520cf5110cf8afc58058b1e575": {
       "first_seen": "2026-07-07",
-      "id": "reality:sha1:8d290f7c6d478848e92777cf9eaedfb8074fb0bd",
-      "last_seen": "2026-08-31",
-      "price_eur": 6175,
-      "url": "https://www.reality.sk/byty/velkoryse-byvanie-s-vlastnym-priestorom-pre-najomnika-stare-mesto/JuMPaq87P2D/"
+      "id": "reality:sha1:a121f1a9eee962e87891ef5a02f7e4cada99934b",
+      "last_seen": "2026-09-09",
+      "price_eur": 4535,
+      "url": "https://www.reality.sk/byty/4-izbovy-byt-s-lodziou-v-starom-meste-palisady/Ju01WZu8OZg/"
     },
     "1f2c0d8f9839c4499440576527976b1835d1ba63": {
       "first_seen": "2026-08-10",
@@ -2106,6 +2113,13 @@
       "last_seen": "2026-07-22",
       "price_eur": 145000,
       "url": "https://www.topreality.sk/exkluzivne-na-predaj-rodinny-dom-4izbovy-s-garazou-palarikovo-r9177332.html"
+    },
+    "1f5e7ec93bfc696a69990bd14fd7ae6f9ed84d98": {
+      "first_seen": "2026-09-09",
+      "id": "bazos:195360463",
+      "last_seen": "2026-09-09",
+      "price_eur": 319900,
+      "url": "https://reality.bazos.sk/inzerat/195360463/5-izbovy-byt-po-kompletnej-rekonstrukcii-z-r-2026-karlova.php"
     },
     "1f607960c19e4c5fe9654dd8655ba879249161d3": {
       "first_seen": "2026-07-07",
@@ -2558,7 +2572,7 @@
     "26cc69d612a0133da26aaa19e0777878d984b1be": {
       "first_seen": "2026-07-21",
       "id": "topreality:sha1:1eb2072d72aff7fedc81e55dbf3bfb67ae852b2e",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 280,
       "url": "https://www.topreality.sk/rozlahle-stavebne-pozemky-pripravene-na-okamzitu-vystavbu-r9371069.html"
     },
@@ -2788,10 +2802,10 @@
     },
     "2a2005f33ed4044f594d2a8168321a13d9ed04a5": {
       "first_seen": "2026-07-07",
-      "id": "reality:sha1:9fdd4550b04aa81610fdbbfa5bf94d44e2df2c83",
-      "last_seen": "2026-09-08",
-      "price_eur": 3787,
-      "url": "https://www.reality.sk/byty/urbanista-svetly-2-izbovy-byt-s-potencialom-rekonstrukcie-kpt-jana-rasu-dubravka/Ju6GgLIE73i/"
+      "id": "reality:sha1:7be637b612389f216bcc618e5f303d0343528ef3",
+      "last_seen": "2026-09-09",
+      "price_eur": 4519,
+      "url": "https://www.reality.sk/byty/super-cena-2-izbovy-byt-s-balkonom-a-2-klimatizaciou-v-oblubenej-lokalite-ruzinova/Ju-QIBH_FDL/"
     },
     "2a3dd28a00dbae1ac0de7e54f9ec420e4ea5dfcd": {
       "first_seen": "2026-07-21",
@@ -2849,6 +2863,13 @@
       "price_eur": 270,
       "url": "https://www.topreality.sk/exkluzivny-stavebny-pozemok-v-slepej-ulici-iba-15-min-od-bratislavy-chorvatsky-grob-r9149151.html"
     },
+    "2b5d9d787f2362f9fc02c5849d478eb10c3a21cf": {
+      "first_seen": "2026-09-09",
+      "id": "bazos:195388144",
+      "last_seen": "2026-09-09",
+      "price_eur": 460000,
+      "url": "https://reality.bazos.sk/inzerat/195388144/predaj-stylovy-4-izbovy-byt-mlynske-nivy-76-palenisko.php"
+    },
     "2bd4325161c1111c86c95787d5e92517fb30596d": {
       "first_seen": "2026-07-29",
       "id": "topreality:sha1:62ecf77e7212001d500779785964012d758422af",
@@ -2897,6 +2918,13 @@
       "last_seen": "2026-08-20",
       "price_eur": 4311,
       "url": "https://www.reality.sk/byty/gravitas-i-moderny-2-izbovy-byt-vo-vienna-gate/Jum9VciEnTD/"
+    },
+    "2ca791d04228702471e8377e94a859c031dc62f3": {
+      "first_seen": "2026-09-09",
+      "id": "bazos:195385823",
+      "last_seen": "2026-09-09",
+      "price_eur": 247000,
+      "url": "https://reality.bazos.sk/inzerat/195385823/2-izbovy-byt-na-ulici-galbaveho-v-dubravke.php"
     },
     "2caa38cc4ba0b00214051bd4ffcbc06a4f8d227e": {
       "first_seen": "2026-07-08",
@@ -3314,7 +3342,7 @@
     "31ddac4d16f01bdcae46221147bd9c63732d8a41": {
       "first_seen": "2026-07-11",
       "id": "topreality:sha1:53a8c4277b70f9fc9c9a45673fba171184728644",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 245000,
       "url": "https://www.topreality.sk/svetly-3-izbovy-byt-s-balkonom-s-celkovou-plochhou-64-46-m2-v-oblubenej-casti-petrzalky-bratislava-v-r9349486.html"
     },
@@ -3642,10 +3670,10 @@
     },
     "35ce7b2b332d899b844bd4c063a64356db9b8201": {
       "first_seen": "2026-08-03",
-      "id": "byty:6189884",
-      "last_seen": "2026-08-25",
+      "id": "byty:6214783",
+      "last_seen": "2026-09-09",
       "price_eur": 214999,
-      "url": "https://www.byty.sk/6189884/na-predaj-2i-byt-s-loggiou-po-rekonstrukcii-ba-petrzalka"
+      "url": "https://www.byty.sk/6214783/na-predaj-2i-byt-s-loggiou-po-rekonstrukcii-ba-petrzalka"
     },
     "3617358ae224244ea308b719ad6d67731c555ee8": {
       "first_seen": "2026-07-21",
@@ -3671,7 +3699,7 @@
     "3629b73a80aaaf51f5eb0de89147ca78014e32f6": {
       "first_seen": "2026-08-21",
       "id": "topreality:sha1:16b2bd3b97d219c8cfe3e0acf740cda84aa9ac50",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 180000,
       "url": "https://www.topreality.sk/predaj-4-izbovy-rodinny-dom-1-929-m2-drahovce-r9404746.html"
     },
@@ -3804,7 +3832,7 @@
     "37a7cc1f938ac7d449446a2ea6a6ece261cd0740": {
       "first_seen": "2026-09-02",
       "id": "topreality:sha1:3a7140541e20dd35675525679399dc18f297bffb",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 254900,
       "url": "https://www.topreality.sk/pripravujeme-do-ponuky-3-izbovy-byt-na-kramaroch-na-revine-loggia-klimatizacia-r9413288.html"
     },
@@ -3874,7 +3902,7 @@
     "38bd00df50ce3ac1e093e26c56c2040aa311b2fe": {
       "first_seen": "2026-08-05",
       "id": "bazos:194899049",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 199900,
       "url": "https://reality.bazos.sk/inzerat/194899049/predaj-1-izbovy-byt-38-m-bakosova-ulica-bratislava-lam.php"
     },
@@ -3983,10 +4011,17 @@
       "price_eur": 250,
       "url": "https://www.topreality.sk/prenajom-2-izbovy-byt-s-parkovacim-statim-v-projekte-ceresne-na-ulici-polianky-bratislava-dubravka-r9369309.html"
     },
+    "3a22fc0b044ace914e720e28d2de10f2d345bb40": {
+      "first_seen": "2026-09-09",
+      "id": "reality:sha1:5831a81c6c9534f9a0d1debfd5ef02029bd5bc1b",
+      "last_seen": "2026-09-09",
+      "price_eur": 4512,
+      "url": "https://www.reality.sk/byty/moderny-4i-byt-novostavba-tammi-predzahradka-2-x-parking-pri-hrubej-luke-dubravka/JuWq64StzmV/"
+    },
     "3a32fd611031257dc2270a907d94824001f496cb": {
       "first_seen": "2026-09-04",
       "id": "topreality:sha1:51c3f381c895a67d65989b067105dcca1bfe348d",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 470000,
       "url": "https://www.topreality.sk/predaj-velky-4-izbovy-byt-s-parkovanim-ba-iv-majernikova-ul-r9405244.html"
     },
@@ -4511,7 +4546,7 @@
     "41b23ebe3b8249d26debae7da281c8a940b71a15": {
       "first_seen": "2026-09-08",
       "id": "topreality:sha1:bc898f795d321deba49decd6c8e04491a61080dc",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 850000,
       "url": "https://www.topreality.sk/2-domy-2-vstupy-1-velky-pozemok-byvanie-podnikanie-investicia-v-1-r9228887.html"
     },
@@ -4707,7 +4742,7 @@
     "44a5ded2c4b0c92099a20476a1c4f36b03df658a": {
       "first_seen": "2026-09-08",
       "id": "topreality:sha1:0dba853605ca97af291a6f65bf3378050b13229a",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 200,
       "url": "https://www.topreality.sk/prenajom-3i-bytu-v-centre-senca-s-garazovym-statim-r9402836.html"
     },
@@ -4833,7 +4868,7 @@
     "46a175f5a521637cad8f1b34a17c41b09e8d6ac3": {
       "first_seen": "2026-07-09",
       "id": "reality:sha1:c9d8a4a8ba4c85e73d97cce9e3e3a0dab5652f69",
-      "last_seen": "2026-08-29",
+      "last_seen": "2026-09-09",
       "price_eur": 3803,
       "url": "https://www.reality.sk/byty/velkorysy-3-izbovy-byt-s-loggiou-vo-vyhladavanej-lokalite-ruzinova/JukPZ8j4Bpz/"
     },
@@ -5012,6 +5047,13 @@
       "price_eur": 335000,
       "url": "https://www.topreality.sk/herrys-na-predaj-priestranny-3-izbovy-byt-v-oblubenom-projekte-iii-veze-s-parkovacim-miestom-r9136544.html"
     },
+    "494449d18a1a09afd3c2801ea9266d33c580ce2f": {
+      "first_seen": "2026-09-09",
+      "id": "byty:6216543",
+      "last_seen": "2026-09-09",
+      "price_eur": 369196,
+      "url": "https://www.byty.sk/6216543/herrys-na-predaj-moderny-1-5-izbovy-apartman-s-vyhladom-na-mesto-v-projekte-metropolis"
+    },
     "4954dea66bbf5fc17cfbc85651a7b6c6b141d95b": {
       "first_seen": "2026-07-30",
       "id": "byty:6061042",
@@ -5092,7 +5134,7 @@
     "4ac587931990e8c287fd46c13846d2d1bd4b0030": {
       "first_seen": "2026-09-08",
       "id": "topreality:sha1:566a78f8c9994e7734c6ce21204185481fe026e3",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 795000,
       "url": "https://www.topreality.sk/5-izbovy-mezonet-o-vymere-303m2-s-garazou-v-cene-frana-krala-811-05-bratislava-r9417259.html"
     },
@@ -5224,10 +5266,10 @@
     },
     "4c8362112c0f3d04b6bbb2b137be6f415f5dbc01": {
       "first_seen": "2026-09-09",
-      "id": "reality:sha1:6ddf37608f32a0492e8850ab55d70dcee43b795e",
+      "id": "reality:sha1:d7845b2eb414a82e7db9b9127b2a3a37201b386c",
       "last_seen": "2026-09-09",
       "price_eur": 4205,
-      "url": "https://www.reality.sk/byty/3-izbovy-by-na-predaj-s-terasou-zahradkou-a-parkovanim-bratislava/Jue8Sz1GLSw/"
+      "url": "https://www.reality.sk/byty/3-izbovy-by-na-predaj-s-terasou-zahradkou-a-parkovanim-ruzinov/Jue8Sz1GLSw/"
     },
     "4c8d71686c0f95fe854f19c6c1b797921aeb2d06": {
       "first_seen": "2026-08-06",
@@ -5406,10 +5448,10 @@
     },
     "4f4cee19d3e9e946a79594fe79bb85a2986851e6": {
       "first_seen": "2026-08-04",
-      "id": "reality:sha1:368c96838056a4c115eef65836d00798a1ed0f26",
-      "last_seen": "2026-09-06",
-      "price_eur": 3676,
-      "url": "https://www.reality.sk/byty/2-izb-byt-v-zahorskej-bystrici-bratislavska-ul/JuSUjKiBzDi/"
+      "id": "reality:sha1:69128a9a7ea158330c9bfe119ddb3e891a6fb7f4",
+      "last_seen": "2026-09-09",
+      "price_eur": 3644,
+      "url": "https://www.reality.sk/byty/2-izbovy-byt-s-balkonom-v-pokojnej-lokalite-na-piniovej-ulici/Jut82yCyyrU/"
     },
     "4f6f3a85ebe006dda7640bc3df5faa5cd8d88bd0": {
       "first_seen": "2026-07-07",
@@ -5995,7 +6037,7 @@
     "5622c8fc4fce085a217d097c49613fead6b4898a": {
       "first_seen": "2026-08-13",
       "id": "topreality:sha1:4eaca87a0a05372bbc99e65e841a1511d3a74859",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 249900,
       "url": "https://www.topreality.sk/na-predaj-dvojgeneracny-rodinny-dom-samostatna-bytova-jedntoka-na-zahori-jakubov-r9401155.html"
     },
@@ -6072,7 +6114,7 @@
     "5759d5525b297edd602ca47ae2a84a9c317a02ad": {
       "first_seen": "2026-08-23",
       "id": "topreality:sha1:de4c6f14aefbdfe0b81006de254c7d33658cadfd",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 1100,
       "url": "https://www.topreality.sk/3-izbovy-byt-na-prenajom-bratislava-ruzinov-ostredky-r9406382.html"
     },
@@ -6433,6 +6475,13 @@
       "price_eur": 209990,
       "url": "https://www.byty.sk/6139817/miesto-pre-vas-spolocny-zaciatok-2-izbovy-byt-s-loggiou-v-ruzinove"
     },
+    "5c4b12b20862ef1593dc67eb4edbef0ae8ee365a": {
+      "first_seen": "2026-09-09",
+      "id": "topreality:sha1:f74b69c83480812ea8a64ccc35898104e8b17ff5",
+      "last_seen": "2026-09-09",
+      "price_eur": 300,
+      "url": "https://www.topreality.sk/prenajom-elegantneho-2i-bytu-97-m2-diplomat-park-mudronova-r9406723.html"
+    },
     "5c7e7ccdcd554ea4f663ac868adc510ac4cdb1ea": {
       "first_seen": "2026-07-20",
       "id": "topreality:sha1:af7da16974a1676c475ceb5cd010476f89a3e4e1",
@@ -6597,7 +6646,7 @@
     "5dd8b9417de709a921dce14811c85f96e957a707": {
       "first_seen": "2026-09-07",
       "id": "topreality:sha1:4d96b6e1f822ddcd2a3d671a9e639888c686c9a1",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 275000,
       "url": "https://www.topreality.sk/kompletne-zrekonstruovany-3-izbovy-byt-na-predaj-bratislava-karlova-ves-r9415492.html"
     },
@@ -6982,7 +7031,7 @@
     "63125c3c8416b40b8753a13e917ac390057a37eb": {
       "first_seen": "2026-09-07",
       "id": "topreality:sha1:2e8beaec3c78cc1da1c947ea215728362bae69f0",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 223000,
       "url": "https://www.topreality.sk/exkluzivne-na-predaj-3-izbovy-byt-s-loggiou-v-blizkosti-maleho-dunaja-estonska-ulica-r9411583.html"
     },
@@ -7003,7 +7052,7 @@
     "632fa2395527d188ede4fe53860a4ad3f0bdc80b": {
       "first_seen": "2026-09-07",
       "id": "topreality:sha1:38417827dac717c95ab90d3962658973ecea4839",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 167900,
       "url": "https://www.topreality.sk/novostavba-1-izb-byt-34-29-m2-pluhova-ba-nove-mesto-r9410380.html"
     },
@@ -7171,7 +7220,7 @@
     "666f4e634394b7ae534fee0f19942ebd84ef4238": {
       "first_seen": "2026-07-21",
       "id": "topreality:sha1:5b9b79399aff67fe3d05f34e339be267c1d67764",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 415000,
       "url": "https://www.topreality.sk/vynimocny-4-izbovy-rodinny-dom-s-bazenom-a-saunou-v-centre-tomasova-r9393737.html"
     },
@@ -7185,7 +7234,7 @@
     "66eb6e2aa717b7cb4951a6befed181ab45481292": {
       "first_seen": "2026-09-08",
       "id": "reality:sha1:78a888da1293d332efb2ca6a78ab0d96e8349fb6",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 3857,
       "url": "https://www.reality.sk/byty/predaj-priestranny-3-izbovy-byt-na-sustekovej-ulici-vyborna-dostupnost-a-zelen-na-dosah/JuCGWgPfspB/"
     },
@@ -7542,7 +7591,7 @@
     "6cb6e9af0c227ec9b12f9ef41cf9eee6b5d6f185": {
       "first_seen": "2026-08-31",
       "id": "topreality:sha1:e2ab82d43d6250d4f425e2ab00ea2cdbd3b0bd61",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 159000,
       "url": "https://www.topreality.sk/rodinny-dom-po-rekonstrukcii-v-prijemnej-casti-obce-suchohrad-r9409115.html"
     },
@@ -7738,7 +7787,7 @@
     "70704e846f153a68f78855cec6a695dc1fd3efcb": {
       "first_seen": "2026-08-21",
       "id": "topreality:sha1:9074e8ac2f9422dcf6c9c17e21133428fbef6534",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 249000,
       "url": "https://www.topreality.sk/herrys-na-predaj-4-izbovy-byt-vo-vajnoroch-r9405775.html"
     },
@@ -8067,7 +8116,7 @@
     "75ae28d49155977a9b5091e8b51d4ef9ae707f18": {
       "first_seen": "2026-07-25",
       "id": "byty:6213172",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 213900,
       "url": "https://www.byty.sk/6213172/p-r-e-d-a-j-1-5-izb-byt-v-novostavbe-slnecnice-mesto"
     },
@@ -8501,7 +8550,7 @@
     "7af11a39b4a0f769f1be4dc348280d63a94cedf4": {
       "first_seen": "2026-09-04",
       "id": "topreality:sha1:124842e5d48d20a9b5c0e231e22ddbfb8c4a9e96",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 319900,
       "url": "https://www.topreality.sk/8-izbovy-rodinny-dom-po-kompletnej-rekonstrukcii-sajdikove-humence-r9401585.html"
     },
@@ -8780,10 +8829,10 @@
     },
     "7f1833fdcc4ef0b356f359aec43f66d77fcf3e47": {
       "first_seen": "2026-08-29",
-      "id": "bazos:195020489",
-      "last_seen": "2026-08-31",
+      "id": "bazos:195382334",
+      "last_seen": "2026-09-09",
       "price_eur": 231900,
-      "url": "https://reality.bazos.sk/inzerat/195020489/halo-reality-predaj-jednoizbovy-byt-bratislava-podunajske.php"
+      "url": "https://reality.bazos.sk/inzerat/195382334/halo-reality-predaj-jednoizbovy-byt-bratislava-podunajske.php"
     },
     "7f268cad506b3b9c19482f2961f3921fe4852a43": {
       "first_seen": "2026-07-31",
@@ -8837,7 +8886,7 @@
     "7f5c1f185f19933c10b622deb6987ecd99d02fd6": {
       "first_seen": "2026-09-08",
       "id": "topreality:sha1:4afde3d43d9fee7999b2a1096e5ae6764ab13c87",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 160,
       "url": "https://www.topreality.sk/stylovy-3-izbovy-stresny-byt-pri-kuchajde-velkorysa-terasa-smart-domov-a-absolutne-sukromie-r9416933.html"
     },
@@ -9698,7 +9747,7 @@
     "8be76d60ddb8ba8df6b556a5f6a3d250ef746f0e": {
       "first_seen": "2026-09-07",
       "id": "topreality:sha1:cae7455cc801cee098fb7f82c89796ef353810b3",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 235000,
       "url": "https://www.topreality.sk/bezkonkurencna-cena-v-downtown-yards-byvajte-v-centre-a-usetrite-luxus-za-cenu-ktoru-inde-nenajdete-predaj-1-izbovy-byt-kosicka-ulica-bratislava-r9413320.html"
     },
@@ -10005,10 +10054,10 @@
     },
     "8f5682705e5bf60db521348ac9f96211ee6ec27a": {
       "first_seen": "2026-08-03",
-      "id": "byty:6185696",
-      "last_seen": "2026-08-25",
+      "id": "byty:6214782",
+      "last_seen": "2026-09-09",
       "price_eur": 199999,
-      "url": "https://www.byty.sk/6185696/na-predaj-krasny-2i-byt-po-rekonstrukcii-47m2-devinska-n-v"
+      "url": "https://www.byty.sk/6214782/na-predaj-krasny-2i-byt-po-rekonstrukcii-47m2-devinska-n-v"
     },
     "8f651e8357c0a034c035c2c8150e813b47fa02c9": {
       "first_seen": "2026-07-25",
@@ -10104,7 +10153,7 @@
     "9023a94987cf8f34c18a4511c45c3739e23d0bc8": {
       "first_seen": "2026-07-07",
       "id": "byty:6148679",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 748500,
       "url": "https://www.byty.sk/6148679/herrys-na-predaj-4-izbovy-byt-na-hradnom-kopci-v-projekte-aura-slavicie-udolie"
     },
@@ -10334,10 +10383,17 @@
     },
     "9317110e2ca6a3bb4e76c6ed203ded694933a569": {
       "first_seen": "2026-09-04",
-      "id": "bazos:195224517",
-      "last_seen": "2026-09-05",
+      "id": "bazos:195386487",
+      "last_seen": "2026-09-09",
       "price_eur": 279000,
-      "url": "https://reality.bazos.sk/inzerat/195224517/tehlovy-3-izb-byt-v-oblubenom-ruzinove.php"
+      "url": "https://reality.bazos.sk/inzerat/195386487/tehlovy-3-izb-byt-v-oblubenom-ruzinove.php"
+    },
+    "93197c51fb45e25e083efa8ce45898e85511b30c": {
+      "first_seen": "2026-09-09",
+      "id": "topreality:sha1:bc869712b69e17243fbea947817bb2669bddbdfe",
+      "last_seen": "2026-09-09",
+      "price_eur": 269000,
+      "url": "https://www.topreality.sk/neibrs-exkluzivny-2i-byt-len-30m-od-mora-komplet-rekonstrukcia-pietra-ligure-liguria-taliansko-r9415419.html"
     },
     "9341682aec41b67baf7cd4e7cfbad64c4ef59ad7": {
       "first_seen": "2026-08-18",
@@ -10657,7 +10713,7 @@
     "973179b8ba406669b9ab16c1fca29559971f7f44": {
       "first_seen": "2026-07-07",
       "id": "byty:6148677",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 535000,
       "url": "https://www.byty.sk/6148677/herrys-na-predaj-3-izbovy-byt-na-hradnom-kopci-v-projekte-aura-slavicie-udolie"
     },
@@ -10685,7 +10741,7 @@
     "978e14f11db7c8ae604cd376dcc7018b2042555d": {
       "first_seen": "2026-09-01",
       "id": "topreality:sha1:a56ca8d3f2eb58d75147af8d0efb2346d9b685c6",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 780000,
       "url": "https://www.topreality.sk/exkluzivny-5-izbovy-byt-146-m2-vlastne-tepelne-cerpadlo-trencianska-ul-bratislava-ruzinov-r9370461.html"
     },
@@ -11000,7 +11056,7 @@
     "9bdee667e57a5b642c47810bf87166c36fc98cbe": {
       "first_seen": "2026-07-07",
       "id": "byty:6149287",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 857750,
       "url": "https://www.byty.sk/6149287/herrys-na-predaj-4-izbovy-byt-na-hradnom-kopci-v-projekte-aura-slavicie-udolie"
     },
@@ -11035,7 +11091,7 @@
     "9cbea24aaeffda1c0f1513b1e1f54ef19040aa93": {
       "first_seen": "2026-09-07",
       "id": "byty:6213184",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 288000,
       "url": "https://www.byty.sk/6213184/predaj-tehlova-2-izb-novostavba-55m2-parking-trnavka"
     },
@@ -11270,6 +11326,13 @@
       "price_eur": 214000,
       "url": "https://reality.bazos.sk/inzerat/195097620/15-izbovy-byt-salviova-ul-ruzinov.php"
     },
+    "9f5400372c0589b2d016498ed98291fc467202bf": {
+      "first_seen": "2026-09-09",
+      "id": "topreality:sha1:4ee04336933c7795175c674f869d0e5940c08126",
+      "last_seen": "2026-09-09",
+      "price_eur": null,
+      "url": "https://www.topreality.sk/na-predaj-krasny-2-izbovy-byt-v-ein-parku-s-parkovanim-a-vyhladom-na-bratislavsky-hrad-bratislava-petrzalka-r9417009.html"
+    },
     "9f835f1028427822e21c4378d014371581abad18": {
       "first_seen": "2026-07-05",
       "id": "topreality:sha1:9d6d5c3df84b8198fd31ae8849c2400fd3809530",
@@ -11433,10 +11496,10 @@
     },
     "a18a45d7d39e550a8586921a5080d203b6fd28b2": {
       "first_seen": "2026-08-10",
-      "id": "bazos:194441745",
-      "last_seen": "2026-08-10",
+      "id": "bazos:195382332",
+      "last_seen": "2026-09-09",
       "price_eur": 199400,
-      "url": "https://reality.bazos.sk/inzerat/194441745/halo-reality-predaj-jednoizbovy-byt-bratislava-petrzalka.php"
+      "url": "https://reality.bazos.sk/inzerat/195382332/halo-reality-predaj-jednoizbovy-byt-bratislava-petrzalka.php"
     },
     "a19a58ccb0d06b58aca6d13aa522b7c002fa6f87": {
       "first_seen": "2026-07-07",
@@ -11574,7 +11637,7 @@
     "a3372cca75633a9fef5e509580404b357fb7e826": {
       "first_seen": "2026-07-07",
       "id": "byty:6151180",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 310000,
       "url": "https://www.byty.sk/6151180/herrys-na-predaj-vynimocny-3-izbovy-podkrovny-byt-centre-bratislavy-na-palarikovej-ulici"
     },
@@ -11917,7 +11980,7 @@
     "a8cf10bfe78ccb9754d2c9762711e818614f3f67": {
       "first_seen": "2026-09-07",
       "id": "topreality:sha1:4399ae1b5b931584b7c200d800c2bd1d5e9ea569",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 125000,
       "url": "https://www.topreality.sk/na-predaj-3-izbovy-kompl-rekonstruovany-zariadeny-byt-so-zahradou-a-garazou-v-caradiciach-r9414636.html"
     },
@@ -11972,10 +12035,10 @@
     },
     "aac23c7ce095e35458bfac7c6cb66d316c483ee1": {
       "first_seen": "2026-08-31",
-      "id": "bazos:195100514",
-      "last_seen": "2026-09-08",
+      "id": "bazos:195384520",
+      "last_seen": "2026-09-09",
       "price_eur": 420000,
-      "url": "https://reality.bazos.sk/inzerat/195100514/na-predaj-3-izbovy-byt-91-m2-rekonstrukcia-bratislava-za.php"
+      "url": "https://reality.bazos.sk/inzerat/195384520/na-predaj-3-izbovy-byt-91-m2-rekonstrukcia-bratislava-za.php"
     },
     "aae441b9fe4a82c7a97816136951a995ff22c5cf": {
       "first_seen": "2026-09-04",
@@ -11990,6 +12053,13 @@
       "last_seen": "2026-07-29",
       "price_eur": 3343,
       "url": "https://www.reality.sk/byty/kompletne-zrekonstr-4-izb-byt-hradistna-ul/JuOYIWaHiZf/"
+    },
+    "ab01c3575c4a9400b82bbff09fe6dd128d04d807": {
+      "first_seen": "2026-09-09",
+      "id": "topreality:sha1:9404b5d73a5c51356e404e5667ae89c22a35beda",
+      "last_seen": "2026-09-09",
+      "price_eur": 400,
+      "url": "https://www.topreality.sk/prenajom-vynimocneho-2i-bytu-98-m2-s-vyhladom-na-hrad-diplomat-park-r9417111.html"
     },
     "ab0e5262bdf5971240e8e71f63179579bda82104": {
       "first_seen": "2026-07-30",
@@ -12187,6 +12257,13 @@
       "price_eur": 280000,
       "url": "https://www.byty.sk/6157800/byt-s-vynimocnym-potencialom-na-luxusny-2-izbovy-byt-v-tichej-casti-stareho-mesta-na-lovinskeho"
     },
+    "add20ab933d9ff6ce25601cad2918bc58b3429f4": {
+      "first_seen": "2026-09-09",
+      "id": "topreality:sha1:4eb28f0ea9826a4efe4c85fd3959cfed56593962",
+      "last_seen": "2026-09-09",
+      "price_eur": 600,
+      "url": "https://www.topreality.sk/prenajom-4i-bytu-203-85-m2-s-parkovanim-diplomat-park-r9417113.html"
+    },
     "adea340ba68e9937204354b1bfa23dc7feba8228": {
       "first_seen": "2026-07-09",
       "id": "reality:sha1:fd664377f96f2007aa45ecc0440177927be10870",
@@ -12204,7 +12281,7 @@
     "ae3ac810391b6e53eb938385a4e0b53f982f9258": {
       "first_seen": "2026-07-08",
       "id": "byty:6161693",
-      "last_seen": "2026-08-03",
+      "last_seen": "2026-09-09",
       "price_eur": 519000,
       "url": "https://www.byty.sk/6161693/frank-zicher-predavame-priestranny-4-izbovy-byt-100-m-na-panenskej-ulici-v-starom-meste"
     },
@@ -12242,6 +12319,13 @@
       "last_seen": "2026-08-24",
       "price_eur": 229000,
       "url": "https://www.byty.sk/6106976/svetly-2-izbovy-byt-v-novostavbe-parkovanie-v-cene-uzavrety-areal-zeleznicna-ulica"
+    },
+    "aeecb483eba81ffe81d17c8d87e4de887a094952": {
+      "first_seen": "2026-09-09",
+      "id": "byty:6216544",
+      "last_seen": "2026-09-09",
+      "price_eur": 493000,
+      "url": "https://www.byty.sk/6216544/herrys-na-predaj-premiovy-3-izbovy-byt-vo-vyhladavanej-novostavbe-metropolis"
     },
     "aef1054565ced0028575f7e7a9ac38f061de55e8": {
       "first_seen": "2026-07-29",
@@ -12302,7 +12386,7 @@
     "afc9e775457a80c8b22d60ac12389abf6432d8a4": {
       "first_seen": "2026-08-29",
       "id": "reality:sha1:8e30ee5ef2d24e4d625e42e0ca98b2bb44514d96",
-      "last_seen": "2026-08-31",
+      "last_seen": "2026-09-09",
       "price_eur": 3792,
       "url": "https://www.reality.sk/byty/frank-zicher-predavame-novozrekonstruovany-3-izbovy-byt-v-blizkosti-liscieho-udolia-v-karlovej-vsi/Ju1ipCaD5oN/"
     },
@@ -12386,7 +12470,7 @@
     "b09def9eaccef17cc30537024bf82dfdcd161d26": {
       "first_seen": "2026-09-02",
       "id": "reality:sha1:7256d8155d33442e8998ed11b312fb3cbe633915",
-      "last_seen": "2026-09-07",
+      "last_seen": "2026-09-09",
       "price_eur": 4490,
       "url": "https://www.reality.sk/byty/uplne-novy-3-izb-byt-pod-lesom-tranovskeho-37/JubHPZbChRA/"
     },
@@ -12631,7 +12715,7 @@
     "b4f4581be30547632059aa3766a4ab1597310385": {
       "first_seen": "2026-08-14",
       "id": "topreality:sha1:fd52849f2e0d528509d64cfc96dd55e80fced646",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 780000,
       "url": "https://www.topreality.sk/gravitas-priestranny-rodinny-dom-s-garazou-vrakuna-bratislava-r9400414.html"
     },
@@ -12903,10 +12987,10 @@
     },
     "b8b78255350d836af83a284138d3e2d548166a64": {
       "first_seen": "2026-08-01",
-      "id": "topreality:sha1:7f183eddf48b48370a216a32dfe2b02abbb91d78",
-      "last_seen": "2026-08-27",
+      "id": "topreality:sha1:8874607d8fba4e05cb2acb41c53fc390bd275265",
+      "last_seen": "2026-09-09",
       "price_eur": 120,
-      "url": "https://www.topreality.sk/na-predaj-2i-byt-s-loggiou-po-rekonstrukcii-ba-petrzalka-r9389288.html"
+      "url": "https://www.topreality.sk/na-predaj-2i-byt-s-loggiou-po-rekonstrukcii-ba-petrzalka-r9414724.html"
     },
     "b8e8cf57bbe6c346dc12049fa0231a405a8df3c7": {
       "first_seen": "2026-07-07",
@@ -12925,7 +13009,7 @@
     "b90c93b1ccd00e06f0cbdd02245ebe6ca382c675": {
       "first_seen": "2026-07-18",
       "id": "topreality:sha1:e7ccb2ddf562441dd042b52154c19fd396f44c4f",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 188,
       "url": "https://www.topreality.sk/klimatizovany-a-kompletne-zrekonstruovany-3-izbovy-byt-s-loggiou-s-dodatocnym-obytnym-priestorom-r9361861.html"
     },
@@ -12974,7 +13058,7 @@
     "b951ff9be004a1384fba6d791881b64f9a198837": {
       "first_seen": "2026-09-07",
       "id": "topreality:sha1:5676e9e662c30beea2772f7fbe7dce01c025725c",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 210000,
       "url": "https://www.topreality.sk/chalupa-na-polosamote-na-myjavskych-kopaniciach-r9407778.html"
     },
@@ -13433,6 +13517,13 @@
       "price_eur": 313990,
       "url": "https://www.topreality.sk/ba-petrzalka-mamateyova-krasny-zrekonstruovany-a-zariadeny-3i-byt-s-klimatizaciou-73m2-loggia-r9397114.html"
     },
+    "c063720f4cce3b55d56c985ac180c7f28d756480": {
+      "first_seen": "2026-09-09",
+      "id": "bazos:195382440",
+      "last_seen": "2026-09-09",
+      "price_eur": 247000,
+      "url": "https://reality.bazos.sk/inzerat/195382440/2-izbovy-byt-bratislava-dubravka.php"
+    },
     "c067c1e040eca1bdbd07496f4e28affcde0fba63": {
       "first_seen": "2026-08-19",
       "id": "bazos:194735579",
@@ -13537,6 +13628,13 @@
       "last_seen": "2026-07-12",
       "price_eur": 4145,
       "url": "https://www.reality.sk/byty/herrys-na-predaj-1-izbovy-byt-v-povodnom-stave-na-slatinskej-ulici-vo-vrakuni/JuIcEaJMHDc/"
+    },
+    "c1823b3f7a1836c81bca89e820b8813f68306e97": {
+      "first_seen": "2026-09-09",
+      "id": "bazos:195386956",
+      "last_seen": "2026-09-09",
+      "price_eur": 498000,
+      "url": "https://reality.bazos.sk/inzerat/195386956/predaj-bratislava-ruzinov.php"
     },
     "c1a65f1f42812d04f5f6eff7b169280ea1bd1b27": {
       "first_seen": "2026-08-11",
@@ -13818,6 +13916,13 @@
       "price_eur": 336900,
       "url": "https://www.byty.sk/6160169/predaj-3-izboveho-bytu-s-parkovanim-a-skladom-bratislava-pionierska-nove-mesto"
     },
+    "c6121ab977a3e19cd34b7ad7bc50e19d90b36ad3": {
+      "first_seen": "2026-09-09",
+      "id": "topreality:sha1:5e64113c2556d5bde6e7e3f176cfec520b84dd90",
+      "last_seen": "2026-09-09",
+      "price_eur": 139000,
+      "url": "https://www.topreality.sk/vynimocna-ponuka-dom-za-cenu-garzonky-len-teraz-r9410929.html"
+    },
     "c6542db668942363774a9ee1bf38894b98da4274": {
       "first_seen": "2026-07-09",
       "id": "byty:6163292",
@@ -13996,7 +14101,7 @@
     "c7f5ee8b7c524523c4be36183c07c71785e88e1e": {
       "first_seen": "2026-09-07",
       "id": "byty:6204852",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 515000,
       "url": "https://www.byty.sk/6204852/ruzinov-nivy-jegeho-ul-4-izbovy-byt-s-terasou-22m2-loggia-5m2-klima-3d-prehliadka"
     },
@@ -14479,7 +14584,7 @@
     "cdbb67abd4ae71b555a37a29651f4b4c795f90a0": {
       "first_seen": "2026-09-07",
       "id": "byty:6212999",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 179000,
       "url": "https://www.byty.sk/6212999/herrys-na-predaj-1-izbovy-byt-v-lukrativnej-lokalite-na-vansovej-ulici-moznost-upravy-podla-vlas"
     },
@@ -14931,6 +15036,13 @@
       "price_eur": 212500,
       "url": "https://www.topreality.sk/dvojgarsonka-deluxe-po-rekonstrukcii-r9374681.html"
     },
+    "d4967796ceb8b8789afd099631a2ed6418a50256": {
+      "first_seen": "2026-09-09",
+      "id": "bazos:195379848",
+      "last_seen": "2026-09-09",
+      "price_eur": 185000,
+      "url": "https://reality.bazos.sk/inzerat/195379848/1-izbovy-byt-s-loggiou-v-bratislave-na-kramaroch.php"
+    },
     "d4c33569c0ff620b95f011ae762b6e7b19d0be3c": {
       "first_seen": "2026-08-12",
       "id": "topreality:sha1:8a003ca024a0c1baf11db43cdb37a96707ce5edd",
@@ -15375,7 +15487,7 @@
     "db46ce4262905abd96b5302e975fac95d8e075f5": {
       "first_seen": "2026-09-07",
       "id": "topreality:sha1:f79867e0708527a47713765d93fffc2e6da857d1",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 235000,
       "url": "https://www.topreality.sk/limitovana-akcia-downtown-yards-za-historicky-najnizsiu-cenu-predaj-1-izbovy-byt-kosicka-ulica-bratislava-ruzinov-r9399626.html"
     },
@@ -15722,6 +15834,13 @@
       "price_eur": 890000,
       "url": "https://www.topreality.sk/veroreal-predaj-vynimocneho-3-izboveho-bytu-na-37-poschodi-eurovea-tower-bratislava-r9359585.html"
     },
+    "e0b79bd36530f05047d84c9baf45c86769c63217": {
+      "first_seen": "2026-09-09",
+      "id": "bazos:195382581",
+      "last_seen": "2026-09-09",
+      "price_eur": 233000,
+      "url": "https://reality.bazos.sk/inzerat/195382581/1-izbovy-byt-bratislava-tehelne-pole.php"
+    },
     "e0d11612eacad7b4596ea27f9b9162818173445b": {
       "first_seen": "2026-07-17",
       "id": "byty:6166133",
@@ -15960,6 +16079,13 @@
       "price_eur": 299990,
       "url": "https://reality.bazos.sk/inzerat/193422462/107-m-za-299-990-e-4-izbova-novostavba-v-bratislave.php"
     },
+    "e399a51a415a5c2cfbba37727a28f03e6c300fcf": {
+      "first_seen": "2026-09-09",
+      "id": "topreality:sha1:4299b449fd4aa57da729fcd505586427c6eb795b",
+      "last_seen": "2026-09-09",
+      "price_eur": 319990,
+      "url": "https://www.topreality.sk/bav-mlynarovicova-3i-74-m2-nova-kompletna-rekonstrukcia-top-lokalita-chorvatske-rameno-r9418282.html"
+    },
     "e3ab1e4bcb5e8e14a3fa1e228b12606ff180bfd6": {
       "first_seen": "2026-08-12",
       "id": "byty:6197840",
@@ -16019,7 +16145,7 @@
     "e47d6ae11b5c6a5dd0211062dee4a452c493134a": {
       "first_seen": "2026-08-14",
       "id": "topreality:sha1:aef771479f710b4ba34ace666273d9e3af54a69b",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 249900,
       "url": "https://www.topreality.sk/kompletne-zariadeny-2-izbovy-byt-49-2m2-po-rekonstrukcii-s-loggiou-do-zelene-r9401803.html"
     },
@@ -16359,10 +16485,17 @@
       "price_eur": 226999,
       "url": "https://reality.bazos.sk/inzerat/195019840/2-izbovy-svetly-kompletne-zrekonstruovany-byt-s.php"
     },
+    "e92c84bd01b6835e61c484df927a043e7017f7ef": {
+      "first_seen": "2026-09-09",
+      "id": "reality:sha1:482793a2334af45aa685538895e31b54e34f896c",
+      "last_seen": "2026-09-09",
+      "price_eur": 4338,
+      "url": "https://www.reality.sk/byty/2-izbovy-byt-po-rekonstrukcii-v-centre-bratislavy-velmi-tichy/Juh10ltzmWK/"
+    },
     "e939df14926ab5ab4b0a660d38f224682f32f302": {
       "first_seen": "2026-07-09",
       "id": "byty:5809087",
-      "last_seen": "2026-09-07",
+      "last_seen": "2026-09-09",
       "price_eur": 308966,
       "url": "https://www.byty.sk/5809087/herrys-na-predaj-1-izbovy-apartman-s-terasou-v-projekte-uno-postova"
     },
@@ -16606,10 +16739,10 @@
     },
     "ecb1648b09347059bcad364ecf73364911423d99": {
       "first_seen": "2026-07-07",
-      "id": "bazos:195351512",
+      "id": "bazos:195388463",
       "last_seen": "2026-09-09",
       "price_eur": 369000,
-      "url": "https://reality.bazos.sk/inzerat/195351512/4-izbovy-byt-bratislavanove-mesto-ulica-nova-roznavska.php"
+      "url": "https://reality.bazos.sk/inzerat/195388463/4-izbovy-byt-bratislavanove-mesto-ulica-nova-roznavska.php"
     },
     "ecb1e0edc9a094d147485079c740edc8175fb086": {
       "first_seen": "2026-08-11",
@@ -16726,7 +16859,7 @@
     "edaf6450cdf11b90d7a77a89cedd8ca052a5926f": {
       "first_seen": "2026-08-01",
       "id": "topreality:sha1:4187f100cf083eb5f23cde88d37b46f8ce5c35ca",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 269900,
       "url": "https://www.topreality.sk/priestranny-slnecny-4i-byt-s-lodziou-bagarova-ul-dubravka-r9390072.html"
     },
@@ -16922,7 +17055,7 @@
     "f08e4d277ebe45a50382ea49a758e8393df6d8aa": {
       "first_seen": "2026-08-30",
       "id": "byty:6207747",
-      "last_seen": "2026-09-04",
+      "last_seen": "2026-09-09",
       "price_eur": 315000,
       "url": "https://www.byty.sk/6207747/kompletne-vkusne-zariadeny-3i-byt-s-balkonom-matadorka"
     },
@@ -17271,10 +17404,10 @@
     },
     "f51084173f8a92c2b8b8796401b13004c7ba846c": {
       "first_seen": "2026-07-05",
-      "id": "reality:sha1:281cea7b69240091c463a12ea6fa6c88aa1a0343",
+      "id": "reality:sha1:e45642584de35f6fc30d3e74b84a41777f608ca9",
       "last_seen": "2026-09-09",
-      "price_eur": 4429,
-      "url": "https://www.reality.sk/byty/herrys-na-predaj-vynimocny-3-izbovy-podkrovny-byt-centre-bratislavy-na-palarikovej-ulici/Ju_sVwtJOI8/"
+      "price_eur": 3713,
+      "url": "https://www.reality.sk/byty/mikelssen-na-predaj-3-izbovy-byt-na-exnarovej-s-moznostou-zmeny-na-4-izbovy/JusEsM5jUsx/"
     },
     "f5253f107352db618302491aeb6c14788b7102a8": {
       "first_seen": "2026-07-10",
@@ -17426,7 +17559,7 @@
     "f746668d03f1e7464650e65af82e5c47d554e8b7": {
       "first_seen": "2026-07-07",
       "id": "byty:6148678",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 562500,
       "url": "https://www.byty.sk/6148678/herrys-na-predaj-3-izbovy-byt-na-hradnom-kopci-v-projekte-aura-slavicie-udolie"
     },
@@ -17538,7 +17671,7 @@
     "f9a2738a6157dc22cec9ba5d8f717236ef5eec50": {
       "first_seen": "2026-09-08",
       "id": "topreality:sha1:04ce66e4262b2c8b31f8f3ccaedfa5dbf741eb0f",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 385000,
       "url": "https://www.topreality.sk/assenzio-predaj-3-izbovy-byt-bukurestska-stare-mesto-r9380290.html"
     },
@@ -20291,7 +20424,7 @@
     "bazos:193695861": {
       "first_seen": "2026-07-16",
       "hash": "8950355f6b891545a0caa65f58f8d04b3a9404b4",
-      "last_seen": "2026-09-06",
+      "last_seen": "2026-09-09",
       "price_eur": 199900,
       "url": "https://reality.bazos.sk/inzerat/193695861/predaj-2-izbovy-byt-38-m-bakosova-ulica-bratislava-lam.php"
     },
@@ -26248,7 +26381,7 @@
     "bazos:194899049": {
       "first_seen": "2026-08-05",
       "hash": "961de577d959a1990109eb7cc6f4bc997f8f0c1e",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 199900,
       "url": "https://reality.bazos.sk/inzerat/194899049/predaj-1-izbovy-byt-38-m-bakosova-ulica-bratislava-lam.php"
     },
@@ -28369,7 +28502,7 @@
     "bazos:195291715": {
       "first_seen": "2026-07-05",
       "hash": "b6b3503be86c9696489d8451d0dba0fc15e5fecf",
-      "last_seen": "2026-09-07",
+      "last_seen": "2026-09-09",
       "price_eur": 165000,
       "url": "https://reality.bazos.sk/inzerat/195291715/stylova-garzonka-po-rekonstrukcii-bratislava-ruzinov.php"
     },
@@ -28982,6 +29115,104 @@
       "price_eur": 195000,
       "url": "https://reality.bazos.sk/inzerat/195373961/mezonet-v-obci-zohor-na-skolskej-ulici.php"
     },
+    "bazos:195379848": {
+      "first_seen": "2026-09-09",
+      "hash": "dce0497554ac10c58b0cfb465fb4f09bf281fdc9",
+      "last_seen": "2026-09-09",
+      "price_eur": 185000,
+      "url": "https://reality.bazos.sk/inzerat/195379848/1-izbovy-byt-s-loggiou-v-bratislave-na-kramaroch.php"
+    },
+    "bazos:195382331": {
+      "first_seen": "2026-09-09",
+      "hash": "33a31cb2e9720ea3260bc7824e9c801467331c62",
+      "last_seen": "2026-09-09",
+      "price_eur": 184900,
+      "url": "https://reality.bazos.sk/inzerat/195382331/halo-reality-predaj-jednoizbovy-byt-bratislava-nove-mesto.php"
+    },
+    "bazos:195382332": {
+      "first_seen": "2026-08-10",
+      "hash": "f49d33bbaa37ddaf015e0955a907532f94fb9e58",
+      "last_seen": "2026-09-09",
+      "price_eur": 199400,
+      "url": "https://reality.bazos.sk/inzerat/195382332/halo-reality-predaj-jednoizbovy-byt-bratislava-petrzalka.php"
+    },
+    "bazos:195382334": {
+      "first_seen": "2026-08-29",
+      "hash": "d41d5b88fb19372b74450d0e15dd1ab3a5f81272",
+      "last_seen": "2026-09-09",
+      "price_eur": 231900,
+      "url": "https://reality.bazos.sk/inzerat/195382334/halo-reality-predaj-jednoizbovy-byt-bratislava-podunajske.php"
+    },
+    "bazos:195382440": {
+      "first_seen": "2026-09-09",
+      "hash": "bfa14664c37ee9f6ee3d6b3eb1ac7326cd0ce955",
+      "last_seen": "2026-09-09",
+      "price_eur": 247000,
+      "url": "https://reality.bazos.sk/inzerat/195382440/2-izbovy-byt-bratislava-dubravka.php"
+    },
+    "bazos:195382581": {
+      "first_seen": "2026-09-09",
+      "hash": "4bb610c3254b6b1b92792c3599bbe2895f36b279",
+      "last_seen": "2026-09-09",
+      "price_eur": 233000,
+      "url": "https://reality.bazos.sk/inzerat/195382581/1-izbovy-byt-bratislava-tehelne-pole.php"
+    },
+    "bazos:195383135": {
+      "first_seen": "2026-09-09",
+      "hash": "568306ad3bf9d6ab0cae0fd6d85c7768337b0851",
+      "last_seen": "2026-09-09",
+      "price_eur": 338000,
+      "url": "https://reality.bazos.sk/inzerat/195383135/na-predaj-moderny-3-izbovy-byt-s-loggiou-ruzinov.php"
+    },
+    "bazos:195384520": {
+      "first_seen": "2026-08-31",
+      "hash": "6a261c7f3047b851f8a8bd8f3ae44b0a6e506ce7",
+      "last_seen": "2026-09-09",
+      "price_eur": 420000,
+      "url": "https://reality.bazos.sk/inzerat/195384520/na-predaj-3-izbovy-byt-91-m2-rekonstrukcia-bratislava-za.php"
+    },
+    "bazos:195385823": {
+      "first_seen": "2026-09-09",
+      "hash": "3d5e0999a76e999e95aff08b5dac0c40ddd0c45b",
+      "last_seen": "2026-09-09",
+      "price_eur": 247000,
+      "url": "https://reality.bazos.sk/inzerat/195385823/2-izbovy-byt-na-ulici-galbaveho-v-dubravke.php"
+    },
+    "bazos:195386487": {
+      "first_seen": "2026-09-04",
+      "hash": "6258c1920e1ab45e2f9cef5b5bdb9d05ac0a396c",
+      "last_seen": "2026-09-09",
+      "price_eur": 279000,
+      "url": "https://reality.bazos.sk/inzerat/195386487/tehlovy-3-izb-byt-v-oblubenom-ruzinove.php"
+    },
+    "bazos:195386956": {
+      "first_seen": "2026-09-09",
+      "hash": "99af0aedb3c98d612a82d9fce15a43c1b937d085",
+      "last_seen": "2026-09-09",
+      "price_eur": 498000,
+      "url": "https://reality.bazos.sk/inzerat/195386956/predaj-bratislava-ruzinov.php"
+    },
+    "bazos:195387085": {
+      "first_seen": "2026-09-09",
+      "hash": "cd710dc93a0fb905aa2b2458686ee40a819e2b7c",
+      "last_seen": "2026-09-09",
+      "price_eur": 249000,
+      "url": "https://reality.bazos.sk/inzerat/195387085/predaj-3-izbovy-byt-ciastocna-rekonstrukcia-namestie-hrani.php"
+    },
+    "bazos:195388144": {
+      "first_seen": "2026-09-09",
+      "hash": "ae5f7e74a886a725e67ca129d2f7ad40fb48e911",
+      "last_seen": "2026-09-09",
+      "price_eur": 460000,
+      "url": "https://reality.bazos.sk/inzerat/195388144/predaj-stylovy-4-izbovy-byt-mlynske-nivy-76-palenisko.php"
+    },
+    "bazos:195388463": {
+      "first_seen": "2026-07-07",
+      "hash": "e4e208352eb23edbd87b909c56da6b7578b12a65",
+      "last_seen": "2026-09-09",
+      "price_eur": 369000,
+      "url": "https://reality.bazos.sk/inzerat/195388463/4-izbovy-byt-bratislavanove-mesto-ulica-nova-roznavska.php"
+    },
     "byty:4774580": {
       "first_seen": "2026-07-18",
       "hash": "64d8a383c361e96c5a3983c9db0d4500a6be23d1",
@@ -29048,7 +29279,7 @@
     "byty:5809087": {
       "first_seen": "2026-07-09",
       "hash": "2e6798bdfeaa4dd7c24e0893f91e3d569e8257d5",
-      "last_seen": "2026-09-07",
+      "last_seen": "2026-09-09",
       "price_eur": 308966,
       "url": "https://www.byty.sk/5809087/herrys-na-predaj-1-izbovy-apartman-s-terasou-v-projekte-uno-postova"
     },
@@ -30938,21 +31169,21 @@
     "byty:6148677": {
       "first_seen": "2026-07-07",
       "hash": "bd751202b4c411e871eab7d12bb4eb88f5bac403",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 535000,
       "url": "https://www.byty.sk/6148677/herrys-na-predaj-3-izbovy-byt-na-hradnom-kopci-v-projekte-aura-slavicie-udolie"
     },
     "byty:6148678": {
       "first_seen": "2026-07-07",
       "hash": "62bcf5c881f5295005a945b6fc57034278158e5b",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 562500,
       "url": "https://www.byty.sk/6148678/herrys-na-predaj-3-izbovy-byt-na-hradnom-kopci-v-projekte-aura-slavicie-udolie"
     },
     "byty:6148679": {
       "first_seen": "2026-07-07",
       "hash": "10e5c492d505fbacff39577abf202e089c128c60",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 748500,
       "url": "https://www.byty.sk/6148679/herrys-na-predaj-4-izbovy-byt-na-hradnom-kopci-v-projekte-aura-slavicie-udolie"
     },
@@ -30994,7 +31225,7 @@
     "byty:6149287": {
       "first_seen": "2026-07-07",
       "hash": "c5c9ee77f0821994c59df61e5130d66ab1039cca",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 857750,
       "url": "https://www.byty.sk/6149287/herrys-na-predaj-4-izbovy-byt-na-hradnom-kopci-v-projekte-aura-slavicie-udolie"
     },
@@ -31050,14 +31281,14 @@
     "byty:6151179": {
       "first_seen": "2026-07-07",
       "hash": "85f1fc8103a21570e2fcf0b8e629a32c18db516d",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 285000,
       "url": "https://www.byty.sk/6151179/herrys-na-predaj-vynimocny-3-izbovy-podkrovny-byt-v-centre-bratislavy-na-palarikovej-ulici"
     },
     "byty:6151180": {
       "first_seen": "2026-07-07",
       "hash": "29e084c4e85e685728d2f155e656fe38d6fc0633",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 310000,
       "url": "https://www.byty.sk/6151180/herrys-na-predaj-vynimocny-3-izbovy-podkrovny-byt-centre-bratislavy-na-palarikovej-ulici"
     },
@@ -31421,7 +31652,7 @@
     "byty:6161693": {
       "first_seen": "2026-07-08",
       "hash": "817abd8a043b9a4cea5efa84fa434a67c9bcd7e1",
-      "last_seen": "2026-08-03",
+      "last_seen": "2026-09-09",
       "price_eur": 519000,
       "url": "https://www.byty.sk/6161693/frank-zicher-predavame-priestranny-4-izbovy-byt-100-m-na-panenskej-ulici-v-starom-meste"
     },
@@ -34116,7 +34347,7 @@
     "byty:6204852": {
       "first_seen": "2026-09-07",
       "hash": "62fc4f5d6b6a84f694cc047311aaac43a259d308",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 515000,
       "url": "https://www.byty.sk/6204852/ruzinov-nivy-jegeho-ul-4-izbovy-byt-s-terasou-22m2-loggia-5m2-klima-3d-prehliadka"
     },
@@ -34312,7 +34543,7 @@
     "byty:6207747": {
       "first_seen": "2026-08-30",
       "hash": "72a8dfe008c5d8cc5f290023a49152e0296d734a",
-      "last_seen": "2026-09-04",
+      "last_seen": "2026-09-09",
       "price_eur": 315000,
       "url": "https://www.byty.sk/6207747/kompletne-vkusne-zariadeny-3i-byt-s-balkonom-matadorka"
     },
@@ -34522,7 +34753,7 @@
     "byty:6212999": {
       "first_seen": "2026-09-07",
       "hash": "d09df1bd0453aa8ccd5049ca671c102cbfb9be16",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 179000,
       "url": "https://www.byty.sk/6212999/herrys-na-predaj-1-izbovy-byt-v-lukrativnej-lokalite-na-vansovej-ulici-moznost-upravy-podla-vlas"
     },
@@ -34536,14 +34767,14 @@
     "byty:6213172": {
       "first_seen": "2026-07-25",
       "hash": "9084ccded1624ea2a4277ea6c6c3c11540ff714b",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 213900,
       "url": "https://www.byty.sk/6213172/p-r-e-d-a-j-1-5-izb-byt-v-novostavbe-slnecnice-mesto"
     },
     "byty:6213184": {
       "first_seen": "2026-09-07",
       "hash": "abfd8ae5dd0e664780904463090a95993b01833a",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 288000,
       "url": "https://www.byty.sk/6213184/predaj-tehlova-2-izb-novostavba-55m2-parking-trnavka"
     },
@@ -34666,6 +34897,20 @@
       "price_eur": 270000,
       "url": "https://www.byty.sk/6214743/2-izb-byt-v-srdci-stareho-mesta-sancova-bai"
     },
+    "byty:6214782": {
+      "first_seen": "2026-08-03",
+      "hash": "18c9a822f587388c43e4c7bc0474164bcfa64bc9",
+      "last_seen": "2026-09-09",
+      "price_eur": 199999,
+      "url": "https://www.byty.sk/6214782/na-predaj-krasny-2i-byt-po-rekonstrukcii-47m2-devinska-n-v"
+    },
+    "byty:6214783": {
+      "first_seen": "2026-08-03",
+      "hash": "70a2c87c464861bf1bd36297d0bd1da36aa901ba",
+      "last_seen": "2026-09-09",
+      "price_eur": 214999,
+      "url": "https://www.byty.sk/6214783/na-predaj-2i-byt-s-loggiou-po-rekonstrukcii-ba-petrzalka"
+    },
     "byty:6214985": {
       "first_seen": "2026-09-05",
       "hash": "2b0ff120138cf111f30074e06085e28f7d38f1fd",
@@ -34728,6 +34973,20 @@
       "last_seen": "2026-09-09",
       "price_eur": 188000,
       "url": "https://www.byty.sk/6216491/real-h-s-r-o-ponuka-na-predaj-utulny-2-izbovy-byt-bratislava-iv"
+    },
+    "byty:6216543": {
+      "first_seen": "2026-09-09",
+      "hash": "0ffa3a0551e34288c6bf34697f03defc65af0e8d",
+      "last_seen": "2026-09-09",
+      "price_eur": 369196,
+      "url": "https://www.byty.sk/6216543/herrys-na-predaj-moderny-1-5-izbovy-apartman-s-vyhladom-na-mesto-v-projekte-metropolis"
+    },
+    "byty:6216544": {
+      "first_seen": "2026-09-09",
+      "hash": "65be62d9b9414bbcc4e9b800871107576b24bded",
+      "last_seen": "2026-09-09",
+      "price_eur": 493000,
+      "url": "https://www.byty.sk/6216544/herrys-na-predaj-premiovy-3-izbovy-byt-vo-vyhladavanej-novostavbe-metropolis"
     },
     "byty:6217335": {
       "first_seen": "2026-09-08",
@@ -36402,6 +36661,13 @@
       "price_eur": 4545,
       "url": "https://www.reality.sk/byty/az-predaj-1i-bytu-v-developerskom-projekte-podzahradna/JuJdy6TsTV5P/"
     },
+    "reality:sha1:482793a2334af45aa685538895e31b54e34f896c": {
+      "first_seen": "2026-09-09",
+      "hash": "482793a2334af45aa685538895e31b54e34f896c",
+      "last_seen": "2026-09-09",
+      "price_eur": 4338,
+      "url": "https://www.reality.sk/byty/2-izbovy-byt-po-rekonstrukcii-v-centre-bratislavy-velmi-tichy/Juh10ltzmWK/"
+    },
     "reality:sha1:4836bfdc9857a18d64213340f2ba61449fde25ff": {
       "first_seen": "2026-08-17",
       "hash": "4836bfdc9857a18d64213340f2ba61449fde25ff",
@@ -36828,6 +37094,13 @@
       "last_seen": "2026-07-07",
       "price_eur": 7917,
       "url": "https://www.reality.sk/byty/veroreal-predaj-vynimocneho-3-izboveho-bytu-na-37-poschodi-eurovea-tower-bratislava/Juq4RaW5wFX/"
+    },
+    "reality:sha1:5831a81c6c9534f9a0d1debfd5ef02029bd5bc1b": {
+      "first_seen": "2026-09-09",
+      "hash": "5831a81c6c9534f9a0d1debfd5ef02029bd5bc1b",
+      "last_seen": "2026-09-09",
+      "price_eur": 4512,
+      "url": "https://www.reality.sk/byty/moderny-4i-byt-novostavba-tammi-predzahradka-2-x-parking-pri-hrubej-luke-dubravka/JuWq64StzmV/"
     },
     "reality:sha1:5868105a53b0912b13e3b1f932330200ed1f0e84": {
       "first_seen": "2026-09-02",
@@ -37256,6 +37529,13 @@
       "price_eur": 4143,
       "url": "https://www.reality.sk/byty/zrekonstruovany-3-izbovy-byt-na-seberiniho-k-nastahovaniu-ihned/Juqh8VLsPzt/"
     },
+    "reality:sha1:69128a9a7ea158330c9bfe119ddb3e891a6fb7f4": {
+      "first_seen": "2026-08-04",
+      "hash": "69128a9a7ea158330c9bfe119ddb3e891a6fb7f4",
+      "last_seen": "2026-09-09",
+      "price_eur": 3644,
+      "url": "https://www.reality.sk/byty/2-izbovy-byt-s-balkonom-v-pokojnej-lokalite-na-piniovej-ulici/Jut82yCyyrU/"
+    },
     "reality:sha1:6956cfd6924b3964d418d049d112be313aa579d3": {
       "first_seen": "2026-07-12",
       "hash": "6956cfd6924b3964d418d049d112be313aa579d3",
@@ -37501,6 +37781,13 @@
       "price_eur": 2656,
       "url": "https://www.reality.sk/byty/na-predaj-3-izbovy-byt-s-3-loggiami-ul-heyrovskeho-v-bratislave-lamac-v-blizkosti-lesa/Juoxb5n0plc/"
     },
+    "reality:sha1:714b314e5c338409fdb9b2890f75ea9b3e34773b": {
+      "first_seen": "2026-07-09",
+      "hash": "714b314e5c338409fdb9b2890f75ea9b3e34773b",
+      "last_seen": "2026-09-09",
+      "price_eur": 3906,
+      "url": "https://www.reality.sk/byty/na-predaj-3-izbovy-bytik-v-centre-petrzalky/JuYIDEXxUH3/"
+    },
     "reality:sha1:716107abc85f156a3853fec5b9a7953393d66c88": {
       "first_seen": "2026-07-05",
       "hash": "716107abc85f156a3853fec5b9a7953393d66c88",
@@ -37532,7 +37819,7 @@
     "reality:sha1:7256d8155d33442e8998ed11b312fb3cbe633915": {
       "first_seen": "2026-09-02",
       "hash": "7256d8155d33442e8998ed11b312fb3cbe633915",
-      "last_seen": "2026-09-07",
+      "last_seen": "2026-09-09",
       "price_eur": 4490,
       "url": "https://www.reality.sk/byty/uplne-novy-3-izb-byt-pod-lesom-tranovskeho-37/JubHPZbChRA/"
     },
@@ -37665,7 +37952,7 @@
     "reality:sha1:78a888da1293d332efb2ca6a78ab0d96e8349fb6": {
       "first_seen": "2026-09-08",
       "hash": "78a888da1293d332efb2ca6a78ab0d96e8349fb6",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 3857,
       "url": "https://www.reality.sk/byty/predaj-priestranny-3-izbovy-byt-na-sustekovej-ulici-vyborna-dostupnost-a-zelen-na-dosah/JuCGWgPfspB/"
     },
@@ -37763,7 +38050,7 @@
     "reality:sha1:7be637b612389f216bcc618e5f303d0343528ef3": {
       "first_seen": "2026-07-07",
       "hash": "7be637b612389f216bcc618e5f303d0343528ef3",
-      "last_seen": "2026-09-02",
+      "last_seen": "2026-09-09",
       "price_eur": 4519,
       "url": "https://www.reality.sk/byty/super-cena-2-izbovy-byt-s-balkonom-a-2-klimatizaciou-v-oblubenej-lokalite-ruzinova/Ju-QIBH_FDL/"
     },
@@ -38267,7 +38554,7 @@
     "reality:sha1:8e30ee5ef2d24e4d625e42e0ca98b2bb44514d96": {
       "first_seen": "2026-08-29",
       "hash": "8e30ee5ef2d24e4d625e42e0ca98b2bb44514d96",
-      "last_seen": "2026-08-31",
+      "last_seen": "2026-09-09",
       "price_eur": 3792,
       "url": "https://www.reality.sk/byty/frank-zicher-predavame-novozrekonstruovany-3-izbovy-byt-v-blizkosti-liscieho-udolia-v-karlovej-vsi/Ju1ipCaD5oN/"
     },
@@ -38340,6 +38627,13 @@
       "last_seen": "2026-07-06",
       "price_eur": 5715,
       "url": "https://www.reality.sk/byty/utulna-garsonka-ruzinov-na-predaj/JuK3mHZQ6ab/"
+    },
+    "reality:sha1:90c6ad146c2e962ddeced9ce1f587fb6f388138c": {
+      "first_seen": "2026-07-05",
+      "hash": "90c6ad146c2e962ddeced9ce1f587fb6f388138c",
+      "last_seen": "2026-09-09",
+      "price_eur": 4324,
+      "url": "https://www.reality.sk/byty/bav-mlynarovicova-3i-74-m2-nova-kompletna-rekonstrukcia-top-lokalita-chorvatske-rameno/Juldcelzvnm/"
     },
     "reality:sha1:90c9354d305179ace457e162c04a79eff3d04412": {
       "first_seen": "2026-07-24",
@@ -38718,6 +39012,13 @@
       "last_seen": "2026-07-27",
       "price_eur": 5747,
       "url": "https://www.reality.sk/byty/avenue-i-3-izbovy-byt-v-projekte-villa-rustica-terasy-2-dubravka/JufqA94W8m7/"
+    },
+    "reality:sha1:a121f1a9eee962e87891ef5a02f7e4cada99934b": {
+      "first_seen": "2026-07-07",
+      "hash": "a121f1a9eee962e87891ef5a02f7e4cada99934b",
+      "last_seen": "2026-09-09",
+      "price_eur": 4535,
+      "url": "https://www.reality.sk/byty/4-izbovy-byt-s-lodziou-v-starom-meste-palisady/Ju01WZu8OZg/"
     },
     "reality:sha1:a16fae2a976ddbb55213e89afdc9dd50fb4ab4b2": {
       "first_seen": "2026-07-13",
@@ -39849,7 +40150,7 @@
     "reality:sha1:c9d8a4a8ba4c85e73d97cce9e3e3a0dab5652f69": {
       "first_seen": "2026-07-09",
       "hash": "c9d8a4a8ba4c85e73d97cce9e3e3a0dab5652f69",
-      "last_seen": "2026-08-29",
+      "last_seen": "2026-09-09",
       "price_eur": 3803,
       "url": "https://www.reality.sk/byty/velkorysy-3-izbovy-byt-s-loggiou-vo-vyhladavanej-lokalite-ruzinova/JukPZ8j4Bpz/"
     },
@@ -40195,6 +40496,13 @@
       "last_seen": "2026-07-22",
       "price_eur": 4263,
       "url": "https://www.reality.sk/byty/fedinova-byt-po-rekonstrukcii-s-peknymi-vyhladmi/Jug_NBkFrx6/"
+    },
+    "reality:sha1:d7845b2eb414a82e7db9b9127b2a3a37201b386c": {
+      "first_seen": "2026-09-09",
+      "hash": "d7845b2eb414a82e7db9b9127b2a3a37201b386c",
+      "last_seen": "2026-09-09",
+      "price_eur": 4205,
+      "url": "https://www.reality.sk/byty/3-izbovy-by-na-predaj-s-terasou-zahradkou-a-parkovanim-ruzinov/Jue8Sz1GLSw/"
     },
     "reality:sha1:d795e5b76f8039b7bc5d0b9d988741832a594e37": {
       "first_seen": "2026-07-30",
@@ -41445,7 +41753,7 @@
     "topreality:sha1:04ce66e4262b2c8b31f8f3ccaedfa5dbf741eb0f": {
       "first_seen": "2026-09-08",
       "hash": "04ce66e4262b2c8b31f8f3ccaedfa5dbf741eb0f",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 385000,
       "url": "https://www.topreality.sk/assenzio-predaj-3-izbovy-byt-bukurestska-stare-mesto-r9380290.html"
     },
@@ -41641,7 +41949,7 @@
     "topreality:sha1:0dba853605ca97af291a6f65bf3378050b13229a": {
       "first_seen": "2026-09-08",
       "hash": "0dba853605ca97af291a6f65bf3378050b13229a",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 200,
       "url": "https://www.topreality.sk/prenajom-3i-bytu-v-centre-senca-s-garazovym-statim-r9402836.html"
     },
@@ -41753,7 +42061,7 @@
     "topreality:sha1:124842e5d48d20a9b5c0e231e22ddbfb8c4a9e96": {
       "first_seen": "2026-09-04",
       "hash": "124842e5d48d20a9b5c0e231e22ddbfb8c4a9e96",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 319900,
       "url": "https://www.topreality.sk/8-izbovy-rodinny-dom-po-kompletnej-rekonstrukcii-sajdikove-humence-r9401585.html"
     },
@@ -41886,7 +42194,7 @@
     "topreality:sha1:16b2bd3b97d219c8cfe3e0acf740cda84aa9ac50": {
       "first_seen": "2026-08-21",
       "hash": "16b2bd3b97d219c8cfe3e0acf740cda84aa9ac50",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 180000,
       "url": "https://www.topreality.sk/predaj-4-izbovy-rodinny-dom-1-929-m2-drahovce-r9404746.html"
     },
@@ -42075,7 +42383,7 @@
     "topreality:sha1:1eb2072d72aff7fedc81e55dbf3bfb67ae852b2e": {
       "first_seen": "2026-07-21",
       "hash": "1eb2072d72aff7fedc81e55dbf3bfb67ae852b2e",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 280,
       "url": "https://www.topreality.sk/rozlahle-stavebne-pozemky-pripravene-na-okamzitu-vystavbu-r9371069.html"
     },
@@ -42250,7 +42558,7 @@
     "topreality:sha1:2828e33e091517246ff2c0faf04a83c5e5a44d7e": {
       "first_seen": "2026-09-08",
       "hash": "2828e33e091517246ff2c0faf04a83c5e5a44d7e",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 200,
       "url": "https://www.topreality.sk/na-prenajom-stylovy-2i-byt-v-cubicone-stare-grunty-r9404167.html"
     },
@@ -42432,7 +42740,7 @@
     "topreality:sha1:2e8beaec3c78cc1da1c947ea215728362bae69f0": {
       "first_seen": "2026-09-07",
       "hash": "2e8beaec3c78cc1da1c947ea215728362bae69f0",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 223000,
       "url": "https://www.topreality.sk/exkluzivne-na-predaj-3-izbovy-byt-s-loggiou-v-blizkosti-maleho-dunaja-estonska-ulica-r9411583.html"
     },
@@ -42593,7 +42901,7 @@
     "topreality:sha1:38417827dac717c95ab90d3962658973ecea4839": {
       "first_seen": "2026-09-07",
       "hash": "38417827dac717c95ab90d3962658973ecea4839",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 167900,
       "url": "https://www.topreality.sk/novostavba-1-izb-byt-34-29-m2-pluhova-ba-nove-mesto-r9410380.html"
     },
@@ -42607,7 +42915,7 @@
     "topreality:sha1:38499fec85509eb6f289b38369424d23703f1cfa": {
       "first_seen": "2026-09-04",
       "hash": "38499fec85509eb6f289b38369424d23703f1cfa",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 250,
       "url": "https://www.topreality.sk/stylovy-a-svetly-3-izbovy-byt-s-velkou-lodziou-10-m2-a-vyhladom-do-parku-dubravka-huscavova-ul-r9414926.html"
     },
@@ -42656,7 +42964,7 @@
     "topreality:sha1:3a7140541e20dd35675525679399dc18f297bffb": {
       "first_seen": "2026-09-02",
       "hash": "3a7140541e20dd35675525679399dc18f297bffb",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 254900,
       "url": "https://www.topreality.sk/pripravujeme-do-ponuky-3-izbovy-byt-na-kramaroch-na-revine-loggia-klimatizacia-r9413288.html"
     },
@@ -42761,7 +43069,7 @@
     "topreality:sha1:4187f100cf083eb5f23cde88d37b46f8ce5c35ca": {
       "first_seen": "2026-08-01",
       "hash": "4187f100cf083eb5f23cde88d37b46f8ce5c35ca",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 269900,
       "url": "https://www.topreality.sk/priestranny-slnecny-4i-byt-s-lodziou-bagarova-ul-dubravka-r9390072.html"
     },
@@ -42785,6 +43093,13 @@
       "last_seen": "2026-07-23",
       "price_eur": 250,
       "url": "https://www.topreality.sk/4-izbovy-byt-s-terasou-a-parkovanim-bratislava-ruzinov-r9375142.html"
+    },
+    "topreality:sha1:4299b449fd4aa57da729fcd505586427c6eb795b": {
+      "first_seen": "2026-09-09",
+      "hash": "4299b449fd4aa57da729fcd505586427c6eb795b",
+      "last_seen": "2026-09-09",
+      "price_eur": 319990,
+      "url": "https://www.topreality.sk/bav-mlynarovicova-3i-74-m2-nova-kompletna-rekonstrukcia-top-lokalita-chorvatske-rameno-r9418282.html"
     },
     "topreality:sha1:42ba76b0c7c08b3f3abee55950740fee21e6fa79": {
       "first_seen": "2026-07-06",
@@ -42824,7 +43139,7 @@
     "topreality:sha1:4399ae1b5b931584b7c200d800c2bd1d5e9ea569": {
       "first_seen": "2026-09-07",
       "hash": "4399ae1b5b931584b7c200d800c2bd1d5e9ea569",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 125000,
       "url": "https://www.topreality.sk/na-predaj-3-izbovy-kompl-rekonstruovany-zariadeny-byt-so-zahradou-a-garazou-v-caradiciach-r9414636.html"
     },
@@ -42971,7 +43286,7 @@
     "topreality:sha1:4afde3d43d9fee7999b2a1096e5ae6764ab13c87": {
       "first_seen": "2026-09-08",
       "hash": "4afde3d43d9fee7999b2a1096e5ae6764ab13c87",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 160,
       "url": "https://www.topreality.sk/stylovy-3-izbovy-stresny-byt-pri-kuchajde-velkorysa-terasa-smart-domov-a-absolutne-sukromie-r9416933.html"
     },
@@ -43055,7 +43370,7 @@
     "topreality:sha1:4d96b6e1f822ddcd2a3d671a9e639888c686c9a1": {
       "first_seen": "2026-09-07",
       "hash": "4d96b6e1f822ddcd2a3d671a9e639888c686c9a1",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 275000,
       "url": "https://www.topreality.sk/kompletne-zrekonstruovany-3-izbovy-byt-na-predaj-bratislava-karlova-ves-r9415492.html"
     },
@@ -43069,9 +43384,23 @@
     "topreality:sha1:4eaca87a0a05372bbc99e65e841a1511d3a74859": {
       "first_seen": "2026-08-13",
       "hash": "4eaca87a0a05372bbc99e65e841a1511d3a74859",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 249900,
       "url": "https://www.topreality.sk/na-predaj-dvojgeneracny-rodinny-dom-samostatna-bytova-jedntoka-na-zahori-jakubov-r9401155.html"
+    },
+    "topreality:sha1:4eb28f0ea9826a4efe4c85fd3959cfed56593962": {
+      "first_seen": "2026-09-09",
+      "hash": "4eb28f0ea9826a4efe4c85fd3959cfed56593962",
+      "last_seen": "2026-09-09",
+      "price_eur": 600,
+      "url": "https://www.topreality.sk/prenajom-4i-bytu-203-85-m2-s-parkovanim-diplomat-park-r9417113.html"
+    },
+    "topreality:sha1:4ee04336933c7795175c674f869d0e5940c08126": {
+      "first_seen": "2026-09-09",
+      "hash": "4ee04336933c7795175c674f869d0e5940c08126",
+      "last_seen": "2026-09-09",
+      "price_eur": null,
+      "url": "https://www.topreality.sk/na-predaj-krasny-2-izbovy-byt-v-ein-parku-s-parkovanim-a-vyhladom-na-bratislavsky-hrad-bratislava-petrzalka-r9417009.html"
     },
     "topreality:sha1:4ee494d3c570f7915ded078858142baa7f83f6d0": {
       "first_seen": "2026-08-19",
@@ -43146,7 +43475,7 @@
     "topreality:sha1:51c3f381c895a67d65989b067105dcca1bfe348d": {
       "first_seen": "2026-09-04",
       "hash": "51c3f381c895a67d65989b067105dcca1bfe348d",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 470000,
       "url": "https://www.topreality.sk/predaj-velky-4-izbovy-byt-s-parkovanim-ba-iv-majernikova-ul-r9405244.html"
     },
@@ -43160,7 +43489,7 @@
     "topreality:sha1:521445994619757ceb026a8ab5a7bd124ecd376a": {
       "first_seen": "2026-08-04",
       "hash": "521445994619757ceb026a8ab5a7bd124ecd376a",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 800000,
       "url": "https://www.topreality.sk/na-predaj-rodinny-dom-s-4-bytovymi-jednotkami-bratislava-vrakuna-r9219084.html"
     },
@@ -43202,7 +43531,7 @@
     "topreality:sha1:53a8c4277b70f9fc9c9a45673fba171184728644": {
       "first_seen": "2026-07-11",
       "hash": "53a8c4277b70f9fc9c9a45673fba171184728644",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 245000,
       "url": "https://www.topreality.sk/svetly-3-izbovy-byt-s-balkonom-s-celkovou-plochhou-64-46-m2-v-oblubenej-casti-petrzalky-bratislava-v-r9349486.html"
     },
@@ -43258,14 +43587,14 @@
     "topreality:sha1:566a78f8c9994e7734c6ce21204185481fe026e3": {
       "first_seen": "2026-09-08",
       "hash": "566a78f8c9994e7734c6ce21204185481fe026e3",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 795000,
       "url": "https://www.topreality.sk/5-izbovy-mezonet-o-vymere-303m2-s-garazou-v-cene-frana-krala-811-05-bratislava-r9417259.html"
     },
     "topreality:sha1:5676e9e662c30beea2772f7fbe7dce01c025725c": {
       "first_seen": "2026-09-07",
       "hash": "5676e9e662c30beea2772f7fbe7dce01c025725c",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 210000,
       "url": "https://www.topreality.sk/chalupa-na-polosamote-na-myjavskych-kopaniciach-r9407778.html"
     },
@@ -43398,7 +43727,7 @@
     "topreality:sha1:5b9b79399aff67fe3d05f34e339be267c1d67764": {
       "first_seen": "2026-07-21",
       "hash": "5b9b79399aff67fe3d05f34e339be267c1d67764",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 415000,
       "url": "https://www.topreality.sk/vynimocny-4-izbovy-rodinny-dom-s-bazenom-a-saunou-v-centre-tomasova-r9393737.html"
     },
@@ -43464,6 +43793,13 @@
       "last_seen": "2026-07-09",
       "price_eur": 560,
       "url": "https://www.topreality.sk/krasny-priestor-vo-vienna-gate-pre-vase-podnikanie-r9146523.html"
+    },
+    "topreality:sha1:5e64113c2556d5bde6e7e3f176cfec520b84dd90": {
+      "first_seen": "2026-09-09",
+      "hash": "5e64113c2556d5bde6e7e3f176cfec520b84dd90",
+      "last_seen": "2026-09-09",
+      "price_eur": 139000,
+      "url": "https://www.topreality.sk/vynimocna-ponuka-dom-za-cenu-garzonky-len-teraz-r9410929.html"
     },
     "topreality:sha1:5efea20d977a9be58de2cbd7060a6238d663cb37": {
       "first_seen": "2026-07-07",
@@ -44158,6 +44494,13 @@
       "price_eur": null,
       "url": "https://www.topreality.sk/svoboda-williams-112614-nadstandardny-3-izbovy-byt-s-terasou-a-vlastnou-zahradkou-v-absolutnom-centre-bratislavy-r9389474.html"
     },
+    "topreality:sha1:8874607d8fba4e05cb2acb41c53fc390bd275265": {
+      "first_seen": "2026-08-01",
+      "hash": "8874607d8fba4e05cb2acb41c53fc390bd275265",
+      "last_seen": "2026-09-09",
+      "price_eur": 120,
+      "url": "https://www.topreality.sk/na-predaj-2i-byt-s-loggiou-po-rekonstrukcii-ba-petrzalka-r9414724.html"
+    },
     "topreality:sha1:88a02eb2dd0157de208575317f57f208b4ebe636": {
       "first_seen": "2026-09-02",
       "hash": "88a02eb2dd0157de208575317f57f208b4ebe636",
@@ -44371,7 +44714,7 @@
     "topreality:sha1:9074e8ac2f9422dcf6c9c17e21133428fbef6534": {
       "first_seen": "2026-08-21",
       "hash": "9074e8ac2f9422dcf6c9c17e21133428fbef6534",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 249000,
       "url": "https://www.topreality.sk/herrys-na-predaj-4-izbovy-byt-vo-vajnoroch-r9405775.html"
     },
@@ -44451,6 +44794,13 @@
       "last_seen": "2026-07-16",
       "price_eur": 580,
       "url": "https://www.topreality.sk/prenajom-priestranneho-1-izboveho-bytu-pri-jazere-kuchajda-tomasikova-ulica-r9374450.html"
+    },
+    "topreality:sha1:9404b5d73a5c51356e404e5667ae89c22a35beda": {
+      "first_seen": "2026-09-09",
+      "hash": "9404b5d73a5c51356e404e5667ae89c22a35beda",
+      "last_seen": "2026-09-09",
+      "price_eur": 400,
+      "url": "https://www.topreality.sk/prenajom-vynimocneho-2i-bytu-98-m2-s-vyhladom-na-hrad-diplomat-park-r9417111.html"
     },
     "topreality:sha1:952680f0f272eda67767cafce9d9ff05f19e82f3": {
       "first_seen": "2026-07-06",
@@ -44742,7 +45092,7 @@
     "topreality:sha1:a56ca8d3f2eb58d75147af8d0efb2346d9b685c6": {
       "first_seen": "2026-09-01",
       "hash": "a56ca8d3f2eb58d75147af8d0efb2346d9b685c6",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 780000,
       "url": "https://www.topreality.sk/exkluzivny-5-izbovy-byt-146-m2-vlastne-tepelne-cerpadlo-trencianska-ul-bratislava-ruzinov-r9370461.html"
     },
@@ -44896,7 +45246,7 @@
     "topreality:sha1:aef771479f710b4ba34ace666273d9e3af54a69b": {
       "first_seen": "2026-08-14",
       "hash": "aef771479f710b4ba34ace666273d9e3af54a69b",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 249900,
       "url": "https://www.topreality.sk/kompletne-zariadeny-2-izbovy-byt-49-2m2-po-rekonstrukcii-s-loggiou-do-zelene-r9401803.html"
     },
@@ -45159,6 +45509,13 @@
       "price_eur": 990,
       "url": "https://www.topreality.sk/na-prenajom-2-izb-byt-v-ruzinove-na-velehradskej-r9352903.html"
     },
+    "topreality:sha1:bba832c5b5b2f82b4a6616efb622cb921df6cdab": {
+      "first_seen": "2026-09-09",
+      "hash": "bba832c5b5b2f82b4a6616efb622cb921df6cdab",
+      "last_seen": "2026-09-09",
+      "price_eur": 182000,
+      "url": "https://www.topreality.sk/na-predaj-priestranny-1i-byt-po-rekonstrukcii-dubravka-r9407291.html"
+    },
     "topreality:sha1:bbb8247147004530ff549c4ef3012c749d6a18fc": {
       "first_seen": "2026-07-07",
       "hash": "bbb8247147004530ff549c4ef3012c749d6a18fc",
@@ -45180,10 +45537,17 @@
       "price_eur": 243999,
       "url": "https://www.topreality.sk/3-izbovy-byt-s-loggiou-a-vybornou-dispoziciou-s-halou-s-plochou-69-m2-vo-vyhladavanej-lokalite-bratislava-karlova-ves-r9367117.html"
     },
+    "topreality:sha1:bc869712b69e17243fbea947817bb2669bddbdfe": {
+      "first_seen": "2026-09-09",
+      "hash": "bc869712b69e17243fbea947817bb2669bddbdfe",
+      "last_seen": "2026-09-09",
+      "price_eur": 269000,
+      "url": "https://www.topreality.sk/neibrs-exkluzivny-2i-byt-len-30m-od-mora-komplet-rekonstrukcia-pietra-ligure-liguria-taliansko-r9415419.html"
+    },
     "topreality:sha1:bc898f795d321deba49decd6c8e04491a61080dc": {
       "first_seen": "2026-09-08",
       "hash": "bc898f795d321deba49decd6c8e04491a61080dc",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 850000,
       "url": "https://www.topreality.sk/2-domy-2-vstupy-1-velky-pozemok-byvanie-podnikanie-investicia-v-1-r9228887.html"
     },
@@ -45365,7 +45729,7 @@
     "topreality:sha1:c4fb3d953916db2ea2aa8de05db2fb68632408c3": {
       "first_seen": "2026-08-30",
       "hash": "c4fb3d953916db2ea2aa8de05db2fb68632408c3",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 219000,
       "url": "https://www.topreality.sk/predaj-novostavba-4-izboveho-rodinneho-domu-v-gbeloch-okr-skalica-r9405964.html"
     },
@@ -45491,7 +45855,7 @@
     "topreality:sha1:cae7455cc801cee098fb7f82c89796ef353810b3": {
       "first_seen": "2026-09-07",
       "hash": "cae7455cc801cee098fb7f82c89796ef353810b3",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 235000,
       "url": "https://www.topreality.sk/bezkonkurencna-cena-v-downtown-yards-byvajte-v-centre-a-usetrite-luxus-za-cenu-ktoru-inde-nenajdete-predaj-1-izbovy-byt-kosicka-ulica-bratislava-r9413320.html"
     },
@@ -45813,7 +46177,7 @@
     "topreality:sha1:de4c6f14aefbdfe0b81006de254c7d33658cadfd": {
       "first_seen": "2026-08-23",
       "hash": "de4c6f14aefbdfe0b81006de254c7d33658cadfd",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 1100,
       "url": "https://www.topreality.sk/3-izbovy-byt-na-prenajom-bratislava-ruzinov-ostredky-r9406382.html"
     },
@@ -45897,7 +46261,7 @@
     "topreality:sha1:e2ab82d43d6250d4f425e2ab00ea2cdbd3b0bd61": {
       "first_seen": "2026-08-31",
       "hash": "e2ab82d43d6250d4f425e2ab00ea2cdbd3b0bd61",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 159000,
       "url": "https://www.topreality.sk/rodinny-dom-po-rekonstrukcii-v-prijemnej-casti-obce-suchohrad-r9409115.html"
     },
@@ -45974,14 +46338,14 @@
     "topreality:sha1:e74bfee4a93bcda4f79683fed37ec8624d63ab46": {
       "first_seen": "2026-09-04",
       "hash": "e74bfee4a93bcda4f79683fed37ec8624d63ab46",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 299000,
       "url": "https://www.topreality.sk/velky-2-5izb-tehlovy-byt-s-charakterom-dostojevskeho-rad-bratislava-stare-mesto-r9414920.html"
     },
     "topreality:sha1:e7ccb2ddf562441dd042b52154c19fd396f44c4f": {
       "first_seen": "2026-07-18",
       "hash": "e7ccb2ddf562441dd042b52154c19fd396f44c4f",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 188,
       "url": "https://www.topreality.sk/klimatizovany-a-kompletne-zrekonstruovany-3-izbovy-byt-s-loggiou-s-dodatocnym-obytnym-priestorom-r9361861.html"
     },
@@ -46307,10 +46671,17 @@
       "price_eur": 250,
       "url": "https://www.topreality.sk/prenajom-1-5-izbovy-byt-v-bratislave-stare-mesto-r9373039.html"
     },
+    "topreality:sha1:f74b69c83480812ea8a64ccc35898104e8b17ff5": {
+      "first_seen": "2026-09-09",
+      "hash": "f74b69c83480812ea8a64ccc35898104e8b17ff5",
+      "last_seen": "2026-09-09",
+      "price_eur": 300,
+      "url": "https://www.topreality.sk/prenajom-elegantneho-2i-bytu-97-m2-diplomat-park-mudronova-r9406723.html"
+    },
     "topreality:sha1:f79867e0708527a47713765d93fffc2e6da857d1": {
       "first_seen": "2026-09-07",
       "hash": "f79867e0708527a47713765d93fffc2e6da857d1",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 235000,
       "url": "https://www.topreality.sk/limitovana-akcia-downtown-yards-za-historicky-najnizsiu-cenu-predaj-1-izbovy-byt-kosicka-ulica-bratislava-ruzinov-r9399626.html"
     },
@@ -46387,7 +46758,7 @@
     "topreality:sha1:fd52849f2e0d528509d64cfc96dd55e80fced646": {
       "first_seen": "2026-08-14",
       "hash": "fd52849f2e0d528509d64cfc96dd55e80fced646",
-      "last_seen": "2026-09-08",
+      "last_seen": "2026-09-09",
       "price_eur": 780000,
       "url": "https://www.topreality.sk/gravitas-priestranny-rodinny-dom-s-garazou-vrakuna-bratislava-r9400414.html"
     },
@@ -46459,31 +46830,31 @@
     "bazos": {
       "last_count": 60,
       "last_error": null,
-      "last_run": "2026-09-09T09:47:58+00:00",
+      "last_run": "2026-09-09T19:18:22+00:00",
       "zero_streak": 0
     },
     "byty": {
       "last_count": 20,
       "last_error": null,
-      "last_run": "2026-09-09T09:49:06+00:00",
+      "last_run": "2026-09-09T19:19:09+00:00",
       "zero_streak": 0
     },
     "nehnutelnosti": {
       "last_count": 0,
       "last_error": null,
-      "last_run": "2026-09-09T09:45:50+00:00",
-      "zero_streak": 128
+      "last_run": "2026-09-09T19:16:33+00:00",
+      "zero_streak": 129
     },
     "reality": {
       "last_count": 72,
       "last_error": null,
-      "last_run": "2026-09-09T09:47:17+00:00",
+      "last_run": "2026-09-09T19:17:52+00:00",
       "zero_streak": 0
     },
     "topreality": {
       "last_count": 48,
       "last_error": null,
-      "last_run": "2026-09-09T09:46:01+00:00",
+      "last_run": "2026-09-09T19:16:47+00:00",
       "zero_streak": 0
     }
   },
