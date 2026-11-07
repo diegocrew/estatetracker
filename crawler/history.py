@@ -16,8 +16,8 @@ from .report import ReportItem
 DEFAULT_HISTORY_DIR = "history"
 
 _TABLE_HEADER = (
-    "| Logged | Score | Price | Area | Rooms | Address | Condition | Portal | Listing |\n"
-    "| --- | ---: | ---: | ---: | :---: | --- | --- | --- | --- |"
+    "| Logged | Score | Price | Area | Rooms | Floor | Address | Condition | Portal | Listing |\n"
+    "| --- | ---: | ---: | ---: | :---: | :---: | --- | --- | --- | --- |"
 )
 
 
@@ -41,9 +41,30 @@ def _row(item: ReportItem, logged: str) -> str:
     title = _cell(listing.title) or "listing"
     return (
         f"| {logged} | {item.score} | {price} | {area} | {listing.rooms or '-'} "
+        f"| {listing.floor if listing.floor is not None else '-'} "
         f"| {address} | {listing.condition.value} | {listing.portal} "
         f"| [{title}]({listing.url}) |"
     )
+
+
+def _add_legacy_floor_column(text: str) -> str:
+    """Keep existing monthly tables aligned when their next row adds Floor."""
+    legacy_header = (
+        "| Logged | Score | Price | Area | Rooms | Address | Condition | Portal | Listing |"
+    )
+    if legacy_header not in text:
+        return text
+
+    lines = text.splitlines()
+    header_index = lines.index(legacy_header)
+    lines[header_index] = _TABLE_HEADER.splitlines()[0]
+    lines[header_index + 1] = _TABLE_HEADER.splitlines()[1]
+    for index in range(header_index + 2, len(lines)):
+        if lines[index].startswith("|"):
+            cells = lines[index].split("|")
+            cells.insert(6, " - ")
+            lines[index] = "|".join(cells)
+    return "\n".join(lines) + "\n"
 
 
 def month_path(history_dir: str, on: date) -> str:
@@ -66,6 +87,13 @@ def append_matches(
     os.makedirs(history_dir, exist_ok=True)
     path = month_path(history_dir, on)
     new_file = not os.path.exists(path)
+    if not new_file:
+        with open(path, encoding="utf-8") as fh:
+            existing = fh.read()
+        upgraded = _add_legacy_floor_column(existing)
+        if upgraded != existing:
+            with open(path, "w", encoding="utf-8") as fh:
+                fh.write(upgraded)
     rows = [_row(item, on.isoformat()) for item in items]
     with open(path, "a", encoding="utf-8") as fh:
         if new_file:

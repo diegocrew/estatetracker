@@ -6,8 +6,10 @@ filters, so you can browse the archive month by month instead of scrolling one
 giant file.
 
 Each row records the date it was logged, score, price (with the previous price
-shown when it changed since last seen), area, rooms, address, condition, portal, and a
-link to the listing.
+shown when it changed since last seen), area, rooms, floor, address, condition,
+portal, and a link to the listing. Existing monthly tables are upgraded to add
+the floor column the next time a match is appended; historical floors are shown
+as unknown.
 
 These files are generated - **do not edit them by hand**; the crawler owns them.
 The machine-readable dedupe memory lives in [`../state/seen.json`](../state/seen.json).

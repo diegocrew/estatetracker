@@ -33,6 +33,7 @@ def make_rules(**overrides: Any) -> dict[str, Any]:
             "max_price_eur": 260000,
             "max_price_per_m2": 4500,
             "min_rooms": "2",
+            "min_floor": None,
             "max_floor": None,
             "exclude_ground_floor": True,
             "require_balcony": False,
@@ -213,6 +214,17 @@ class TestHardFilters:
         rules = make_rules(filters={"require_balcony": True})
         assert failing_filter(listing, rules) is None
 
+    def test_min_floor_drops_known_lower_floors_but_not_unknown(self) -> None:
+        rules = make_rules(filters={"min_floor": 3})
+        assert failing_filter(make_listing(floor=2), rules) == "floor 2 below min_floor 3"
+        assert failing_filter(make_listing(floor=3), rules) is None
+        assert failing_filter(make_listing(floor=None), rules) is None
+
+    def test_banned_apartment_keyword(self) -> None:
+        rules = make_rules(filters={"banned_keywords": ["apartmán"]})
+        listing = make_listing(title="Investičný apartmán na predaj")
+        assert failing_filter(listing, rules) == "banned keyword 'apartmán'"
+
     def test_require_balcony_drops_confirmed_no(self) -> None:
         rules = make_rules(filters={"require_balcony": True})
         assert failing_filter(make_listing(balcony=False), rules) is not None
@@ -297,10 +309,19 @@ class TestNonResidentialFilter:
         for borough in ("Devínska Nová Ves", "Podunajské Biskupice", "Vrakuňa"):
             listing = make_listing(
                 district=f"Bratislava - {borough}",
-                area_m2=120.0, rooms="4+", price_eur=400000,
+                area_m2=120.0, rooms="4+", price_eur=400000, floor=3,
             )
             reason = failing_filter(listing, rules)
             assert reason is not None and "banned district" in reason, borough
+
+    def test_repo_rules_ban_apartment_listings(self) -> None:
+        rules = load_rules(str(REPO_ROOT / "rules.yaml"), env={})
+        listing = make_listing(
+            title="Investičný apartmán na predaj",
+            area_m2=120.0, rooms="4+", price_eur=400000, floor=3,
+        )
+        reason = failing_filter(listing, rules)
+        assert reason is not None and "banned keyword" in reason
 
     def test_repo_rules_flag_favourite_streets(self) -> None:
         """A flat on a favourite street must reach the 'hot' label on that alone."""

@@ -34,7 +34,8 @@ def test_creates_month_file_with_header_and_row(tmp_path: pathlib.Path) -> None:
     text = pathlib.Path(path).read_text(encoding="utf-8")
     assert "# reality-watch matches - July 2026" in text
     assert "| Logged | Score | Price |" in text
-    assert "| 2026-07-05 | 94 | 299 000 € | 92 m² | 4+ | Bratislava III |" in text
+    assert "| Floor |" in text
+    assert "| 2026-07-05 | 94 | 299 000 € | 92 m² | 4+ | - | Bratislava III |" in text
     assert "[4 izbový byt](https://example.sk/1)" in text
 
 
@@ -74,3 +75,24 @@ def test_pipe_in_title_does_not_break_table(tmp_path: pathlib.Path) -> None:
     text = pathlib.Path(path).read_text(encoding="utf-8")
     # the raw pipes from the title must not appear inside the link label
     assert "Byt / 4 izby / Bratislava" in text
+
+
+def test_existing_month_table_is_upgraded_before_append(tmp_path: pathlib.Path) -> None:
+    path = append_matches([make_item()], str(tmp_path), today=date(2026, 7, 5))
+    text = pathlib.Path(path).read_text(encoding="utf-8")
+    text = text.replace(
+        "| Logged | Score | Price | Area | Rooms | Floor | Address | Condition | Portal | Listing |",
+        "| Logged | Score | Price | Area | Rooms | Address | Condition | Portal | Listing |",
+    )
+    text = text.replace(
+        "| --- | ---: | ---: | ---: | :---: | :---: | --- | --- | --- | --- |",
+        "| --- | ---: | ---: | ---: | :---: | --- | --- | --- | --- |",
+    )
+    text = text.replace(" | 4+ | - | Bratislava III |", " | 4+ | Bratislava III |")
+    pathlib.Path(path).write_text(text, encoding="utf-8")
+
+    append_matches([make_item(listing={"floor": 3})], str(tmp_path), today=date(2026, 7, 6))
+    upgraded = pathlib.Path(path).read_text(encoding="utf-8")
+    assert "| Rooms | Floor | Address |" in upgraded
+    assert "| 2026-07-05 | 94 | 299 000 € | 92 m² | 4+ | - | Bratislava III |" in upgraded
+    assert "| 2026-07-06 | 94 | 299 000 € | 92 m² | 4+ | 3 | Bratislava III |" in upgraded

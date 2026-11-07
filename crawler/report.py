@@ -150,8 +150,8 @@ def digest_body(items: list[ReportItem]) -> str:
     lines = [
         f"**{len(items)} new matching flat(s)** this run, highest score first.",
         "",
-        "| Score | Price | Area | Rooms | Address | Condition | Portal | Link |",
-        "| ---: | ---: | ---: | :---: | --- | --- | --- | --- |",
+        "| Score | Price | Area | Rooms | Floor | Address | Condition | Portal | Link |",
+        "| ---: | ---: | ---: | :---: | :---: | --- | --- | --- | --- |",
     ]
     for item in items:
         listing = item.listing
@@ -163,7 +163,8 @@ def digest_body(items: list[ReportItem]) -> str:
             price = f"{fmt_price(new)} (was {fmt_price(old)})"
         lines.append(
             f"| {item.score} | {price} | {area} "
-            f"| {_fmt(listing.rooms)} | {address} | {listing.condition.value} "
+            f"| {_fmt(listing.rooms)} | {_fmt(listing.floor)} | {address} "
+            f"| {listing.condition.value} "
             f"| {listing.portal} | [open]({listing.url}) |"
         )
     lines += ["", "Edit `rules.yaml` to tune matches."]

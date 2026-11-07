@@ -17,6 +17,7 @@ filters:                      # hard filters - listing dropped if violated
   max_price_eur: 700000      # budget cap ; null = disabled
   max_price_per_m2: null      # disabled; set a number to cap €/m²
   min_rooms: "4"             # required: 4 rooms or more ("4+" listings pass)
+  min_floor: 3               # require at least the 3rd floor; unknown floors still pass
   max_floor: null
   exclude_ground_floor: true
   exclude_houses: true        # drop "dom" / land / vila - flats only
@@ -39,6 +40,8 @@ filters:                      # hard filters - listing dropped if violated
     - "predzáhrad"            # front garden -> ground floor (predzáhradka/-ou)
     - "prízem"                # prízemie / prízemný -> ground floor
     - "backyard"
+    - "apartmán"              # exclude apartment / investment-unit listings
+    - "apartmán"              # exclude apartment / investment-unit listings
 
 scoring:                      # soft preferences - affect score, not inclusion
   # Favourite area: Nivy and the Ružinov / Staré Mesto blocks around it.

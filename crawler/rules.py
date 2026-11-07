@@ -134,7 +134,7 @@ def validate_rules(rules: dict[str, Any]) -> None:
 
     filters = rules["filters"]
     for key in ("min_area_m2", "max_area_m2", "min_price_eur", "max_price_eur",
-                "max_price_per_m2", "max_floor"):
+                "max_price_per_m2", "min_floor", "max_floor"):
         _check_number(filters.get(key), f"filters.{key}")
     for key in ("exclude_ground_floor", "require_balcony", "exclude_houses", "city_required",
                 "exclude_non_residential"):
@@ -313,6 +313,10 @@ def failing_filter(listing: Listing, rules: dict[str, Any]) -> str | None:
         wanted = rooms_to_float(str(min_rooms)) or 0.0
         if rooms < wanted:
             return f"rooms {listing.rooms} below min_rooms {min_rooms}"
+
+    min_floor = filters.get("min_floor")
+    if min_floor is not None and listing.floor is not None and listing.floor < min_floor:
+        return f"floor {listing.floor} below min_floor {min_floor}"
 
     max_floor = filters.get("max_floor")
     if max_floor is not None and listing.floor is not None and listing.floor > max_floor:

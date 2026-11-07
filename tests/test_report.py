@@ -114,6 +114,8 @@ def test_digest_body_one_row_per_flat() -> None:
     assert body.count("[open](https://example.sk/1)") == 2
     assert "185 000 €" in body  # price column
     assert "68 m²" in body      # area column
+    assert "| Floor |" in body
+    assert "| 5 |" in body
     assert "Obchodná" in body   # address column
 
 
