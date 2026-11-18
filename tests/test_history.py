@@ -81,7 +81,8 @@ def test_existing_month_table_is_upgraded_before_append(tmp_path: pathlib.Path) 
     path = append_matches([make_item()], str(tmp_path), today=date(2026, 7, 5))
     text = pathlib.Path(path).read_text(encoding="utf-8")
     text = text.replace(
-        "| Logged | Score | Price | Area | Rooms | Floor | Address | Condition | Portal | Listing |",
+        "| Logged | Score | Price | Area | Rooms | Floor | Address | "
+        "Condition | Portal | Listing |",
         "| Logged | Score | Price | Area | Rooms | Address | Condition | Portal | Listing |",
     )
     text = text.replace(
